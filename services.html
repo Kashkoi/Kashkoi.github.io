@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Consumer Services | Alpha Inception</title>
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        /* Header */
+        .header { background: var(--primary); color: #fff; padding: 0; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 80px 24px 60px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
+        .hero p { font-size: 1.15rem; color: #94a3b8; max-width: 640px; margin: 0 auto; }
+
+        /* Products Grid */
+        .products { max-width: 1200px; margin: -40px auto 60px; padding: 0 24px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        .card-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-health { background: #dcfce7; color: #166534; }
+        .badge-social { background: #e0e7ff; color: #3730a3; }
+        .badge-productivity { background: #fef3c7; color: #92400e; }
+        .badge-wellness { background: #fce7f3; color: #9d174d; }
+        .badge-sports { background: #ccfbf1; color: #065f46; }
+        .card-color { height: 6px; }
+        .card-body { padding: 28px; }
+        .card-body h3 { font-size: 1.35rem; color: var(--primary); margin: 12px 0 8px; }
+        .card-body .tagline { font-size: 0.95rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+        .card-body p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
+        .card-body .features { list-style: none; margin-bottom: 20px; }
+        .card-body .features li { font-size: 0.85rem; color: var(--text); padding: 4px 0; padding-left: 20px; position: relative; }
+        .card-body .features li::before { content: "\2713"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .card-link { display: inline-block; background: var(--accent); color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+        .card-link:hover { background: var(--accent-dark); color: #fff; }
+        .platforms { font-size: 0.8rem; color: var(--text-light); margin-top: 12px; }
+
+        /* Footer */
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; }
+        .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .header-inner { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">Alpha <span>Inception</span></div>
+        <nav class="header-nav">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Additional Consumer Services</h1>
+    <p>AI-powered applications built to enhance your health, productivity, social life, and entertainment. Designed with privacy at the core.</p>
+</section>
+
+<section class="products">
+    <div class="grid">
+
+        <!-- Alpha Medical -->
+        <div class="card">
+            <div class="card-color" style="background: linear-gradient(90deg, #2563eb, #06b6d4);"></div>
+            <div class="card-body">
+                <span class="card-badge badge-health">Health &amp; Medical</span>
+                <h3>Alpha Medical</h3>
+                <div class="tagline">AI Clinical Decision Support</div>
+                <p>A clinical decision support system that combines multiple AI models with curated medical knowledge bases to deliver high-confidence diagnostic insights for healthcare professionals.</p>
+                <ul class="features">
+                    <li>Multi-LLM Consensus Engine reduces AI hallucinations</li>
+                    <li>15,000+ medical knowledge embeddings (FDA, clinical guidelines, literature)</li>
+                    <li>FDA Pathway Advisor &amp; Benchmark Tool</li>
+                    <li>Expert-weighted feedback loop for continuous learning</li>
+                </ul>
+                <a class="card-link" href="alpha-medical.html">Learn More</a>
+                <div class="platforms">Available on iOS (TestFlight) &amp; Android</div>
+            </div>
+        </div>
+
+        <!-- Aura Social Secretary -->
+        <div class="card">
+            <div class="card-color" style="background: linear-gradient(90deg, #6366f1, #8b5cf6);"></div>
+            <div class="card-body">
+                <span class="card-badge badge-social">Social &amp; Lifestyle</span>
+                <h3>Aura Social Secretary</h3>
+                <div class="tagline">Your AI-Powered Social Intelligence Assistant</div>
+                <p>An intelligent assistant that helps you navigate your social world with confidence. Remembers your relationships, prepares you for conversations, and protects your energy.</p>
+                <ul class="features">
+                    <li>Memory Whispers &mdash; AI-generated conversation prep</li>
+                    <li>Social Battery &mdash; wellness-first burnout protection</li>
+                    <li>Agent-to-agent smart scheduling</li>
+                    <li>100% on-device processing &mdash; no data leaves your phone</li>
+                </ul>
+                <a class="card-link" href="aura-social-secretary.html">Learn More</a>
+                <div class="platforms">Available on iOS &amp; Android</div>
+            </div>
+        </div>
+
+        <!-- Concierge -->
+        <div class="card">
+            <div class="card-color" style="background: linear-gradient(90deg, #d97706, #f59e0b);"></div>
+            <div class="card-body">
+                <span class="card-badge badge-productivity">Productivity</span>
+                <h3>Concierge</h3>
+                <div class="tagline">AI Email Assistant</div>
+                <p>An intelligent email assistant powered by Claude AI that classifies, prioritizes, and manages your inbox. Automates routine tasks, surfaces what matters, and keeps your inbox clean.</p>
+                <ul class="features">
+                    <li>6-category AI email classification with confidence scores</li>
+                    <li>AI-drafted replies, voice memos &amp; calendar extraction</li>
+                    <li>Bulk unsubscribe, block &amp; auto-cleanup</li>
+                    <li>Google Drive archival &amp; privacy mode</li>
+                </ul>
+                <a class="card-link" href="concierge.html">Learn More</a>
+                <div class="platforms">Available on iOS (TestFlight), Android &amp; Desktop</div>
+            </div>
+        </div>
+
+        <!-- NaturaBridge -->
+        <div class="card">
+            <div class="card-color" style="background: linear-gradient(90deg, #059669, #10b981);"></div>
+            <div class="card-body">
+                <span class="card-badge badge-wellness">Wellness</span>
+                <h3>NaturaBridge</h3>
+                <div class="tagline">Evidence-Based Natural Medicine</div>
+                <p>Uses multi-agent AI consensus to convert pharmaceutical prescriptions into evidence-based natural alternatives, combining Western medicine, Ayurvedic, and Traditional Chinese Medicine perspectives.</p>
+                <ul class="features">
+                    <li>Prescription-to-natural conversion with consensus confidence</li>
+                    <li>Constitutional assessment (Dosha + TCM profiling)</li>
+                    <li>Biometric tracking with wearable integration</li>
+                    <li>AI-powered treatment adjustments with safety validation</li>
+                </ul>
+                <a class="card-link" href="naturabridge.html">Learn More</a>
+                <div class="platforms">Available on iOS (TestFlight) &amp; Web</div>
+            </div>
+        </div>
+
+        <!-- ProspectIQ DraftRoom -->
+        <div class="card">
+            <div class="card-color" style="background: linear-gradient(90deg, #0d9488, #14b8a6);"></div>
+            <div class="card-body">
+                <span class="card-badge badge-sports">Sports &amp; Entertainment</span>
+                <h3>ProspectIQ DraftRoom</h3>
+                <div class="tagline">AI-Powered NBA Draft Intelligence</div>
+                <p>The ultimate NBA draft companion featuring AI-generated scouting reports, mock draft simulations, head-to-head prospect comparisons, and fantasy draft advice.</p>
+                <ul class="features">
+                    <li>60+ prospect database with AI scouting reports</li>
+                    <li>War Room mock draft simulator with trade proposals</li>
+                    <li>Head-to-head compare with radar charts</li>
+                    <li>Prediction leagues &amp; Fantasy Draft Advisor</li>
+                </ul>
+                <a class="card-link" href="prospectiq-draftroom.html">Learn More</a>
+                <div class="platforms">Available on iOS (TestFlight)</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:andre@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
+    </div>
+</footer>
+
+</body>
+</html>

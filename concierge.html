@@ -13,25 +13,35 @@
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
         .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #3d2c1a 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
         .hero-inner { max-width: 800px; margin: 0 auto; }
-        .hero .badge { display: inline-block; background: rgba(217,119,6,0.2); color: #fbbf24; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero .badge { display: inline-block; background: rgba(217,119,6,0.25); color: #fbbf24; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
         .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
-        .hero .tagline { font-size: 1.15rem; color: #94a3b8; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
         .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
         .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
         .content h2:first-child { margin-top: 0; }
-        .content p { margin-bottom: 16px; }
+        .content p { margin-bottom: 16px; color: var(--text); }
         .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
-        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
         .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
-        .category-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        .category-table th, .category-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-        .category-table th { background: var(--primary); color: #fff; font-weight: 600; }
-        .category-table tr:hover { background: #f1f5f9; }
-        .cat-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; color: #fff; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #fef3c7; color: #92400e; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .category-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+        .category-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+        .category-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .category-table tr:nth-child(even) { background: #f8fafc; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #b45309; color: #fff; }
         .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
@@ -39,7 +49,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .category-table { font-size: 0.8rem; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .category-table { font-size: 0.8rem; } }
     </style>
 </head>
 <body>
@@ -59,77 +69,163 @@
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Productivity</div>
         <h1>Concierge</h1>
-        <div class="tagline">AI Email Assistant &mdash; classify, prioritize, and conquer your inbox</div>
+        <div class="tagline">AI email assistant &mdash; classify, prioritize, draft, and clean up your inbox automatically</div>
     </div>
 </section>
 
 <div class="content">
-    <h2>Overview</h2>
-    <p>Concierge is your AI-powered email assistant that uses Claude AI to intelligently classify, prioritize, and manage your inbox. It learns your preferences over time to automate routine email tasks, surface what matters, and keep your inbox clean.</p>
+    <h2>What Is Concierge?</h2>
+    <p>Concierge is an intelligent email assistant powered by Claude AI that transforms your inbox from a source of stress into a managed system. It reads every incoming message, classifies it into one of six priority categories, and surfaces what actually matters so you can focus on the emails that need your attention.</p>
+    <p>Beyond classification, Concierge drafts contextual replies that match your writing style, extracts calendar events from email text, converts voice memos into polished email responses, and automates bulk cleanup of newsletters, spam, and old threads you no longer need.</p>
 
-    <h2>AI Email Classification</h2>
-    <p>Every email is automatically classified into one of six categories with color-coded badges and confidence scores:</p>
+    <h2>Email Classification System</h2>
+    <p>Every email that arrives is automatically analyzed and sorted into one of six categories with a confidence score:</p>
     <table class="category-table">
-        <tr><th>Category</th><th>Description</th></tr>
-        <tr><td><span class="cat-badge" style="background:#ef4444;">Urgent</span></td><td>Time-sensitive emails with deadlines within 48 hours, critical requests, or outages</td></tr>
-        <tr><td><span class="cat-badge" style="background:#f97316;">Follow-up</span></td><td>Emails needing your response &mdash; meeting invites, action items, pending conversations</td></tr>
-        <tr><td><span class="cat-badge" style="background:#3b82f6;">Personal</span></td><td>Messages from friends, family, and personal contacts</td></tr>
-        <tr><td><span class="cat-badge" style="background:#8b5cf6;">Records</span></td><td>Receipts, confirmations, bank statements, tax forms, and documents to keep</td></tr>
-        <tr><td><span class="cat-badge" style="background:#10b981;">Offers</span></td><td>Deals, coupons, promotions, and newsletters with detected expiry dates</td></tr>
-        <tr><td><span class="cat-badge" style="background:#6b7280;">Junk</span></td><td>Spam, phishing attempts, scams, and unsolicited marketing</td></tr>
+        <tr><th>Category</th><th>Description</th><th>Example</th></tr>
+        <tr><td><strong>Urgent</strong></td><td>Requires immediate action or response</td><td>Client deadline, security alert, time-sensitive request</td></tr>
+        <tr><td><strong>Important</strong></td><td>Needs attention but not time-critical</td><td>Project update, team discussion, strategic decision</td></tr>
+        <tr><td><strong>Informational</strong></td><td>Worth reading but no action required</td><td>Industry news, company announcements, FYI threads</td></tr>
+        <tr><td><strong>Transactional</strong></td><td>Receipts, confirmations, and automated notices</td><td>Order confirmation, shipping update, password reset</td></tr>
+        <tr><td><strong>Newsletter</strong></td><td>Subscriptions and marketing content</td><td>Weekly digests, product updates, promotional emails</td></tr>
+        <tr><td><strong>Spam</strong></td><td>Unwanted or suspicious messages</td><td>Phishing attempts, unsolicited offers, junk mail</td></tr>
     </table>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
-            <h4>AI Draft Reply</h4>
-            <p>Contextual AI-generated reply suggestions you can edit and send with one tap.</p>
+            <h4>Smart Classification</h4>
+            <p>Every email is categorized with a confidence score. You see at a glance what needs your attention and what can wait, without reading each message yourself.</p>
+        </div>
+        <div class="feature-card">
+            <h4>AI Draft Replies</h4>
+            <p>Tap any email to see a pre-drafted reply that matches your tone and communication style. Edit, approve, and send in seconds instead of minutes.</p>
         </div>
         <div class="feature-card">
             <h4>Calendar Extraction</h4>
-            <p>Detects meetings in emails and extracts event details directly to your Google Calendar.</p>
+            <p>When an email mentions a date, time, or meeting, Concierge detects it and offers a one-tap "Add to Calendar" action with the details pre-filled.</p>
         </div>
         <div class="feature-card">
             <h4>Voice Memos</h4>
-            <p>Audio summaries of long emails you can listen to on the go. Choose voice and speed.</p>
-        </div>
-        <div class="feature-card">
-            <h4>Drive Archival</h4>
-            <p>One-tap attachment saving to Google Drive, organized by category.</p>
+            <p>Record a voice memo describing what you want to say. Concierge transcribes it and converts it into a polished, professional email ready to send.</p>
         </div>
         <div class="feature-card">
             <h4>Bulk Cleanup</h4>
-            <p>Multi-select, bulk trash, bulk unsubscribe, and one-tap junk purge.</p>
+            <p>One-tap unsubscribe from newsletters, block persistent senders, and set auto-cleanup rules that archive or delete old messages matching your criteria.</p>
         </div>
         <div class="feature-card">
-            <h4>Smart Automation</h4>
-            <p>Configurable auto-scan (hourly/daily), auto-purge expired offers, and rule-based actions.</p>
+            <h4>Privacy Mode</h4>
+            <p>Sensitive emails can be processed locally without sending content to cloud AI. Google Drive archival lets you save important threads outside your inbox.</p>
         </div>
     </div>
 
-    <h2>Privacy Mode</h2>
-    <p>Concierge includes a local-only Privacy Mode that uses keyword matching instead of cloud AI. Lower accuracy, but no data leaves your device. You control how your email is processed.</p>
+    <h2>App Screens &amp; How You Interact</h2>
 
-    <h2>Availability</h2>
+    <div class="screen-section">
+        <span class="screen-tag">Smart Inbox</span>
+        <h3>Your Prioritized Email View</h3>
+        <p>The Smart Inbox replaces the traditional chronological email list with a prioritized view that puts your most important messages first.</p>
+        <ul>
+            <li><strong>Priority Sections:</strong> Emails are grouped by category (Urgent at top, Spam at bottom). Each section shows a count so you know exactly how much needs attention.</li>
+            <li><strong>Confidence Badges:</strong> Each email displays a colored badge showing the AI's classification confidence. High confidence means the category is reliable; lower confidence emails are flagged for your review.</li>
+            <li><strong>Quick Actions:</strong> Swipe right to archive, swipe left to snooze. Long-press for options like "Draft Reply," "Extract Calendar Event," or "Block Sender."</li>
+            <li><strong>Search &amp; Filter:</strong> Search across all emails or filter by category, sender, date range, or attachment type.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Draft Reply</span>
+        <h3>AI-Generated Responses</h3>
+        <p>When you open an email, Concierge has already prepared a draft reply based on the email content and your communication history.</p>
+        <ul>
+            <li><strong>Pre-Written Draft:</strong> A ready-to-send reply appears below the original email. The AI considers the context, your typical tone, and the appropriate level of formality.</li>
+            <li><strong>Tone Selector:</strong> Toggle between Professional, Friendly, Brief, or Detailed to adjust the reply style before sending.</li>
+            <li><strong>Edit &amp; Send:</strong> Make any changes you want in the text editor, then tap Send. Your edits help Concierge learn your preferences over time.</li>
+            <li><strong>Multiple Options:</strong> For complex emails, Concierge may offer two or three draft variations so you can choose the approach that fits best.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Voice Memo</span>
+        <h3>Speak Your Reply</h3>
+        <p>When you are on the go and cannot type, use Voice Memo to dictate your response naturally.</p>
+        <ul>
+            <li><strong>Record:</strong> Tap the microphone icon and speak freely. Say what you want to communicate in your own words, even if it is informal or disorganized.</li>
+            <li><strong>Transcribe &amp; Polish:</strong> Concierge transcribes your audio, then reformats it into a clean, professional email while preserving your intended meaning.</li>
+            <li><strong>Review &amp; Send:</strong> See the polished version side-by-side with your original transcription. Make edits if needed, then send.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Cleanup Center</span>
+        <h3>Inbox Maintenance Tools</h3>
+        <p>The Cleanup Center helps you reclaim your inbox from clutter without spending hours manually unsubscribing and deleting.</p>
+        <ul>
+            <li><strong>Newsletter Manager:</strong> See all your active subscriptions in one list. Unsubscribe from any with a single tap. Concierge handles the actual unsubscribe process for you.</li>
+            <li><strong>Blocked Senders:</strong> Maintain a block list. Emails from blocked senders are automatically moved to trash without notification.</li>
+            <li><strong>Auto-Cleanup Rules:</strong> Create rules like "Archive all transactional emails older than 30 days" or "Delete all spam immediately." Rules run automatically in the background.</li>
+            <li><strong>Storage Report:</strong> See how much inbox space is used by each category. Identify and bulk-delete large attachments or old threads you no longer need.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Connect Your Email</h4>
+                <p>Link your Gmail, Outlook, or other email account through secure OAuth. Concierge gets read and send permissions but never stores your password.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>AI Classifies Everything</h4>
+                <p>Every incoming email is analyzed by Claude AI and sorted into one of six priority categories with a confidence score. This happens automatically in real time.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Review What Matters</h4>
+                <p>Open the Smart Inbox and focus on Urgent and Important categories first. Everything else can wait or be handled in bulk later.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Reply, Clean, Repeat</h4>
+                <p>Use AI drafts to respond quickly, extract calendar events with one tap, and periodically visit the Cleanup Center to keep your inbox lean.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is Concierge For?</h2>
     <ul>
-        <li><strong>iOS:</strong> Available via TestFlight</li>
-        <li><strong>Android:</strong> APK available for beta testers</li>
-        <li><strong>Desktop:</strong> Coming soon</li>
+        <li><strong>Professionals drowning in email</strong> who spend hours daily reading, sorting, and responding to messages</li>
+        <li><strong>Executives and managers</strong> who receive high volumes of email and need to prioritize quickly</li>
+        <li><strong>Freelancers and small business owners</strong> who handle their own correspondence and need to be responsive</li>
+        <li><strong>Anyone who wants inbox zero</strong> without the manual effort of traditional email management systems</li>
     </ul>
+
+    <h2>Privacy &amp; Data</h2>
+    <p>Your emails contain some of the most sensitive information in your digital life. Concierge accesses your inbox through secure OAuth and processes email content solely for classification and drafting. We do not store your email content on our servers after processing. Privacy Mode allows fully local processing for sensitive messages.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
 </div>
 
 <div class="cta">
-    <a class="cta-btn" href="mailto:andre@alphainception.com">Request Beta Access</a>
+    <a class="cta-btn" href="services.html">View All Services</a>
 </div>
 
 <footer class="footer">
-    <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
-    <div class="footer-links">
-        <a href="services.html">Services</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:andre@alphainception.com">Contact</a>
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>
-    <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
 </footer>
 
 </body>

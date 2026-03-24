@@ -24,9 +24,20 @@
         .content p { margin-bottom: 16px; color: var(--text); }
         .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
-        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
         .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #dbeafe; color: #2563eb; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
         .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #1d4ed8; color: #fff; }
@@ -35,7 +46,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -60,70 +71,149 @@
 </section>
 
 <div class="content">
-    <h2>Overview</h2>
-    <p>Alpha Medical is a clinical decision support system that combines multiple artificial intelligence models with curated medical knowledge bases to deliver high-confidence diagnostic insights. Designed for healthcare professionals, medical device developers, and clinical researchers who need reliable, evidence-based guidance.</p>
-    <p>Unlike traditional single-model AI tools, Alpha Medical uses a proprietary consensus engine that queries multiple independent AI models simultaneously and synthesizes their responses, dramatically reducing the risk of AI hallucinations.</p>
+    <h2>What Is Alpha Medical?</h2>
+    <p>Alpha Medical is a clinical decision support system that combines multiple artificial intelligence models with curated medical knowledge bases to deliver high-confidence diagnostic insights. It is designed for healthcare professionals, medical device developers, and clinical researchers who need reliable, evidence-based guidance they can trust.</p>
+    <p>Unlike traditional single-model AI tools that can produce confident-sounding but incorrect answers, Alpha Medical uses a proprietary consensus engine that queries three independent AI models simultaneously and synthesizes their responses. When all three models agree, you get a high-confidence answer. When they disagree, the system flags the uncertainty so you know exactly where to apply additional clinical judgment.</p>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
             <h4>Consensus Engine</h4>
-            <p>3-LLM querying with transparent agreement levels (High, Medium, Low) so you always know how much to trust each response.</p>
+            <p>Queries three independent LLMs in parallel and presents a unified response with transparent agreement levels (High, Medium, Low) so you always know how much to trust each answer.</p>
         </div>
         <div class="feature-card">
             <h4>AI Medical Consultation</h4>
-            <p>Real-time conversational interface with a medical diagnostics agent. Multi-turn conversations with full citations and rich formatting.</p>
+            <p>Real-time conversational interface with a medical diagnostics agent. Supports multi-turn conversations with full citations, clinical references, and rich formatting.</p>
         </div>
         <div class="feature-card">
             <h4>FDA Pathway Advisor</h4>
-            <p>Guided 4-step wizard recommending the appropriate FDA regulatory pathway (510(k), De Novo, PMA, or Exempt) for your device.</p>
+            <p>A guided 4-step wizard that recommends the appropriate FDA regulatory pathway (510(k), De Novo, PMA, or Exempt) for your medical device based on classification and risk profile.</p>
         </div>
         <div class="feature-card">
             <h4>Benchmark Tool</h4>
-            <p>Submit diagnostic claims and compare against FDA standards, peer-reviewed literature, and published accuracy metrics.</p>
+            <p>Test AI diagnostic accuracy against known clinical cases. Run standardized test sets and measure performance metrics including sensitivity, specificity, and concordance.</p>
         </div>
         <div class="feature-card">
-            <h4>Knowledge Base</h4>
-            <p>Over 15,000 curated medical embeddings spanning FDA device data, clinical guidelines, research literature, and diagnostic standards.</p>
+            <h4>Medical Knowledge Base</h4>
+            <p>Over 15,000 curated medical embeddings sourced from FDA databases, peer-reviewed literature, clinical practice guidelines, and pharmacological references.</p>
         </div>
         <div class="feature-card">
             <h4>Expert Feedback Loop</h4>
-            <p>Expert-weighted clinical corrections (up to 15x multiplier) are ingested as lessons that directly improve future AI responses.</p>
+            <p>Clinicians can rate and annotate AI responses. Expert-weighted feedback continuously improves the system, creating a virtuous cycle of accuracy improvement.</p>
         </div>
     </div>
 
-    <h2>How It Works</h2>
-    <p>When Consensus Mode is enabled, three independent large language models evaluate your clinical question simultaneously. Each model generates its response independently, and the system synthesizes the results:</p>
-    <ul>
-        <li><strong>High Agreement</strong> &mdash; All three models concur. Highest confidence.</li>
-        <li><strong>Medium Agreement</strong> &mdash; Two of three agree. Review recommended.</li>
-        <li><strong>Low Agreement</strong> &mdash; Models disagree. Uncertainty is flagged transparently.</li>
-    </ul>
-    <p>Every response is grounded in a curated knowledge base using retrieval-augmented generation, ensuring answers are anchored in evidence rather than generated purely from training data.</p>
+    <h2>App Screens &amp; How You Interact</h2>
 
-    <h2>Availability</h2>
+    <div class="screen-section">
+        <span class="screen-tag">Dashboard</span>
+        <h3>Your Clinical Home Base</h3>
+        <p>The Dashboard provides an at-a-glance view of your recent consultations, saved cases, and quick-access tools. From here you can start a new consultation, access the FDA Pathway Advisor, or review your benchmark results.</p>
+        <ul>
+            <li><strong>Recent Consultations:</strong> Tap any previous session to resume or review. Each consultation is timestamped and tagged by specialty area.</li>
+            <li><strong>Quick Launch:</strong> Large action buttons let you jump directly into a new AI consultation, start an FDA pathway analysis, or run a benchmark test.</li>
+            <li><strong>Consensus Trend:</strong> A summary card shows the average agreement level across your recent consultations so you can track AI reliability over time.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Consultation Screen</span>
+        <h3>AI Medical Consultation</h3>
+        <p>The core consultation interface works like a chat with a highly knowledgeable medical advisor. You describe a clinical scenario or question, and the system responds with evidence-based guidance.</p>
+        <ul>
+            <li><strong>Multi-Turn Dialogue:</strong> Ask follow-up questions, refine your clinical scenario, or request deeper detail on specific aspects. The AI maintains full context throughout the session.</li>
+            <li><strong>Consensus Indicator:</strong> Every response includes a colored badge (green/yellow/red) showing whether the three underlying models agree. Green means high confidence; red means you should exercise additional caution.</li>
+            <li><strong>Citations &amp; References:</strong> Responses include inline citations linked to their source material &mdash; FDA guidance documents, clinical guidelines, peer-reviewed studies, or pharmacological databases.</li>
+            <li><strong>Rich Formatting:</strong> Complex information is presented in structured tables, bullet lists, and highlighted callouts for easy scanning during clinical workflows.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">FDA Pathway Advisor</span>
+        <h3>Regulatory Classification Wizard</h3>
+        <p>A step-by-step guided wizard for medical device developers who need to determine the correct FDA submission pathway for their product.</p>
+        <ul>
+            <li><strong>Step 1 &mdash; Device Description:</strong> Enter your device type, intended use, and technology category. The system narrows the relevant product codes.</li>
+            <li><strong>Step 2 &mdash; Risk Classification:</strong> Answer targeted questions about patient contact, invasiveness, and clinical risk to determine Class I, II, or III.</li>
+            <li><strong>Step 3 &mdash; Predicate Analysis:</strong> The AI searches for substantially equivalent devices already cleared by the FDA, suggesting potential predicate devices for a 510(k) pathway.</li>
+            <li><strong>Step 4 &mdash; Pathway Recommendation:</strong> Receive a recommendation (510(k), De Novo, PMA, or Exempt) with a detailed rationale, estimated timeline, and next steps.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Benchmark Tool</span>
+        <h3>AI Accuracy Testing</h3>
+        <p>The Benchmark Tool lets you evaluate how well the consensus engine performs against known clinical cases, helping you understand the system's strengths and limitations for your specialty.</p>
+        <ul>
+            <li><strong>Test Case Library:</strong> Choose from curated clinical scenarios across multiple specialties, or create your own custom test cases.</li>
+            <li><strong>Run Benchmarks:</strong> Execute a test set and see the AI's responses compared against the known correct answer for each case.</li>
+            <li><strong>Performance Metrics:</strong> View accuracy rates, sensitivity, specificity, and per-model breakdowns. Identify which types of cases benefit most from the consensus approach.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Describe Your Clinical Question</h4>
+                <p>Enter a patient scenario, diagnostic question, or device classification inquiry in natural language. No special formatting required.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Three Models Analyze Independently</h4>
+                <p>Your question is sent simultaneously to three independent AI models. Each analyzes the query against the medical knowledge base and produces its own response.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Consensus Is Synthesized</h4>
+                <p>The consensus engine compares all three responses, identifies areas of agreement and disagreement, and produces a unified answer with a clear confidence indicator.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Review, Refine, and Save</h4>
+                <p>Read the response with its citations and confidence level. Ask follow-up questions to go deeper. Save important consultations for future reference.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is Alpha Medical For?</h2>
     <ul>
-        <li><strong>iOS:</strong> Available via TestFlight invitation</li>
-        <li><strong>Android:</strong> APK available for beta testers</li>
+        <li><strong>Healthcare professionals</strong> seeking a second-opinion tool that is transparent about its confidence levels</li>
+        <li><strong>Medical device developers</strong> navigating FDA regulatory pathways and classification requirements</li>
+        <li><strong>Clinical researchers</strong> who need rapid literature synthesis and evidence summaries</li>
+        <li><strong>Medical students and residents</strong> using it as a study and reference companion</li>
     </ul>
 
     <div class="disclaimer">
-        <strong>Important Disclaimer:</strong> Alpha Medical is a clinical decision support tool. It is not a replacement for professional clinical judgment. All AI-generated responses should be validated by qualified healthcare professionals before being used in patient care.
+        <strong>Important Notice:</strong> Alpha Medical is a clinical decision support tool and does not replace professional medical judgment. All AI-generated insights should be verified by a qualified healthcare professional. This tool is not intended for direct patient diagnosis or treatment decisions without clinical oversight.
     </div>
+
+    <h2>Privacy &amp; Data</h2>
+    <p>Clinical data requires the highest level of protection. All consultations are encrypted in transit and at rest. We do not use your clinical queries for model training. Your data is never shared with third parties.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
 </div>
 
 <div class="cta">
-    <a class="cta-btn" href="mailto:andre@alphainception.com">Request Beta Access</a>
+    <a class="cta-btn" href="services.html">View All Services</a>
 </div>
 
 <footer class="footer">
-    <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
-    <div class="footer-links">
-        <a href="services.html">Services</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:andre@alphainception.com">Contact</a>
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>
-    <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
 </footer>
 
 </body>

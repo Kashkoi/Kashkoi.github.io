@@ -13,20 +13,31 @@
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
         .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1a3d2e 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
         .hero-inner { max-width: 800px; margin: 0 auto; }
-        .hero .badge { display: inline-block; background: rgba(5,150,105,0.2); color: #6ee7b7; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero .badge { display: inline-block; background: rgba(5,150,105,0.25); color: #6ee7b7; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
         .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
-        .hero .tagline { font-size: 1.15rem; color: #94a3b8; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
         .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
         .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
         .content h2:first-child { margin-top: 0; }
-        .content p { margin-bottom: 16px; }
+        .content p { margin-bottom: 16px; color: var(--text); }
         .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
-        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
         .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #d1fae5; color: #065f46; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
         .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #047857; color: #fff; }
@@ -35,7 +46,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -55,76 +66,156 @@
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Wellness</div>
         <h1>NaturaBridge</h1>
-        <div class="tagline">Evidence-Based Natural Medicine &mdash; Western, Ayurvedic &amp; TCM perspectives</div>
+        <div class="tagline">Evidence-based natural medicine &mdash; bridging Western, Ayurvedic &amp; Traditional Chinese Medicine with AI consensus</div>
     </div>
 </section>
 
 <div class="content">
-    <h2>Overview</h2>
-    <p>NaturaBridge uses multi-agent AI consensus to convert pharmaceutical prescriptions into evidence-based natural alternatives. It combines Western medicine, Ayurvedic tradition, and Traditional Chinese Medicine (TCM) to generate personalized treatment plans.</p>
+    <h2>What Is NaturaBridge?</h2>
+    <p>NaturaBridge uses multi-agent AI consensus to research and recommend evidence-based natural alternatives alongside your existing prescriptions. It bridges three major medical traditions &mdash; Western medicine, Ayurveda, and Traditional Chinese Medicine (TCM) &mdash; to give you a holistic view of your wellness options.</p>
+    <p>Rather than replacing your doctor's advice, NaturaBridge acts as a research companion that surfaces peer-reviewed evidence for natural supplements, herbal remedies, and lifestyle modifications. Every recommendation includes a confidence score from multiple AI agents, interaction warnings with your current medications, and links to the underlying research.</p>
+
+    <div class="disclaimer">
+        <strong>Important Notice:</strong> NaturaBridge is an informational wellness tool. It does not replace professional medical advice. Always consult your healthcare provider before starting, stopping, or changing any medication or supplement regimen. Never discontinue prescribed medication based solely on app recommendations.
+    </div>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
             <h4>Prescription Conversion</h4>
-            <p>Transform any pharmaceutical medication into a personalized natural alternative treatment plan with consensus confidence scores.</p>
+            <p>Enter a current medication and NaturaBridge researches natural alternatives with similar mechanisms of action. Results include evidence quality ratings and consensus confidence scores.</p>
         </div>
         <div class="feature-card">
-            <h4>Constitutional Quiz</h4>
-            <p>25-question assessment to discover your Ayurvedic dosha (Vata, Pitta, Kapha) and TCM element profile for personalized plans.</p>
+            <h4>Constitutional Assessment</h4>
+            <p>Complete a detailed quiz that combines Ayurvedic Dosha profiling (Vata, Pitta, Kapha) with TCM body constitution typing to create a personalized wellness profile.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Interaction Checker</h4>
+            <p>Before adding any supplement, the interaction checker scans for conflicts with your current medications, other supplements, and known food interactions. Safety flags are color-coded.</p>
         </div>
         <div class="feature-card">
             <h4>Biometric Tracking</h4>
-            <p>Monitor HRV, sleep quality, heart rate, and daily steps with wearable integration. Wellness score (0-100) from weighted components.</p>
+            <p>Connect Apple Health, Google Fit, or wearable devices to track how your body responds to changes. Monitor sleep, heart rate, energy levels, and other wellness indicators.</p>
         </div>
         <div class="feature-card">
-            <h4>AI Adjustments</h4>
-            <p>AI-driven recommendations to fine-tune treatment plans based on 7-day biometric trends, with 6-check safety validation.</p>
+            <h4>Multi-Tradition Research</h4>
+            <p>For each condition or medication, see perspectives from Western evidence-based medicine, Ayurvedic tradition, and Traditional Chinese Medicine side by side, with citations for each.</p>
         </div>
         <div class="feature-card">
-            <h4>Transition Protocol</h4>
-            <p>3-phase step-down protocol for safely transitioning from pharmaceutical to natural alternatives.</p>
-        </div>
-        <div class="feature-card">
-            <h4>Minority Reports</h4>
-            <p>Transparent dissenting opinions from AI agents who disagree with the consensus &mdash; full transparency in recommendations.</p>
+            <h4>AI Treatment Adjustments</h4>
+            <p>As you track your biometrics and self-reported outcomes, the AI adjusts its recommendations over time, suggesting dosage modifications or alternative approaches based on your response data.</p>
         </div>
     </div>
 
-    <h2>How Conversion Works</h2>
-    <ul>
-        <li>Search for your medication by name and enter dosage/frequency</li>
-        <li>The multi-agent AI consensus engine processes your profile and medication</li>
-        <li>Receive primary alternatives ranked by confidence, synergy enhancers, and a transition protocol</li>
-        <li>Save plans, download as PDF, or set as active for biometric tracking</li>
-    </ul>
+    <h2>App Screens &amp; How You Interact</h2>
 
-    <h2>Daily Check-Ins</h2>
-    <p>Log your subjective experience each day: mood, energy, symptoms (1-10), and supplement adherence. This data feeds the AI adjustment engine for continuous optimization.</p>
-
-    <div class="disclaimer">
-        <strong>Medical Disclaimer:</strong> NaturaBridge is a research and informational tool. It does not replace medical advice. Always consult your healthcare provider before making changes to your medication.
+    <div class="screen-section">
+        <span class="screen-tag">Dashboard</span>
+        <h3>Your Wellness Overview</h3>
+        <p>The Dashboard shows your current supplement regimen, biometric trends, and any alerts or adjustments the AI is suggesting.</p>
+        <ul>
+            <li><strong>Active Regimen:</strong> A visual list of everything you are currently taking &mdash; both prescribed medications and natural supplements &mdash; with daily timing reminders.</li>
+            <li><strong>Biometric Trends:</strong> Sparkline charts showing your key health indicators over the past week and month. Tap any chart to see detailed history.</li>
+            <li><strong>AI Insights:</strong> Cards highlighting patterns the AI has noticed, such as improved sleep since starting magnesium or elevated heart rate that may warrant attention.</li>
+            <li><strong>Safety Alerts:</strong> Any new interaction warnings or dosage concerns are displayed prominently at the top of the dashboard.</li>
+        </ul>
     </div>
 
-    <h2>Availability</h2>
+    <div class="screen-section">
+        <span class="screen-tag">Prescription Converter</span>
+        <h3>Research Natural Alternatives</h3>
+        <p>The core research tool where you enter a medication and explore evidence-based natural options.</p>
+        <ul>
+            <li><strong>Medication Input:</strong> Type or scan a medication name. NaturaBridge identifies the drug class, mechanism of action, and common use cases.</li>
+            <li><strong>Natural Alternatives:</strong> A ranked list of natural options with evidence quality ratings (Strong, Moderate, Preliminary) and consensus confidence from multiple AI agents.</li>
+            <li><strong>Three-Tradition View:</strong> Toggle between Western, Ayurvedic, and TCM perspectives. Each tradition provides different remedies with different rationales, all with source citations.</li>
+            <li><strong>Safety Check:</strong> Before you add anything to your regimen, the app runs an automatic interaction check against everything else you are taking.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Constitutional Quiz</span>
+        <h3>Personalized Wellness Profiling</h3>
+        <p>A comprehensive assessment that builds your unique health profile by combining two traditional medicine systems.</p>
+        <ul>
+            <li><strong>Ayurvedic Dosha Assessment:</strong> Answer questions about your body type, digestion, sleep patterns, emotional tendencies, and environmental preferences. Results identify your primary and secondary Doshas (Vata, Pitta, Kapha).</li>
+            <li><strong>TCM Constitution Typing:</strong> Additional questions about temperature sensitivity, energy patterns, and organ system tendencies map you to one of nine TCM body constitutions.</li>
+            <li><strong>Combined Profile:</strong> Your Dosha and TCM results are combined into a unified wellness profile that informs all future recommendations, from supplement choices to lifestyle advice.</li>
+            <li><strong>Seasonal Adjustments:</strong> Your profile includes seasonal guidance &mdash; different recommendations for summer versus winter based on how your constitution responds to environmental changes.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Biometric Tracker</span>
+        <h3>Monitor Your Response</h3>
+        <p>Connect your health data sources and track how your body responds to changes in your wellness regimen.</p>
+        <ul>
+            <li><strong>Wearable Integration:</strong> Syncs with Apple Health, Google Fit, Fitbit, Oura Ring, and other popular devices to pull in sleep, heart rate, HRV, steps, and other metrics automatically.</li>
+            <li><strong>Self-Reported Data:</strong> Log subjective measures like energy level, mood, pain, digestion quality, and overall well-being on a simple daily scale.</li>
+            <li><strong>Correlation Analysis:</strong> The AI looks for correlations between regimen changes and biometric shifts. For example, it might notice that your sleep quality improved two weeks after adding a specific supplement.</li>
+            <li><strong>Progress Reports:</strong> Weekly and monthly summaries show how your key metrics have trended and what changes may be contributing to improvements or declines.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Complete Your Profile</h4>
+                <p>Take the Constitutional Quiz and enter your current medications and supplements. This creates your baseline wellness profile that informs all recommendations.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Research Alternatives</h4>
+                <p>Use the Prescription Converter to explore natural options for any medication. Review evidence ratings, read the research, and check for interactions before making changes.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Consult Your Doctor</h4>
+                <p>Share NaturaBridge's findings with your healthcare provider. The app generates a printable summary with citations that you can bring to your appointment.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Track &amp; Adjust</h4>
+                <p>Connect your wearables and log daily check-ins. Over time, the AI identifies what is working and suggests adjustments based on your personal response data.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is NaturaBridge For?</h2>
     <ul>
-        <li><strong>iOS:</strong> Available via TestFlight</li>
-        <li><strong>Web:</strong> Web application available</li>
+        <li><strong>People interested in integrative medicine</strong> who want to explore natural options alongside conventional treatment</li>
+        <li><strong>Anyone taking supplements</strong> who wants evidence-based guidance on what actually works and what interacts with their medications</li>
+        <li><strong>Practitioners of Ayurveda or TCM</strong> who want AI-powered research to complement their traditional knowledge</li>
+        <li><strong>Health-conscious individuals</strong> who want a data-driven approach to wellness with biometric tracking and personalized insights</li>
     </ul>
+
+    <h2>Privacy &amp; Data</h2>
+    <p>Your health data is among the most sensitive information you have. NaturaBridge encrypts all data in transit and at rest. Your medication list, health profile, and biometric data are never shared with third parties or used for advertising. You can export or delete your data at any time.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
 </div>
 
 <div class="cta">
-    <a class="cta-btn" href="mailto:andre@alphainception.com">Request Beta Access</a>
+    <a class="cta-btn" href="services.html">View All Services</a>
 </div>
 
 <footer class="footer">
-    <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
-    <div class="footer-links">
-        <a href="services.html">Services</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:andre@alphainception.com">Contact</a>
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>
-    <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
 </footer>
 
 </body>

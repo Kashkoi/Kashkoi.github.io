@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synapta AI Therapist - Patent-Pending Multi-LLM Therapeutic AI | Alpha Inception</title>
+    <title>Synapta Therapist — AI Therapy Companion | Alpha Inception</title>
     <style>
         :root { --primary: #1a2b4a; --accent: #0ea5e9; --accent-dark: #0284c7; --light-bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --product-color: #7c3aed; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,9 +13,9 @@
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
         .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero { background: linear-gradient(135deg, #1a2b4a 0%, #2d1b69 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
         .hero-inner { max-width: 800px; margin: 0 auto; }
-        .hero .badge { display: inline-block; background: rgba(124,58,237,0.2); color: #c4b5fd; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero .badge { display: inline-block; background: rgba(124,58,237,0.25); color: #c4b5fd; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
         .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
         .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
         .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
@@ -24,9 +24,20 @@
         .content p { margin-bottom: 16px; color: var(--text); }
         .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
-        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
         .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #f3e8ff; color: #7c3aed; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
         .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #6d28d9; color: #fff; }
@@ -35,7 +46,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -54,85 +65,158 @@
     <div class="hero-inner">
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Mental Health &amp; Wellness</div>
-        <h1>Synapta AI Therapist</h1>
-        <div class="tagline">Patent-pending multi-LLM therapeutic AI platform with real-time physiological monitoring</div>
+        <h1>Synapta Therapist</h1>
+        <div class="tagline">AI-powered therapy companion &mdash; supportive conversations, mood tracking &amp; guided wellness exercises</div>
     </div>
 </section>
 
 <div class="content">
-    <h2>Overview</h2>
-    <p>Synapta is a patent-pending AI therapeutic platform that combines multiple large language models with real-time physiological monitoring to deliver personalized, evidence-based mental health support. The platform features always-on crisis prevention, automated clinical billing compliance, cross-device session continuity, and voice-interactive therapy sessions with customizable therapist personas.</p>
-    <p>Unlike traditional telehealth apps, Synapta uses a multi-agent architecture where specialized AI subsystems handle crisis detection, care coordination, treatment planning, and regulatory compliance simultaneously &mdash; ensuring comprehensive therapeutic support while maintaining clinical-grade audit trails.</p>
+    <h2>What Is Synapta Therapist?</h2>
+    <p>Synapta Therapist is a personal AI therapy companion that provides on-demand emotional support through natural, empathetic conversation. Whether you are working through anxiety, stress, relationship challenges, or simply need a safe space to process your thoughts, Synapta Therapist is available whenever you need it &mdash; no appointments and no waitlists.</p>
+    <p>The app uses evidence-informed therapeutic techniques including Cognitive Behavioral Therapy (CBT), mindfulness practices, and reflective listening to help you reframe negative thinking patterns, explore your emotions, and develop healthier coping strategies over time.</p>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
-            <h4>Crisis Prevention (Always-On)</h4>
-            <p>Life-saving background service with suicide prevention, overdose detection, violence de-escalation, self-harm interruption, and psychotic episode early warning. Integrated with 988 Suicide &amp; Crisis Lifeline.</p>
+            <h4>Therapeutic Conversations</h4>
+            <p>Talk openly with an AI trained in supportive, evidence-informed techniques. The conversation adapts to your needs, whether you want to vent, problem-solve, or reflect.</p>
         </div>
         <div class="feature-card">
-            <h4>Voice-Interactive Therapy</h4>
-            <p>Choose from 4 therapist voices (2 female, 2 male) and name your AI therapist for a personalized experience. Full speech-to-text and text-to-speech for natural conversation.</p>
+            <h4>Mood Tracking</h4>
+            <p>Log how you are feeling each day with a simple emoji-based check-in. View patterns over time to understand your emotional landscape and identify triggers.</p>
         </div>
         <div class="feature-card">
-            <h4>RTM Billing Compliance</h4>
-            <p>Automated CPT code tracking (98975-98981) with cryptographically verified engagement metrics, predictive audit defense, and audit-ready claim generation for clinic administrators.</p>
+            <h4>Guided Exercises</h4>
+            <p>Access structured breathing techniques (4-7-8, box breathing), body scan meditations, grounding exercises (5-4-3-2-1), and journaling prompts.</p>
         </div>
         <div class="feature-card">
-            <h4>Cross-Device Continuity</h4>
-            <p>Seamless session handoff between devices with encrypted state transfer, sensor recalibration, and conflict-free replicated data types (CRDTs) for offline resilience.</p>
+            <h4>Wellness Streaks</h4>
+            <p>Build consistency with daily check-in streaks. Track your progress and stay motivated with gentle reminders and milestone celebrations.</p>
         </div>
         <div class="feature-card">
-            <h4>Care Coordination</h4>
-            <p>Multi-provider care team management with secure messaging, treatment plan synchronization, and automated referral workflows.</p>
+            <h4>Sleep Support</h4>
+            <p>Wind-down routines and calming audio designed to help you transition from a busy mind to restful sleep. Guided progressive relaxation included.</p>
         </div>
         <div class="feature-card">
-            <h4>LLM Morphing</h4>
-            <p>Dynamic switching between AI models based on therapeutic context &mdash; using the optimal model for each clinical scenario while maintaining conversation continuity.</p>
+            <h4>Private &amp; Secure</h4>
+            <p>Your conversations are encrypted and your data stays private. No conversations are shared with third parties. You can delete your data at any time.</p>
         </div>
-        <div class="feature-card">
-            <h4>Physiological Monitoring</h4>
-            <p>Real-time biometric integration tracking heart rate, HRV, EDA, skin temperature, sleep patterns, and movement for objective treatment progress measurement.</p>
-        </div>
-        <div class="feature-card">
-            <h4>Agent Governance</h4>
-            <p>Transparent AI decision-making with full audit trails, configurable authority schedules, and break-confidence protocols for crisis situations.</p>
-        </div>
+    </div>
+
+    <h2>App Screens &amp; How You Interact</h2>
+
+    <div class="screen-section">
+        <span class="screen-tag">Home Screen</span>
+        <h3>Your Daily Dashboard</h3>
+        <p>When you open Synapta Therapist, the Home screen greets you with a mood check-in prompt and quick-access actions. This is your starting point each day.</p>
+        <ul>
+            <li><strong>Mood Check-In:</strong> Tap one of five mood indicators (Good, Okay, Low, Anxious, Stressed) to log how you are feeling right now. This takes less than two seconds and feeds into your mood history.</li>
+            <li><strong>Quick Actions:</strong> Four large buttons let you jump straight into a therapy session, start a breathing exercise, write a journal entry, or play calming sleep sounds.</li>
+            <li><strong>Wellness Streak:</strong> A card at the bottom shows your consecutive days of engagement, encouraging daily check-ins.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Chat Screen</span>
+        <h3>Therapeutic Conversations</h3>
+        <p>The Chat screen is the core of Synapta Therapist. It provides a familiar messaging interface where you can type freely about anything on your mind.</p>
+        <ul>
+            <li><strong>Natural Dialogue:</strong> The AI responds with thoughtful, empathetic messages. It asks clarifying questions, reflects back what you have said, and offers gentle reframes when appropriate.</li>
+            <li><strong>Technique Suggestions:</strong> When the AI identifies that a specific technique might help (like grounding or cognitive restructuring), it offers it naturally within the conversation.</li>
+            <li><strong>Session Continuity:</strong> The therapist remembers context within your session so you can explore topics deeply without repeating yourself.</li>
+            <li><strong>Typing Indicator:</strong> A calming animation shows when the AI is composing a response, creating a natural conversational rhythm.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Exercises Screen</span>
+        <h3>Guided Wellness Activities</h3>
+        <p>The Exercises screen presents a library of structured mental wellness activities, each with clear time estimates so you can fit them into your schedule.</p>
+        <ul>
+            <li><strong>Deep Breathing (5 min):</strong> The 4-7-8 technique calms your nervous system with timed inhale, hold, and exhale cycles. Visual guides keep you on pace.</li>
+            <li><strong>Body Scan (10 min):</strong> Progressive relaxation from head to toe. Audio guidance helps you notice and release tension in each muscle group.</li>
+            <li><strong>Grounding &mdash; 5-4-3-2-1 (3 min):</strong> Reconnect with the present moment using your five senses. The app walks you through noticing 5 things you see, 4 you hear, 3 you touch, 2 you smell, and 1 you taste.</li>
+            <li><strong>Gratitude Reflection (5 min):</strong> Guided journaling that shifts your focus to positive aspects of your day. Research shows daily gratitude practice reduces anxiety and improves sleep.</li>
+            <li><strong>Sleep Prep (15 min):</strong> A full wind-down routine combining breathing, progressive muscle relaxation, and visualization to prepare your mind and body for rest.</li>
+            <li><strong>Mindful Walk (10 min):</strong> Transform a simple walk into a mindfulness practice with audio cues that draw your attention to your surroundings and body.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Journal Screen</span>
+        <h3>Reflective Writing</h3>
+        <p>The Journal provides a private space for freeform writing. Studies show that expressive writing reduces stress and helps process difficult emotions.</p>
+        <ul>
+            <li><strong>Free Writing:</strong> Open a blank entry and write whatever comes to mind. No prompts required.</li>
+            <li><strong>Guided Prompts:</strong> Prefer structure? Choose from prompts like "What am I grateful for today?", "What is weighing on me?", or "What would I tell a friend in my situation?"</li>
+            <li><strong>Entry History:</strong> Review past entries to reflect on your journey and see how your thinking has evolved over time.</li>
+        </ul>
     </div>
 
     <h2>How It Works</h2>
-    <p>Synapta operates as a multi-agent system where specialized AI subsystems work together:</p>
-    <ul>
-        <li><strong>The Crisis Prevention Engine</strong> continuously monitors physiological baselines and detects dangerous deviations using z-score analysis, including paradoxical calming patterns that indicate imminent suicide risk</li>
-        <li><strong>The Therapeutic Core</strong> manages your treatment plan, adapting interventions based on real-time biometric data and session history</li>
-        <li><strong>The Billing Engine</strong> automatically tracks engagement for Remote Therapeutic Monitoring (RTM) CPT codes, ensuring your clinician's practice stays compliant</li>
-        <li><strong>Cross-device sync</strong> maintains your therapeutic state across phones, tablets, and other devices with military-grade encryption</li>
-    </ul>
-    <p>All interactions are protected by SHA-256 hash-chained audit trails that ensure data integrity and regulatory compliance.</p>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Open the App &amp; Check In</h4>
+                <p>Start your day by tapping a mood indicator on the Home screen. This takes two seconds and helps you build self-awareness around your emotional patterns.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Start a Conversation</h4>
+                <p>Tap "Start a Session" and begin talking about whatever is on your mind. The AI listens, reflects, and guides you with evidence-based therapeutic techniques.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Try a Guided Exercise</h4>
+                <p>When you need something more structured, browse the Exercises library. Choose an activity that fits your time and current needs &mdash; from 3-minute grounding to 15-minute sleep prep.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Track Your Progress</h4>
+                <p>Over time, your mood history reveals patterns. The wellness streak keeps you motivated, and journal entries let you look back and see growth.</p>
+            </div>
+        </div>
+    </div>
 
-    <h2>Availability</h2>
+    <h2>Who Is Synapta Therapist For?</h2>
     <ul>
-        <li><strong>iOS:</strong> Available via TestFlight</li>
-        <li><strong>Android:</strong> APK available for beta testers</li>
+        <li><strong>Anyone experiencing stress, anxiety, or low mood</strong> who wants on-demand support between (or instead of) traditional therapy sessions</li>
+        <li><strong>People who want to build mental wellness habits</strong> like daily mood tracking, journaling, and mindfulness</li>
+        <li><strong>Those on therapy waitlists</strong> who need support now while waiting for a human therapist</li>
+        <li><strong>Individuals who prefer text-based communication</strong> and find it easier to open up in writing</li>
+        <li><strong>Anyone curious about therapy</strong> who wants a low-pressure way to explore their thoughts and feelings</li>
     </ul>
 
     <div class="disclaimer">
-        <strong>Important Disclaimer:</strong> Synapta AI Therapist is a therapeutic support tool designed to complement professional mental health care. It is not a replacement for licensed therapists, psychiatrists, or emergency services. If you are experiencing a mental health emergency, call 988 (Suicide &amp; Crisis Lifeline) or 911 immediately.
+        <strong>Important Notice:</strong> Synapta Therapist is a wellness and self-help tool. It is not a replacement for licensed therapy, psychiatric care, or medical treatment. If you are in crisis or experiencing thoughts of self-harm, please contact your local emergency services or a crisis helpline immediately.
     </div>
+
+    <h2>Privacy &amp; Data</h2>
+    <p>Your mental health data deserves the highest level of protection. All conversations are encrypted in transit and at rest. We do not sell, share, or use your therapy conversations for advertising. You can request deletion of your account and all associated data at any time.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details. To request data deletion, visit our <a href="delete-account.html">Account Deletion</a> or <a href="delete-data.html">Data Deletion</a> pages.</p>
 </div>
 
 <div class="cta">
-    <a class="cta-btn" href="mailto:andre@alphainception.com">Request Beta Access</a>
+    <a class="cta-btn" href="services.html">View All Services</a>
 </div>
 
 <footer class="footer">
-    <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
-    <div class="footer-links">
-        <a href="services.html">Services</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:andre@alphainception.com">Contact</a>
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>
-    <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
 </footer>
 
 </body>

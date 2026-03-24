@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Additional Consumer Services | Alpha Inception</title>
+    <title>Consumer Services | Alpha Inception</title>
     <style>
         :root {
             --primary: #1a2b4a;
@@ -20,23 +20,20 @@
         a { text-decoration: none; color: var(--accent); }
         a:hover { color: var(--accent-dark); }
 
-        /* Header */
-        .header { background: var(--primary); color: #fff; padding: 0; }
+        .header { background: var(--primary); color: #fff; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
         .logo span { color: var(--accent); }
         .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
         .header-nav a:hover { color: #fff; }
 
-        /* Hero */
         .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 80px 24px 60px; text-align: center; }
         .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
-        .hero p { font-size: 1.15rem; color: #94a3b8; max-width: 640px; margin: 0 auto; }
+        .hero p { font-size: 1.15rem; color: #94a3b8; max-width: 700px; margin: 0 auto; }
 
-        /* Products Grid */
         .products { max-width: 1200px; margin: -40px auto 60px; padding: 0 24px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
-        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; }
+        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
         .card-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         .badge-health { background: #dcfce7; color: #166534; }
@@ -44,21 +41,20 @@
         .badge-productivity { background: #fef3c7; color: #92400e; }
         .badge-wellness { background: #fce7f3; color: #9d174d; }
         .badge-sports { background: #ccfbf1; color: #065f46; }
-        .badge-therapy { background: #ede9fe; color: #5b21b6; }
-        .badge-analytics { background: #fff7ed; color: #9a3412; }
+        .badge-mental { background: #f3e8ff; color: #6b21a8; }
         .card-color { height: 6px; }
-        .card-body { padding: 28px; }
+        .card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
         .card-body h3 { font-size: 1.35rem; color: var(--primary); margin: 12px 0 8px; }
         .card-body .tagline { font-size: 0.95rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
-        .card-body p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
+        .card-body .desc { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; }
         .card-body .features { list-style: none; margin-bottom: 20px; }
         .card-body .features li { font-size: 0.85rem; color: var(--text); padding: 4px 0; padding-left: 20px; position: relative; }
         .card-body .features li::before { content: "\2713"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .card-bottom { margin-top: auto; }
         .card-link { display: inline-block; background: var(--accent); color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
         .card-link:hover { background: var(--accent-dark); color: #fff; }
         .platforms { font-size: 0.8rem; color: var(--text-light); margin-top: 12px; }
 
-        /* Footer */
         .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
         .footer-inner { max-width: 1200px; margin: 0 auto; }
         .footer a { color: #cbd5e1; }
@@ -87,29 +83,32 @@
 </header>
 
 <section class="hero">
-    <h1>AI-Powered Consumer Products</h1>
-    <p>Seven AI-powered applications built to enhance your health, mental wellness, productivity, social life, and entertainment. Designed with privacy at the core.</p>
+    <h1>Consumer Services</h1>
+    <p>AI-powered applications designed to enhance your health, mental wellness, productivity, social life, and entertainment. Built with privacy at the core and available across iOS, Android, and Web.</p>
 </section>
 
 <section class="products">
     <div class="grid">
 
-        <!-- Synapta AI Therapist -->
+        <!-- Synapta Therapist -->
         <div class="card">
             <div class="card-color" style="background: linear-gradient(90deg, #7c3aed, #a78bfa);"></div>
             <div class="card-body">
-                <span class="card-badge badge-therapy">Mental Health &amp; Wellness</span>
-                <h3>Synapta AI Therapist</h3>
-                <div class="tagline">Patent-Pending Multi-LLM Therapeutic AI</div>
-                <p>A patent-pending AI therapeutic platform combining multiple language models with real-time physiological monitoring for personalized, evidence-based mental health support with always-on crisis prevention.</p>
+                <span class="card-badge badge-mental">Mental Health &amp; Wellness</span>
+                <h3>Synapta Therapist</h3>
+                <div class="tagline">AI Therapy Companion</div>
+                <p class="desc">A personal AI therapy companion that provides on-demand emotional support through empathetic conversation. Uses evidence-informed CBT, mindfulness, and reflective listening techniques to help you work through stress, anxiety, and difficult emotions whenever you need it.</p>
                 <ul class="features">
-                    <li>Always-on crisis prevention with 988 integration</li>
-                    <li>Voice-interactive therapy with customizable therapist personas</li>
-                    <li>Real-time physiological monitoring &amp; biometric tracking</li>
-                    <li>Automated RTM CPT billing compliance for clinicians</li>
+                    <li>Natural therapeutic conversations with an empathetic AI</li>
+                    <li>Daily mood tracking with pattern recognition over time</li>
+                    <li>Guided exercises: breathing, body scan, grounding, journaling</li>
+                    <li>Sleep support with wind-down routines and calming audio</li>
+                    <li>Wellness streaks and progress tracking</li>
                 </ul>
-                <a class="card-link" href="synapta-therapist.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight) &amp; Android</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="synapta-therapist.html">Learn More</a>
+                    <div class="platforms">Available on Android &amp; iOS</div>
+                </div>
             </div>
         </div>
 
@@ -120,15 +119,18 @@
                 <span class="card-badge badge-health">Health &amp; Medical</span>
                 <h3>Alpha Medical</h3>
                 <div class="tagline">AI Clinical Decision Support</div>
-                <p>A clinical decision support system that combines multiple AI models with curated medical knowledge bases to deliver high-confidence diagnostic insights for healthcare professionals.</p>
+                <p class="desc">A clinical decision support system that queries multiple AI models simultaneously and synthesizes their responses through a proprietary consensus engine. Designed for healthcare professionals who need reliable, evidence-based diagnostic insights with transparent confidence levels.</p>
                 <ul class="features">
-                    <li>Multi-LLM Consensus Engine reduces AI hallucinations</li>
-                    <li>15,000+ medical knowledge embeddings (FDA, clinical guidelines, literature)</li>
-                    <li>FDA Pathway Advisor &amp; Benchmark Tool</li>
-                    <li>Expert-weighted feedback loop for continuous learning</li>
+                    <li>Multi-LLM Consensus Engine with transparent agreement scoring</li>
+                    <li>15,000+ medical knowledge embeddings (FDA, clinical guidelines)</li>
+                    <li>FDA Pathway Advisor for device classification (510(k), PMA, De Novo)</li>
+                    <li>Benchmark Tool to test AI accuracy against known diagnoses</li>
+                    <li>Expert-weighted feedback loop for continuous improvement</li>
                 </ul>
-                <a class="card-link" href="alpha-medical.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight) &amp; Android</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="alpha-medical.html">Learn More</a>
+                    <div class="platforms">Available on iOS (TestFlight) &amp; Android</div>
+                </div>
             </div>
         </div>
 
@@ -138,16 +140,19 @@
             <div class="card-body">
                 <span class="card-badge badge-social">Social &amp; Lifestyle</span>
                 <h3>Aura Social Secretary</h3>
-                <div class="tagline">Your AI-Powered Social Intelligence Assistant</div>
-                <p>An intelligent assistant that helps you navigate your social world with confidence. Remembers your relationships, prepares you for conversations, and protects your energy.</p>
+                <div class="tagline">AI-Powered Social Intelligence Assistant</div>
+                <p class="desc">An intelligent assistant that helps you navigate your social world with confidence. Remembers details about your relationships, prepares you with conversation starters before events, monitors your social energy levels, and handles scheduling through agent-to-agent coordination.</p>
                 <ul class="features">
-                    <li>Memory Whispers &mdash; AI-generated conversation prep</li>
-                    <li>Social Battery &mdash; wellness-first burnout protection</li>
-                    <li>Agent-to-agent smart scheduling</li>
-                    <li>100% on-device processing &mdash; no data leaves your phone</li>
+                    <li>Memory Whispers &mdash; AI-generated conversation prep before meetings</li>
+                    <li>Social Battery &mdash; wellness-first burnout detection and protection</li>
+                    <li>Vibes &mdash; real-time social dynamics and relationship health insights</li>
+                    <li>Agent-to-agent smart scheduling (no back-and-forth texts)</li>
+                    <li>100% on-device processing &mdash; no personal data leaves your phone</li>
                 </ul>
-                <a class="card-link" href="aura-social-secretary.html">Learn More</a>
-                <div class="platforms">Available on iOS &amp; Android</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="aura-social-secretary.html">Learn More</a>
+                    <div class="platforms">Available on iOS &amp; Android</div>
+                </div>
             </div>
         </div>
 
@@ -158,15 +163,18 @@
                 <span class="card-badge badge-productivity">Productivity</span>
                 <h3>Concierge</h3>
                 <div class="tagline">AI Email Assistant</div>
-                <p>An intelligent email assistant powered by Claude AI that classifies, prioritizes, and manages your inbox. Automates routine tasks, surfaces what matters, and keeps your inbox clean.</p>
+                <p class="desc">An intelligent email assistant powered by Claude AI that classifies every incoming message into six priority categories, drafts contextual replies, extracts calendar events, and automates inbox cleanup. Turns email from a time sink into a managed system.</p>
                 <ul class="features">
-                    <li>6-category AI email classification with confidence scores</li>
-                    <li>AI-drafted replies, voice memos &amp; calendar extraction</li>
-                    <li>Bulk unsubscribe, block &amp; auto-cleanup</li>
-                    <li>Google Drive archival &amp; privacy mode</li>
+                    <li>6-category classification with confidence scores (Urgent to Spam)</li>
+                    <li>AI-drafted replies that match your tone and style</li>
+                    <li>Calendar event extraction and one-tap scheduling</li>
+                    <li>Voice memo to email &mdash; dictate replies on the go</li>
+                    <li>Bulk unsubscribe, block senders, and auto-cleanup rules</li>
                 </ul>
-                <a class="card-link" href="concierge.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight), Android &amp; Desktop</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="concierge.html">Learn More</a>
+                    <div class="platforms">Available on iOS (TestFlight), Android &amp; Desktop</div>
+                </div>
             </div>
         </div>
 
@@ -177,15 +185,18 @@
                 <span class="card-badge badge-wellness">Wellness</span>
                 <h3>NaturaBridge</h3>
                 <div class="tagline">Evidence-Based Natural Medicine</div>
-                <p>Uses multi-agent AI consensus to convert pharmaceutical prescriptions into evidence-based natural alternatives, combining Western medicine, Ayurvedic, and Traditional Chinese Medicine perspectives.</p>
+                <p class="desc">Uses multi-agent AI consensus to research and recommend evidence-based natural alternatives alongside your existing prescriptions. Bridges Western medicine, Ayurvedic, and Traditional Chinese Medicine perspectives with safety-first validation at every step.</p>
                 <ul class="features">
-                    <li>Prescription-to-natural conversion with consensus confidence</li>
-                    <li>Constitutional assessment (Dosha + TCM profiling)</li>
-                    <li>Biometric tracking with wearable integration</li>
-                    <li>AI-powered treatment adjustments with safety validation</li>
+                    <li>Prescription-to-natural conversion with consensus confidence scores</li>
+                    <li>Constitutional assessment combining Dosha and TCM body profiling</li>
+                    <li>Biometric tracking with Apple Health and wearable integration</li>
+                    <li>Interaction checker &mdash; flags conflicts between supplements and medications</li>
+                    <li>AI-powered treatment adjustments based on your response data</li>
                 </ul>
-                <a class="card-link" href="naturabridge.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight) &amp; Web</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="naturabridge.html">Learn More</a>
+                    <div class="platforms">Available on iOS (TestFlight) &amp; Web</div>
+                </div>
             </div>
         </div>
 
@@ -196,34 +207,18 @@
                 <span class="card-badge badge-sports">Sports &amp; Entertainment</span>
                 <h3>ProspectIQ DraftRoom</h3>
                 <div class="tagline">AI-Powered NBA Draft Intelligence</div>
-                <p>The ultimate NBA draft companion featuring AI-generated scouting reports, mock draft simulations, head-to-head prospect comparisons, and fantasy draft advice.</p>
+                <p class="desc">The ultimate NBA draft companion for fans, analysts, and fantasy players. Features AI-generated scouting reports for 60+ prospects, a War Room mock draft simulator with trade logic, head-to-head stat comparisons, and a prediction league to compete with friends.</p>
                 <ul class="features">
-                    <li>60+ prospect database with AI scouting reports</li>
-                    <li>War Room mock draft simulator with trade proposals</li>
-                    <li>Head-to-head compare with radar charts</li>
-                    <li>Prediction leagues &amp; Fantasy Draft Advisor</li>
+                    <li>60+ prospect database with AI scouting reports and projections</li>
+                    <li>War Room simulator &mdash; run mock drafts with realistic trade proposals</li>
+                    <li>Head-to-head compare with radar charts and stat overlays</li>
+                    <li>Fantasy Draft Advisor with round-by-round recommendations</li>
+                    <li>Prediction leagues &mdash; compete and track accuracy over time</li>
                 </ul>
-                <a class="card-link" href="prospectiq-draftroom.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight)</div>
-            </div>
-        </div>
-
-        <!-- ProspectIQ Intelligence -->
-        <div class="card">
-            <div class="card-color" style="background: linear-gradient(90deg, #ea580c, #f97316);"></div>
-            <div class="card-body">
-                <span class="card-badge badge-analytics">Sports Analytics</span>
-                <h3>ProspectIQ Intelligence</h3>
-                <div class="tagline">Advanced AI Sports Analytics Platform</div>
-                <p>The analytics powerhouse behind the ProspectIQ ecosystem. Deep statistical modeling, trade impact analysis, team-building optimization, and multi-season projection systems for serious analysts.</p>
-                <ul class="features">
-                    <li>Advanced player impact metrics beyond traditional box scores</li>
-                    <li>AI-powered trade analyzer with salary cap modeling</li>
-                    <li>Multi-season projections using machine learning</li>
-                    <li>Custom analytical reports for front offices &amp; media</li>
-                </ul>
-                <a class="card-link" href="prospectiq-intelligence.html">Learn More</a>
-                <div class="platforms">Available on iOS (TestFlight) &amp; Android</div>
+                <div class="card-bottom">
+                    <a class="card-link" href="prospectiq-draftroom.html">Learn More</a>
+                    <div class="platforms">Available on iOS (TestFlight)</div>
+                </div>
             </div>
         </div>
 
@@ -236,7 +231,7 @@
         <div class="footer-links">
             <a href="services.html">Services</a>
             <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="mailto:andre@alphainception.com">Contact</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
         </div>
         <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>

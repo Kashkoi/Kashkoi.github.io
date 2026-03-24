@@ -38,7 +38,9 @@
         .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
         .step-content h4 { color: var(--primary); margin-bottom: 4px; }
         .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+        .tech-box { background: #f5f3ff; border-left: 4px solid var(--product-color); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .safety-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #6d28d9; color: #fff; }
         .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
@@ -46,7 +48,11 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } }
+        .whisper-tiers { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+        .whisper-tiers th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+        .whisper-tiers td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .whisper-tiers tr:nth-child(even) { background: #f8fafc; }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .whisper-tiers { font-size: 0.8rem; } }
     </style>
 </head>
 <body>
@@ -66,90 +72,119 @@
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Mental Health &amp; Wellness</div>
         <h1>Synapta Therapist</h1>
-        <div class="tagline">AI-powered therapy companion &mdash; supportive conversations, mood tracking &amp; guided wellness exercises</div>
+        <div class="tagline">AI-powered therapy companion &mdash; multi-LLM consensus, neuroplastic adaptation, voice &amp; text sessions, and 24/7 ambient monitoring</div>
     </div>
 </section>
 
 <div class="content">
     <h2>What Is Synapta Therapist?</h2>
-    <p>Synapta Therapist is a personal AI therapy companion that provides on-demand emotional support through natural, empathetic conversation. Whether you are working through anxiety, stress, relationship challenges, or simply need a safe space to process your thoughts, Synapta Therapist is available whenever you need it &mdash; no appointments and no waitlists.</p>
-    <p>The app uses evidence-informed therapeutic techniques including Cognitive Behavioral Therapy (CBT), mindfulness practices, and reflective listening to help you reframe negative thinking patterns, explore your emotions, and develop healthier coping strategies over time.</p>
+    <p>Synapta Therapist is a personal AI therapy companion that provides on-demand emotional support through natural, empathetic conversation. It goes far beyond a simple chatbot &mdash; behind every response, a Mitotic Agent Cloner spawns five independent AI clones, each using a different therapeutic strategy. A multi-LLM consensus engine (Claude, GPT-4o, Gemini, DeepSeek, Llama) selects the best response while a hallucination detection system ensures clinical safety.</p>
+    <p>Over time, Synapta adapts to you personally through its Neuroplastic Scorer, which uses long-term potentiation (LTP) and long-term depression (LTD) engagement models to learn which therapeutic approaches resonate most with you. A three-phase Resonance Discovery system evolves from exploration to convergence to optimization across your sessions.</p>
+
+    <div class="tech-box">
+        <strong>Multi-LLM Therapeutic Architecture:</strong> Every message you send triggers 5 parallel AI clones across different LLM providers, each applying a different therapeutic lens. The consensus engine evaluates all responses for clinical appropriateness, empathetic quality, and hallucination risk before selecting the single best reply. You see one thoughtful response; behind it, five models competed to give you the best possible support.
+    </div>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
             <h4>Therapeutic Conversations</h4>
-            <p>Talk openly with an AI trained in supportive, evidence-informed techniques. The conversation adapts to your needs, whether you want to vent, problem-solve, or reflect.</p>
+            <p>Talk through text or voice with an AI trained in CBT, mindfulness, and reflective listening. The Mitotic Agent Cloner ensures you always receive the most therapeutically appropriate response from 5 competing strategies.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Whisper Companion</h4>
+            <p>24/7 ambient background monitoring that listens to prosodic patterns (volume, pitch, speaking rate, pause patterns) to detect stress. Raw audio is NEVER stored or transmitted &mdash; only acoustic features are analyzed on-device.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Voice Sessions</h4>
+            <p>Speak naturally and hear the therapist respond with synthesized voice. Voice input is transcribed to text for processing; the original audio is discarded immediately after transcription for privacy.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Neuroplastic Adaptation</h4>
+            <p>The system learns your therapeutic preferences over time using LTP/LTD engagement modeling. Approaches that help you improve are reinforced; those that do not resonate are gradually deprioritized.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Crisis Detection</h4>
+            <p>Multi-LLM consensus monitors every conversation for crisis signals. If risk is detected, the system provides immediate safety resources, emergency contact notification, and direct routing to 988/Crisis Text Line.</p>
         </div>
         <div class="feature-card">
             <h4>Mood Tracking</h4>
-            <p>Log how you are feeling each day with a simple emoji-based check-in. View patterns over time to understand your emotional landscape and identify triggers.</p>
+            <p>Daily mood check-ins with emoji-based logging. Track patterns over time, identify triggers, and see correlations between your mood and session themes or life events.</p>
         </div>
         <div class="feature-card">
-            <h4>Guided Exercises</h4>
-            <p>Access structured breathing techniques (4-7-8, box breathing), body scan meditations, grounding exercises (5-4-3-2-1), and journaling prompts.</p>
+            <h4>Multi-Party Sessions</h4>
+            <p>Support for couples therapy sessions where both participants interact with the AI therapist. The system manages turn-taking, tracks each person's perspective, and facilitates constructive dialogue.</p>
         </div>
         <div class="feature-card">
-            <h4>Wellness Streaks</h4>
-            <p>Build consistency with daily check-in streaks. Track your progress and stay motivated with gentle reminders and milestone celebrations.</p>
+            <h4>Care Coordination</h4>
+            <p>FHIR bridge integration allows you to share session summaries and mood data with your healthcare providers, creating continuity between AI support and professional care.</p>
         </div>
-        <div class="feature-card">
-            <h4>Sleep Support</h4>
-            <p>Wind-down routines and calming audio designed to help you transition from a busy mind to restful sleep. Guided progressive relaxation included.</p>
-        </div>
-        <div class="feature-card">
-            <h4>Private &amp; Secure</h4>
-            <p>Your conversations are encrypted and your data stays private. No conversations are shared with third parties. You can delete your data at any time.</p>
-        </div>
+    </div>
+
+    <h2>The Whisper Companion</h2>
+    <p>Whisper is a unique background service that passively monitors your vocal prosody throughout the day. It does not listen to words or record conversations &mdash; it only analyzes acoustic features like volume changes, pitch variations, speaking rate, and pause patterns to estimate your stress level.</p>
+
+    <table class="whisper-tiers">
+        <tr><th>Tier</th><th>Stress Level</th><th>Intervention</th></tr>
+        <tr><td><strong>1</strong></td><td>Mild elevation</td><td>Subtle notification with a breathing prompt</td></tr>
+        <tr><td><strong>2</strong></td><td>Moderate</td><td>Gentle check-in message asking how you are doing</td></tr>
+        <tr><td><strong>3</strong></td><td>Elevated</td><td>Offer to start a brief grounding exercise</td></tr>
+        <tr><td><strong>4</strong></td><td>High</td><td>Proactive session invitation with calming guidance</td></tr>
+        <tr><td><strong>5</strong></td><td>Crisis-level</td><td>Safety resources, emergency contact alert, crisis line routing</td></tr>
+    </table>
+
+    <div class="safety-box">
+        <strong>Audio Privacy Guarantee:</strong> Whisper analyzes prosodic features only. Raw audio is NEVER stored, transmitted, or accessible to anyone &mdash; including Alpha Inception. The feature processes audio entirely on your device and immediately discards the raw signal after extracting acoustic measurements. Battery impact is less than 5% per day.
     </div>
 
     <h2>App Screens &amp; How You Interact</h2>
 
     <div class="screen-section">
         <span class="screen-tag">Home Screen</span>
-        <h3>Your Daily Dashboard</h3>
-        <p>When you open Synapta Therapist, the Home screen greets you with a mood check-in prompt and quick-access actions. This is your starting point each day.</p>
+        <h3>Your Daily Starting Point</h3>
+        <p>The Home screen greets you with a mood check-in and quick access to all features. It is designed to take less than five seconds to start a session.</p>
         <ul>
-            <li><strong>Mood Check-In:</strong> Tap one of five mood indicators (Good, Okay, Low, Anxious, Stressed) to log how you are feeling right now. This takes less than two seconds and feeds into your mood history.</li>
-            <li><strong>Quick Actions:</strong> Four large buttons let you jump straight into a therapy session, start a breathing exercise, write a journal entry, or play calming sleep sounds.</li>
-            <li><strong>Wellness Streak:</strong> A card at the bottom shows your consecutive days of engagement, encouraging daily check-ins.</li>
+            <li><strong>Mood Check-In:</strong> Tap one of five mood indicators to log how you are feeling. This feeds your mood history and helps the AI personalize session openers.</li>
+            <li><strong>Start Session:</strong> A prominent button launches a new therapy session in text or voice mode. Your previous session context is loaded so the therapist remembers what you discussed.</li>
+            <li><strong>Whisper Status:</strong> Shows whether the Whisper Companion is active and your current ambient stress level indicator.</li>
+            <li><strong>Homework:</strong> Any exercises or reflection prompts assigned in your last session appear here as action cards.</li>
+            <li><strong>Crisis Button:</strong> A clearly visible safety button that immediately provides crisis resources, emergency contacts, and direct routing to 988 Suicide &amp; Crisis Lifeline.</li>
         </ul>
     </div>
 
     <div class="screen-section">
-        <span class="screen-tag">Chat Screen</span>
-        <h3>Therapeutic Conversations</h3>
-        <p>The Chat screen is the core of Synapta Therapist. It provides a familiar messaging interface where you can type freely about anything on your mind.</p>
+        <span class="screen-tag">Therapy Session</span>
+        <h3>Text &amp; Voice Conversations</h3>
+        <p>The core therapeutic interface supports both text and voice input. Behind the scenes, the Mitotic Agent Cloner and multi-LLM consensus work to deliver the most helpful response.</p>
         <ul>
-            <li><strong>Natural Dialogue:</strong> The AI responds with thoughtful, empathetic messages. It asks clarifying questions, reflects back what you have said, and offers gentle reframes when appropriate.</li>
-            <li><strong>Technique Suggestions:</strong> When the AI identifies that a specific technique might help (like grounding or cognitive restructuring), it offers it naturally within the conversation.</li>
-            <li><strong>Session Continuity:</strong> The therapist remembers context within your session so you can explore topics deeply without repeating yourself.</li>
-            <li><strong>Typing Indicator:</strong> A calming animation shows when the AI is composing a response, creating a natural conversational rhythm.</li>
+            <li><strong>Text Mode:</strong> A familiar messaging interface where you type freely. The AI responds with thoughtful, empathetic messages that draw on CBT techniques, mindfulness, and reflective listening.</li>
+            <li><strong>Voice Mode:</strong> Tap the microphone to speak naturally. Your voice is transcribed in real time, and the therapist responds with synthesized speech. The conversational flow feels more natural than typing.</li>
+            <li><strong>Session Continuity:</strong> The therapist remembers context from previous sessions. You can reference past conversations, and the AI builds on themes you have explored together over time.</li>
+            <li><strong>Technique Integration:</strong> When the AI identifies an opportunity, it naturally weaves therapeutic techniques into the conversation &mdash; cognitive restructuring, grounding, gratitude exercises, or journaling prompts.</li>
+            <li><strong>Session Summary:</strong> After each session, you receive a summary card with key themes, any homework assigned, and mood observations. These summaries build a longitudinal record of your therapeutic journey.</li>
         </ul>
     </div>
 
     <div class="screen-section">
-        <span class="screen-tag">Exercises Screen</span>
-        <h3>Guided Wellness Activities</h3>
-        <p>The Exercises screen presents a library of structured mental wellness activities, each with clear time estimates so you can fit them into your schedule.</p>
+        <span class="screen-tag">Whisper Dashboard</span>
+        <h3>Ambient Stress Monitoring</h3>
+        <p>The Whisper Dashboard shows your prosodic stress patterns over time, helping you understand when and why your stress levels fluctuate.</p>
         <ul>
-            <li><strong>Deep Breathing (5 min):</strong> The 4-7-8 technique calms your nervous system with timed inhale, hold, and exhale cycles. Visual guides keep you on pace.</li>
-            <li><strong>Body Scan (10 min):</strong> Progressive relaxation from head to toe. Audio guidance helps you notice and release tension in each muscle group.</li>
-            <li><strong>Grounding &mdash; 5-4-3-2-1 (3 min):</strong> Reconnect with the present moment using your five senses. The app walks you through noticing 5 things you see, 4 you hear, 3 you touch, 2 you smell, and 1 you taste.</li>
-            <li><strong>Gratitude Reflection (5 min):</strong> Guided journaling that shifts your focus to positive aspects of your day. Research shows daily gratitude practice reduces anxiety and improves sleep.</li>
-            <li><strong>Sleep Prep (15 min):</strong> A full wind-down routine combining breathing, progressive muscle relaxation, and visualization to prepare your mind and body for rest.</li>
-            <li><strong>Mindful Walk (10 min):</strong> Transform a simple walk into a mindfulness practice with audio cues that draw your attention to your surroundings and body.</li>
+            <li><strong>Stress Timeline:</strong> A 24-hour chart showing your estimated stress level throughout the day based on vocal prosody analysis. Identify patterns like consistent afternoon stress spikes.</li>
+            <li><strong>Intervention History:</strong> See when Whisper sent you a check-in or breathing prompt, and whether you engaged with it.</li>
+            <li><strong>Weekly Patterns:</strong> Aggregated view showing which days and times of day tend to have the highest stress, helping you and your therapist identify triggers.</li>
+            <li><strong>Privacy Controls:</strong> Granular controls to pause Whisper, set quiet hours, or disable it entirely. Full transparency into exactly what data is and is not being collected.</li>
         </ul>
     </div>
 
     <div class="screen-section">
-        <span class="screen-tag">Journal Screen</span>
-        <h3>Reflective Writing</h3>
-        <p>The Journal provides a private space for freeform writing. Studies show that expressive writing reduces stress and helps process difficult emotions.</p>
+        <span class="screen-tag">Mood History</span>
+        <h3>Emotional Patterns Over Time</h3>
+        <p>A visual timeline of your daily mood check-ins, session themes, and Whisper stress data combined into one view.</p>
         <ul>
-            <li><strong>Free Writing:</strong> Open a blank entry and write whatever comes to mind. No prompts required.</li>
-            <li><strong>Guided Prompts:</strong> Prefer structure? Choose from prompts like "What am I grateful for today?", "What is weighing on me?", or "What would I tell a friend in my situation?"</li>
-            <li><strong>Entry History:</strong> Review past entries to reflect on your journey and see how your thinking has evolved over time.</li>
+            <li><strong>Mood Calendar:</strong> A color-coded calendar showing your daily mood at a glance. Tap any day to see session notes and stress data for that date.</li>
+            <li><strong>Trend Lines:</strong> Weekly and monthly mood trends with annotations showing when you started or changed therapeutic approaches.</li>
+            <li><strong>Correlation Insights:</strong> The AI identifies patterns between mood, session frequency, homework completion, and external factors you have mentioned in sessions.</li>
         </ul>
     </div>
 
@@ -158,48 +193,50 @@
         <div class="step">
             <div class="step-num">1</div>
             <div class="step-content">
-                <h4>Open the App &amp; Check In</h4>
-                <p>Start your day by tapping a mood indicator on the Home screen. This takes two seconds and helps you build self-awareness around your emotional patterns.</p>
+                <h4>Onboarding &amp; Emergency Setup</h4>
+                <p>Create your account, set up an emergency contact for crisis situations, grant microphone permissions if you want voice sessions and Whisper, and complete your first mood check-in.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-num">2</div>
             <div class="step-content">
-                <h4>Start a Conversation</h4>
-                <p>Tap "Start a Session" and begin talking about whatever is on your mind. The AI listens, reflects, and guides you with evidence-based therapeutic techniques.</p>
+                <h4>Start Your First Session</h4>
+                <p>Begin talking about whatever is on your mind. During the initial Exploration phase, the Resonance Discovery system tests different therapeutic approaches to learn what works best for you.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-num">3</div>
             <div class="step-content">
-                <h4>Try a Guided Exercise</h4>
-                <p>When you need something more structured, browse the Exercises library. Choose an activity that fits your time and current needs &mdash; from 3-minute grounding to 15-minute sleep prep.</p>
+                <h4>The AI Adapts to You</h4>
+                <p>Over multiple sessions, the Neuroplastic Scorer converges on the therapeutic strategies that resonate most with you. The AI becomes increasingly personalized, matching your communication style and therapeutic needs.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-num">4</div>
             <div class="step-content">
-                <h4>Track Your Progress</h4>
-                <p>Over time, your mood history reveals patterns. The wellness streak keeps you motivated, and journal entries let you look back and see growth.</p>
+                <h4>Continuous Support</h4>
+                <p>Between sessions, Whisper monitors your stress, homework cards keep you engaged with therapeutic exercises, and mood tracking builds a longitudinal picture. Share progress with your healthcare provider through the FHIR bridge.</p>
             </div>
         </div>
     </div>
 
     <h2>Who Is Synapta Therapist For?</h2>
     <ul>
-        <li><strong>Anyone experiencing stress, anxiety, or low mood</strong> who wants on-demand support between (or instead of) traditional therapy sessions</li>
-        <li><strong>People who want to build mental wellness habits</strong> like daily mood tracking, journaling, and mindfulness</li>
-        <li><strong>Those on therapy waitlists</strong> who need support now while waiting for a human therapist</li>
-        <li><strong>Individuals who prefer text-based communication</strong> and find it easier to open up in writing</li>
-        <li><strong>Anyone curious about therapy</strong> who wants a low-pressure way to explore their thoughts and feelings</li>
+        <li><strong>Anyone experiencing stress, anxiety, or low mood</strong> who wants on-demand therapeutic support between (or instead of) traditional therapy sessions</li>
+        <li><strong>People on therapy waitlists</strong> who need support now while waiting for a human therapist</li>
+        <li><strong>Individuals who prefer text or voice-based communication</strong> and find it easier to open up without face-to-face interaction</li>
+        <li><strong>Couples seeking guided communication support</strong> through the multi-party session feature</li>
+        <li><strong>Anyone who wants proactive stress monitoring</strong> through the Whisper Companion's ambient detection</li>
+        <li><strong>Users aged 17+</strong> &mdash; the app is not intended for children or minors under 17</li>
     </ul>
 
     <div class="disclaimer">
-        <strong>Important Notice:</strong> Synapta Therapist is a wellness and self-help tool. It is not a replacement for licensed therapy, psychiatric care, or medical treatment. If you are in crisis or experiencing thoughts of self-harm, please contact your local emergency services or a crisis helpline immediately.
+        <strong>Important Notice:</strong> Synapta Therapist is a wellness and self-help tool. It is not a replacement for licensed therapy, psychiatric care, or medical treatment. If you are in crisis or experiencing thoughts of self-harm, please use the in-app Crisis Button, contact 988 Suicide &amp; Crisis Lifeline, or call your local emergency services immediately.
     </div>
 
     <h2>Privacy &amp; Data</h2>
-    <p>Your mental health data deserves the highest level of protection. All conversations are encrypted in transit and at rest. We do not sell, share, or use your therapy conversations for advertising. You can request deletion of your account and all associated data at any time.</p>
+    <p>Your mental health data deserves the highest level of protection. All conversations are encrypted with AES-256-GCM at rest and TLS 1.3 in transit. Credentials are stored in iOS Keychain and Android Keystore. Voice audio is transcribed to text and immediately discarded &mdash; raw audio is never stored or transmitted. Whisper processes audio entirely on-device.</p>
+    <p>Your therapy content is never shared with advertisers, data brokers, or analytics platforms. LLM providers process your messages under strict data processing agreements that prohibit model training on your data. You can request deletion of your account and all associated data at any time &mdash; purge completes within 30 days. Inactive accounts (24+ months) are deleted with 30-day advance notice.</p>
     <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details. To request data deletion, visit our <a href="delete-account.html">Account Deletion</a> or <a href="delete-data.html">Data Deletion</a> pages.</p>
 </div>
 

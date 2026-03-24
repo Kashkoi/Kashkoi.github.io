@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroGuard — Gamified Neurological Health Monitoring | Alpha Inception</title>
+    <style>
+        :root { --primary: #1a2b4a; --accent: #0ea5e9; --accent-dark: #0284c7; --light-bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --product-color: #dc2626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); } a:hover { color: var(--accent-dark); }
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #3b1a1a 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero .badge { display: inline-block; background: rgba(220,38,38,0.25); color: #fca5a5; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
+        .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+        .content h2:first-child { margin-top: 0; }
+        .content p { margin-bottom: 16px; color: var(--text); }
+        .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
+        .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #fee2e2; color: #991b1b; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin: 20px 0; }
+        .game-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 4px solid var(--product-color); }
+        .game-card h4 { color: var(--primary); margin-bottom: 6px; font-size: 0.95rem; }
+        .game-card .game-type { font-size: 0.75rem; color: var(--product-color); font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+        .game-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+        .tech-box { background: #f1f5f9; border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .cta { text-align: center; padding: 40px 24px; }
+        .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #b91c1c; color: #fff; }
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer a { color: #cbd5e1; } .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .game-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">Alpha <span>Inception</span></div>
+        <nav class="header-nav">
+            <a href="services.html">All Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-inner">
+        <a class="back-link" href="services.html">&larr; All Services</a>
+        <div class="badge">Neurological Health</div>
+        <h1>NeuroGuard</h1>
+        <div class="tagline">Gamified neurological health monitoring &mdash; 19 game engines tracking motor, cognitive, cardiac, voice &amp; oculomotor biomarkers</div>
+    </div>
+</section>
+
+<div class="content">
+    <h2>What Is NeuroGuard?</h2>
+    <p>NeuroGuard is a gamified health monitoring platform that turns routine neurological assessments into engaging mini-games. Using your phone's built-in sensors &mdash; touchscreen, accelerometer, gyroscope, microphone, and camera &mdash; NeuroGuard captures clinically relevant biomarkers across six modalities: motor function, cognitive performance, cardiovascular health, voice and speech patterns, gait and balance, and oculomotor tracking.</p>
+    <p>Behind the games, a multi-LLM clinical consensus engine (ICDL) analyzes your data using multiple independent AI models simultaneously, dramatically reducing the risk of false positives. An adaptive immune intelligence system learns your personal baseline over time and flags meaningful deviations, while an entropic hallucination detection mesh ensures AI outputs remain grounded and reliable.</p>
+
+    <div class="tech-box">
+        <strong>Clinical-Grade AI Architecture:</strong> NeuroGuard's ICDL engine queries multiple AI models using Latin Square assignment with context rotation. Correlated failure detection identifies when models produce unreliable outputs, and automated architectural quarantine isolates compromised model pathways. This means every health insight you receive has been validated across independent AI systems.
+    </div>
+
+    <h2>The Game Engines</h2>
+    <p>Each game is designed to feel fun while quietly extracting precise biomarker data. You play for a few minutes; the system captures hundreds of data points per session.</p>
+
+    <div class="game-grid">
+        <div class="game-card">
+            <div class="game-type">Motor Assessment</div>
+            <h4>Quick Tap</h4>
+            <p>A whack-a-mole-style game with separate left and right hand rounds. Measures tap speed, accuracy, reaction time, and touch pressure. Bilateral comparison detects hemispheric asymmetries that may indicate early neurological changes.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Motor &amp; Tremor Analysis</div>
+            <h4>Trace Perfect</h4>
+            <p>Draw Archimedes spirals, clock faces, and copy figures on screen. FFT tremor analysis at 3-12Hz detects rest tremor, action tremor, and intention tremor with clinical-grade precision. Measures drawing accuracy and pen pressure patterns.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Cognitive Assessment</div>
+            <h4>Memory Match Plus</h4>
+            <p>Classic card matching combined with N-back tasks, spatial memory challenges, and interference tasks. Tracks working memory capacity, processing speed, attention, and recall accuracy over time.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Oculomotor Tracking</div>
+            <h4>Pupil Pilot</h4>
+            <p>Uses your phone's front camera to measure pupillary light reflex, saccadic eye movements, smooth pursuit tracking, convergence and divergence. Also tests color discrimination and contrast sensitivity.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Voice &amp; Speech Biomarkers</div>
+            <h4>Voice Quest</h4>
+            <p>Guided vocal exercises that extract jitter, shimmer, harmonics-to-noise ratio (HNR), fundamental frequency (F0), formant frequencies, and spectral tilt. Changes in these biomarkers can indicate neurological or respiratory conditions.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Balance &amp; Gait</div>
+            <h4>Balance Master</h4>
+            <p>Uses accelerometer and gyroscope data to assess standing balance, step cadence, stride length, and gait symmetry. Detects subtle changes in postural stability that may precede clinical symptoms.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Cardiovascular</div>
+            <h4>Rhythm Doctor</h4>
+            <p>A rhythm-tapping game that simultaneously measures heart rate, heart rate variability (HRV), RMSSD, and rhythm accuracy. Combines fun gameplay with passive cardiac monitoring through the phone's sensors.</p>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Visuospatial</div>
+            <h4>Tetris Rotation</h4>
+            <p>A spatial rotation game that tests visuospatial abilities, mental rotation speed, and spatial working memory. Difficulty adapts based on your performance to maintain engagement and clinical sensitivity.</p>
+        </div>
+    </div>
+
+    <p>Additional game engines include <strong>Step Quest</strong> (step counting and gait analysis), <strong>Psychomotor Rhythm</strong> (bilateral motor coordination), <strong>MindScape</strong> (advanced cognitive challenges), <strong>MedVault</strong> (medical records storage), <strong>Nutri Track</strong> (nutrition tracking), <strong>Physio Quest</strong> (physical rehabilitation), <strong>Family Tree</strong> (family health history), <strong>Lifestyle Capture</strong> (activity logging), and <strong>AR Modes</strong> (augmented reality assessments) &mdash; 19 game engines in total, with specialized modes for industrial safety, military/aerospace, and elite athletics.</p>
+
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>ICDL Consensus Engine</h4>
+            <p>Multi-LLM clinical arbiter with Latin Square assignment, context rotation, and correlated failure detection. Every health insight is validated across independent AI models before reaching you.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Adaptive Immune Intelligence</h4>
+            <p>Learns your personal baseline through innate screening and clonal selection. Detects meaningful deviations from YOUR normal, not population averages, with affinity maturation over time.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Bilateral Asymmetry Detection</h4>
+            <p>Games like Quick Tap test each hand separately. The system compares left vs. right performance to detect hemispheric deficits that may indicate early neurological changes.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Biomarker Dashboard</h4>
+            <p>Six-modality health dashboard tracking Motor, Cognitive, Cardiovascular, Voice/Speech, Gait/Balance, and Oculomotor biomarkers with trend visualization and composite risk scoring.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Entropic Hallucination Detection</h4>
+            <p>A dedicated AI safety layer that monitors entropy in model outputs, injects grounding checks, and uses active inference to ensure all health insights remain factually grounded.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Advanced ML Pipeline</h4>
+            <p>Bayesian uncertainty quantification, conformal prediction, Liquid Neural Networks, Spiking Neural Networks, causal AI, and explainable AI (XAI) ensure transparent, reliable analysis.</p>
+        </div>
+    </div>
+
+    <h2>App Screens &amp; How You Interact</h2>
+
+    <div class="screen-section">
+        <span class="screen-tag">Games Hub</span>
+        <h3>Your Assessment Playground</h3>
+        <p>The Games Hub presents all available game engines in a two-column grid. Each game shows its name, the biomarker modality it targets, estimated play time, and your last session score.</p>
+        <ul>
+            <li><strong>Active Games:</strong> Games you have unlocked and calibrated appear at the top with full-color cards. Tap any game to jump straight into a session.</li>
+            <li><strong>Coming Soon:</strong> Upcoming game engines appear as grayed-out cards with a "Coming Soon" label and brief description of what they will measure.</li>
+            <li><strong>Daily Recommendation:</strong> The system suggests which games to play today based on which biomarkers haven't been tested recently, ensuring balanced coverage across all modalities.</li>
+            <li><strong>Session History:</strong> Tap the clock icon on any game to see your past sessions, scores, and biomarker trends specific to that game engine.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Health Dashboard</span>
+        <h3>Biomarker Trends &amp; Risk Scoring</h3>
+        <p>The Dashboard is where game data becomes health intelligence. It synthesizes data from all your game sessions into a unified view of your neurological health.</p>
+        <ul>
+            <li><strong>Six-Modality Overview:</strong> Color-coded cards for Motor, Cognitive, Cardiovascular, Voice/Speech, Gait/Balance, and Oculomotor health. Each shows a current status (Normal, Watch, Alert) and trend direction.</li>
+            <li><strong>Composite Risk Score:</strong> An overall score that combines data from all modalities, weighted by clinical significance. This is your at-a-glance neurological health indicator.</li>
+            <li><strong>Trend Charts:</strong> Tap any modality card to see detailed sparkline charts showing how each biomarker has changed over days, weeks, and months.</li>
+            <li><strong>Bilateral Comparison:</strong> A dedicated view showing left-hand vs. right-hand performance across motor games. Any growing asymmetry is highlighted with an explanation of its potential significance.</li>
+            <li><strong>AI Insights:</strong> The ICDL consensus engine generates plain-language summaries of what your data shows, with confidence indicators showing model agreement levels.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Game Session</span>
+        <h3>Playing a Game (Quick Tap Example)</h3>
+        <p>Each game follows a consistent pattern: brief instructions, calibration, gameplay, and results. Here is how Quick Tap works as an example.</p>
+        <ul>
+            <li><strong>Instructions:</strong> A brief animation shows what to do. For Quick Tap: tap the targets as fast as you can when they appear. You will play one round with your left hand, then one with your right.</li>
+            <li><strong>Calibration:</strong> A short practice round establishes your baseline for this session. The difficulty adapts to keep you in the optimal challenge zone.</li>
+            <li><strong>Gameplay:</strong> Targets appear at random positions. You tap them as quickly and accurately as possible. The game feels like fun; meanwhile sensors capture reaction time, tap accuracy, touch pressure, and inter-tap interval for every single touch.</li>
+            <li><strong>Results:</strong> After both rounds, you see your score, accuracy percentage, and how you compare to your personal average. Behind the scenes, the data is processed through the ICDL engine and added to your biomarker history.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Achievements</span>
+        <h3>Progress &amp; Motivation</h3>
+        <p>The Achievements screen gamifies the monitoring process itself, rewarding consistent engagement with badges and streaks.</p>
+        <ul>
+            <li><strong>Daily Streaks:</strong> Track consecutive days of playing at least one game. Longer streaks unlock achievement badges.</li>
+            <li><strong>Modality Coverage:</strong> Badges for testing all six modalities within a week, ensuring balanced biomarker data collection.</li>
+            <li><strong>Personal Records:</strong> Track your best scores across all games. See improvement trends that keep you motivated to play regularly.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Onboarding &amp; Baseline</h4>
+                <p>Complete initial onboarding and play each game once to establish your personal baseline. The Adaptive Immune Intelligence system starts learning what is normal for YOU specifically.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Play Games Regularly</h4>
+                <p>Play 2-3 games per day for a few minutes each. The system recommends which games to play based on which biomarkers need fresh data. It feels like gaming; the health monitoring happens invisibly.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Review Your Dashboard</h4>
+                <p>Check the Health Dashboard periodically to see trends across all six modalities. The ICDL consensus engine generates plain-language summaries with confidence levels so you understand what the data means.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Share With Your Doctor</h4>
+                <p>Export your biomarker history and AI-generated reports to share with your healthcare provider. Longitudinal data from daily monitoring gives clinicians insights they cannot get from periodic office visits.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is NeuroGuard For?</h2>
+    <ul>
+        <li><strong>Anyone concerned about neurological health</strong> who wants to track cognitive, motor, and sensory function over time with clinical-grade precision</li>
+        <li><strong>People with family history of neurological conditions</strong> who want early detection through continuous, non-invasive monitoring</li>
+        <li><strong>Older adults</strong> who want to proactively monitor cognitive and motor function as part of healthy aging</li>
+        <li><strong>Athletes and military personnel</strong> who need to track neurological function for concussion monitoring, performance optimization, or return-to-play/duty protocols</li>
+        <li><strong>Healthcare professionals</strong> who want patients to collect objective, longitudinal biomarker data between clinical visits</li>
+    </ul>
+
+    <div class="disclaimer">
+        <strong>Important Notice:</strong> NeuroGuard is a health monitoring and wellness tool. It does not diagnose medical conditions. All biomarker data and AI-generated insights should be reviewed with a qualified healthcare professional. If you experience sudden neurological symptoms (weakness, numbness, vision changes, severe headache), contact emergency services immediately.
+    </div>
+
+    <h2>Privacy &amp; Security</h2>
+    <p>Health biomarker data demands the highest level of protection. NeuroGuard uses post-quantum cryptography (Kyber/Dilithium) for data encryption, federated learning with Elastic Weight Consolidation so your raw data never leaves your device for model training, and fully homomorphic encryption (CKKS) for any cloud-based analysis. Your data is encrypted at rest and in transit, and you can export or delete it at any time.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+</div>
+
+<div class="cta">
+    <a class="cta-btn" href="services.html">View All Services</a>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
+    </div>
+</footer>
+
+</body>
+</html>

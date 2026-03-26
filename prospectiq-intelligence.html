@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProspectIQ Intelligence - AI Sports Analytics Platform | Alpha Inception</title>
+    <title>ProspectIQ Intelligence — Advanced AI Sports Analytics Platform | Alpha Inception</title>
     <style>
         :root { --primary: #1a2b4a; --accent: #0ea5e9; --accent-dark: #0284c7; --light-bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --product-color: #ea580c; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,20 +13,32 @@
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
         .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #3b2a1a 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
         .hero-inner { max-width: 800px; margin: 0 auto; }
-        .hero .badge { display: inline-block; background: rgba(234,88,12,0.2); color: #fb923c; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero .badge { display: inline-block; background: rgba(234,88,12,0.25); color: #fb923c; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
         .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
-        .hero .tagline { font-size: 1.15rem; color: #94a3b8; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
         .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
         .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
         .content h2:first-child { margin-top: 0; }
-        .content p { margin-bottom: 16px; }
+        .content p { margin-bottom: 16px; color: var(--text); }
         .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
-        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
         .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #fff7ed; color: #ea580c; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+        .tech-box { background: #fff7ed; border-left: 4px solid var(--product-color); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
         .cta { text-align: center; padding: 40px 24px; }
         .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #c2410c; color: #fff; }
         .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
@@ -34,7 +46,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -54,71 +66,183 @@
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Sports Analytics</div>
         <h1>ProspectIQ Intelligence</h1>
-        <div class="tagline">Advanced AI sports analytics and intelligence platform</div>
+        <div class="tagline">Advanced AI sports analytics platform &mdash; player impact metrics, trade modeling, roster optimization, multi-season projections, and scouting intelligence</div>
     </div>
 </section>
 
 <div class="content">
-    <h2>Overview</h2>
-    <p>ProspectIQ Intelligence is the analytics powerhouse behind the ProspectIQ ecosystem. While DraftRoom focuses on the NBA draft experience, Intelligence provides deep analytical capabilities including advanced statistical modeling, team-building optimization, trade impact analysis, and multi-season projection systems.</p>
-    <p>Built for front office analysts, serious fantasy players, and sports media professionals who need data-driven insights beyond basic box scores.</p>
+    <h2>What Is ProspectIQ Intelligence?</h2>
+    <p>ProspectIQ Intelligence is the analytics engine behind the ProspectIQ ecosystem. While DraftRoom focuses on the draft-day experience, Intelligence provides deep analytical capabilities for year-round decision-making. It combines historical NBA data spanning multiple decades with real-time performance tracking and machine learning models to deliver data-driven insights that go far beyond traditional box scores.</p>
+    <p>Built for front office analysts who evaluate trades at 2am, serious fantasy players who need an edge over their league, and sports media professionals who want data-backed narratives rather than hot takes.</p>
+
+    <div class="tech-box">
+        <strong>AI-Powered Analysis:</strong> ProspectIQ Intelligence uses ensemble machine learning models trained on decades of NBA data. Player projections combine regression analysis, similarity scoring against historical archetypes, and contextual modeling that accounts for team system, coaching style, and roster fit. Trade evaluations run multi-variable optimization across salary cap, positional needs, timeline alignment, and projected win shares.
+    </div>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
             <h4>Advanced Analytics</h4>
-            <p>Deep statistical modeling beyond traditional box scores. Player impact metrics, lineup optimization, and predictive performance models powered by AI.</p>
+            <p>Deep statistical modeling beyond box scores. Player impact metrics, lineup net ratings, clutch performance splits, on/off differentials, and possession-level analysis powered by AI pattern recognition.</p>
         </div>
         <div class="feature-card">
             <h4>Trade Analyzer</h4>
-            <p>Evaluate proposed trades with AI-powered impact analysis. Salary cap implications, roster fit scoring, and multi-season value projections.</p>
+            <p>Evaluate proposed trades with AI-powered impact analysis. Models salary cap implications across multiple seasons, roster fit scoring, chemistry projections, and comparative value based on historical trade outcomes.</p>
         </div>
         <div class="feature-card">
             <h4>Team Builder</h4>
-            <p>AI-optimized roster construction tool. Build championship-caliber teams within salary constraints using multi-variable optimization.</p>
+            <p>AI-optimized roster construction within salary constraints. Multi-variable optimization considers positional versatility, offensive and defensive scheme fit, age curve projections, and championship probability modeling.</p>
         </div>
         <div class="feature-card">
             <h4>Season Projections</h4>
-            <p>Multi-season player and team projections using machine learning models trained on historical NBA data and current performance trends.</p>
+            <p>Multi-season player and team projections using ML models. Win probability curves, playoff seeding forecasts, player development trajectories, and age-adjusted performance curves with confidence intervals.</p>
         </div>
         <div class="feature-card">
             <h4>Scouting Network</h4>
-            <p>Comprehensive prospect evaluation system with international player tracking, college performance analysis, and NBA readiness scoring.</p>
+            <p>Comprehensive prospect pipeline from international leagues, NCAA, and G-League. NBA readiness scoring, statistical translation models, archetype matching against historical comparisons, and draft value optimization.</p>
         </div>
         <div class="feature-card">
             <h4>Custom Reports</h4>
-            <p>Generate detailed analytical reports for any player, team, or matchup. Export-ready formats for presentations and front office briefings.</p>
+            <p>Generate detailed analytical reports for any player, team, matchup, or trade scenario. Export-ready PDF formats designed for front office presentations, media segments, or fantasy league preparation.</p>
         </div>
     </div>
 
+    <h2>App Screens &amp; How You Interact</h2>
+
+    <div class="screen-section">
+        <span class="screen-tag">Analytics Dashboard</span>
+        <h3>Your Command Center</h3>
+        <p>The dashboard provides a real-time overview of the NBA landscape with AI-curated insights and trending analysis.</p>
+        <ul>
+            <li><strong>League Pulse:</strong> Daily AI-generated summaries of the most significant statistical trends, breakout performances, and notable shifts in team dynamics across the league.</li>
+            <li><strong>Watchlist:</strong> Pin specific players or teams for tracking. See real-time stat updates, projection changes, and alerts when a watched player's trade value shifts significantly.</li>
+            <li><strong>Quick Analysis:</strong> Type any player name to instantly see their current stats, projections, trade value, and AI-generated scouting summary. No need to navigate through menus.</li>
+            <li><strong>Trending Insights:</strong> AI identifies emerging patterns &mdash; players on hot streaks, teams whose underlying metrics diverge from their record, and upcoming schedule difficulty rankings.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Player Analysis</span>
+        <h3>Deep Player Intelligence</h3>
+        <p>Comprehensive player profiles with AI-driven analytics that contextualize performance within team systems and historical archetypes.</p>
+        <ul>
+            <li><strong>Impact Metrics:</strong> Beyond traditional stats &mdash; see offensive and defensive ratings, usage-adjusted efficiency, clutch performance indices, and estimated wins above replacement.</li>
+            <li><strong>Archetype Matching:</strong> AI compares the player's statistical profile against thousands of historical NBA careers to identify the closest archetypes and project likely development trajectories.</li>
+            <li><strong>Lineup Context:</strong> See how the player performs in different lineup combinations. Identify which teammates unlock the best version of a player and which pairings create redundancy.</li>
+            <li><strong>Injury Risk Model:</strong> Workload tracking, minutes distribution analysis, and age-adjusted injury probability based on historical patterns for similar player profiles.</li>
+            <li><strong>Contract Value:</strong> Current contract efficiency rating comparing salary to on-court production. Projected market value for upcoming free agents based on comparable signings.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Trade Lab</span>
+        <h3>Evaluate Any Trade Scenario</h3>
+        <p>A sandbox environment where you can construct, evaluate, and compare trade scenarios with AI-powered impact analysis.</p>
+        <ul>
+            <li><strong>Build a Trade:</strong> Drag players and draft picks between teams. The system automatically validates salary matching rules and flags any CBA compliance issues.</li>
+            <li><strong>Impact Score:</strong> Each trade receives an AI-generated impact score for every team involved, projecting win share changes, playoff probability shifts, and championship odds adjustments.</li>
+            <li><strong>Historical Comparisons:</strong> The AI identifies similar historical trades and shows how those played out over 1, 3, and 5 years &mdash; giving you a reality check on proposed moves.</li>
+            <li><strong>Multi-Team Scenarios:</strong> Build three-team and four-team trade scenarios. The optimizer suggests additional pieces that could make a trade work for all parties involved.</li>
+            <li><strong>Save and Share:</strong> Save trade scenarios to your library. Share with friends or league-mates to debate the merits of each proposed deal.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Team Builder</span>
+        <h3>Construct Championship Rosters</h3>
+        <p>Build hypothetical rosters from scratch or modify existing teams to explore what-if scenarios.</p>
+        <ul>
+            <li><strong>Salary Cap Engine:</strong> Real-time cap tracking including luxury tax thresholds, exceptions, and projected future cap holds. The system prevents illegal roster constructions.</li>
+            <li><strong>Optimization Mode:</strong> Tell the AI your priorities (maximize defense, build around a specific star, develop young talent) and it suggests the optimal roster construction within your constraints.</li>
+            <li><strong>Chemistry Model:</strong> AI estimates lineup chemistry based on play style compatibility, historical on-court synergy data, and role overlap analysis.</li>
+            <li><strong>Simulation:</strong> Run your constructed roster through a season simulation to see projected win totals, playoff performance, and championship probability.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Projections Center</span>
+        <h3>Multi-Season Forecasting</h3>
+        <p>Forward-looking analytics that project player development, team trajectories, and league-wide trends.</p>
+        <ul>
+            <li><strong>Player Curves:</strong> Age-adjusted performance projections showing expected peak, plateau, and decline timelines for any player. Confidence bands show the range of likely outcomes.</li>
+            <li><strong>Team Trajectories:</strong> Multi-season win projection graphs for every team, accounting for roster moves, aging, and draft picks. See which teams are trending up or down.</li>
+            <li><strong>Draft Value Models:</strong> Project the likely value of future draft picks based on team trajectory, helping evaluate the real cost of trading future assets.</li>
+            <li><strong>Free Agency Previews:</strong> Upcoming free agent classes ranked by projected market value, with analysis of which teams have cap space and positional needs.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Scouting Hub</span>
+        <h3>Prospect Pipeline</h3>
+        <p>Track prospects from international leagues, NCAA, and G-League with AI-powered evaluation tools.</p>
+        <ul>
+            <li><strong>Prospect Database:</strong> Comprehensive profiles for draft-eligible players across all major feeder leagues. Includes physical measurables, statistical production, and AI-generated scouting reports.</li>
+            <li><strong>Translation Models:</strong> Statistical translation algorithms that project how college, international, or G-League stats will translate to NBA production &mdash; historically the hardest problem in scouting.</li>
+            <li><strong>Big Board:</strong> AI-generated draft rankings that update dynamically as new data comes in. See how prospects move up or down based on recent performance.</li>
+            <li><strong>Combine Analytics:</strong> When available, combine measurement data is integrated into prospect profiles with positional percentile rankings and historical comparison data.</li>
+        </ul>
+    </div>
+
     <h2>How It Works</h2>
-    <p>ProspectIQ Intelligence combines multiple data sources with AI analysis:</p>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Choose Your Focus</h4>
+                <p>Start from the dashboard and dive into player analysis, trade scenarios, roster building, projections, or scouting depending on what you need. Every section is interconnected so you can flow between analysis modes seamlessly.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Explore AI Insights</h4>
+                <p>Every screen surfaces AI-generated insights tailored to your analysis. The system proactively highlights patterns, anomalies, and opportunities you might miss when working with raw data alone.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Build and Test Scenarios</h4>
+                <p>Use the Trade Lab and Team Builder to construct hypothetical scenarios. Run simulations to see projected outcomes. Compare multiple approaches side by side to find the optimal path.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Export and Share</h4>
+                <p>Generate professional reports for any analysis. Share trade scenarios with colleagues or friends. Export player comparisons for presentations, articles, or fantasy draft preparation.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is ProspectIQ Intelligence For?</h2>
     <ul>
-        <li>Historical NBA data spanning multiple decades provides the foundation for predictive models</li>
-        <li>Real-time performance tracking captures current season trends and momentum shifts</li>
-        <li>AI models evaluate player development trajectories and project future performance</li>
-        <li>Trade and roster optimization algorithms consider salary cap, team chemistry, and positional needs simultaneously</li>
+        <li><strong>Front office professionals</strong> who need data-driven support for trade evaluations, draft decisions, and roster construction</li>
+        <li><strong>Serious fantasy basketball players</strong> who want a statistical edge in dynasty leagues, keeper leagues, and high-stakes competitions</li>
+        <li><strong>Sports media and content creators</strong> who need analytical backing for articles, podcasts, and video breakdowns</li>
+        <li><strong>NBA fans who love analysis</strong> and want to go deeper than surface-level stats and hot takes</li>
+        <li><strong>College basketball scouts</strong> who need prospect evaluation tools with statistical translation models</li>
     </ul>
 
-    <h2>Availability</h2>
-    <ul>
-        <li><strong>iOS:</strong> Available via TestFlight</li>
-        <li><strong>Android:</strong> Available for beta testers</li>
-    </ul>
+    <h2>Privacy &amp; Data</h2>
+    <p>ProspectIQ Intelligence uses publicly available NBA statistics and league data. Your personal analysis, saved scenarios, trade labs, and watchlists are stored securely and never shared with other users or third parties. Account data is encrypted at rest and in transit.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
 </div>
 
 <div class="cta">
-    <a class="cta-btn" href="mailto:andre@alphainception.com">Request Beta Access</a>
+    <a class="cta-btn" href="services.html">View All Services</a>
 </div>
 
 <footer class="footer">
-    <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
-    <div class="footer-links">
-        <a href="services.html">Services</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:andre@alphainception.com">Contact</a>
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
     </div>
-    <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
 </footer>
 
 </body>

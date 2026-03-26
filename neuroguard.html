@@ -18,6 +18,10 @@
         .hero .badge { display: inline-block; background: rgba(220,38,38,0.25); color: #fca5a5; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
         .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
         .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
+        .hero .stats { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+        .hero .stat { text-align: center; }
+        .hero .stat-num { font-size: 1.4rem; font-weight: 700; color: #fca5a5; }
+        .hero .stat-label { font-size: 0.75rem; color: #94a3b8; }
         .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
         .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
         .content h2:first-child { margin-top: 0; }
@@ -38,6 +42,11 @@
         .game-card h4 { color: var(--primary); margin-bottom: 6px; font-size: 0.95rem; }
         .game-card .game-type { font-size: 0.75rem; color: var(--product-color); font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
         .game-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .game-card .sensors { font-size: 0.72rem; color: var(--accent); margin-top: 8px; font-weight: 500; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+        .tool-card { background: var(--card-bg); border-radius: 10px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--primary); }
+        .tool-card h4 { color: var(--primary); margin-bottom: 6px; font-size: 0.95rem; }
+        .tool-card p { font-size: 0.83rem; color: var(--text-light); margin: 0; }
         .how-it-works { counter-reset: step; }
         .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
         .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
@@ -52,7 +61,7 @@
         .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
         .footer-copy { font-size: 0.8rem; margin-top: 16px; }
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .game-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .game-grid { grid-template-columns: 1fr; } .tool-grid { grid-template-columns: 1fr; } .hero .stats { gap: 16px; } }
     </style>
 </head>
 <body>
@@ -72,72 +81,189 @@
         <a class="back-link" href="services.html">&larr; All Services</a>
         <div class="badge">Neurological Health</div>
         <h1>NeuroGuard</h1>
-        <div class="tagline">Gamified neurological health monitoring &mdash; 19 game engines tracking motor, cognitive, cardiac, voice &amp; oculomotor biomarkers</div>
+        <div class="tagline">Gamified neurological health monitoring &mdash; 16 game engines, 12 clinical scanning tools, and an AI diagnostic intelligence platform tracking motor, cognitive, cardiac, voice, oculomotor, gait, and metabolic biomarkers</div>
+        <div class="stats">
+            <div class="stat"><div class="stat-num">211</div><div class="stat-label">Dart Files</div></div>
+            <div class="stat"><div class="stat-num">54,261</div><div class="stat-label">Lines of Code</div></div>
+            <div class="stat"><div class="stat-num">751</div><div class="stat-label">Tests Passing</div></div>
+            <div class="stat"><div class="stat-num">16</div><div class="stat-label">Game Engines</div></div>
+            <div class="stat"><div class="stat-num">12</div><div class="stat-label">Clinical Tools</div></div>
+        </div>
     </div>
 </section>
 
 <div class="content">
     <h2>What Is NeuroGuard?</h2>
-    <p>NeuroGuard is a gamified health monitoring platform that turns routine neurological assessments into engaging mini-games. Using your phone's built-in sensors &mdash; touchscreen, accelerometer, gyroscope, microphone, and camera &mdash; NeuroGuard captures clinically relevant biomarkers across six modalities: motor function, cognitive performance, cardiovascular health, voice and speech patterns, gait and balance, and oculomotor tracking.</p>
-    <p>Behind the games, a multi-LLM clinical consensus engine (ICDL) analyzes your data using multiple independent AI models simultaneously, dramatically reducing the risk of false positives. An adaptive immune intelligence system learns your personal baseline over time and flags meaningful deviations, while an entropic hallucination detection mesh ensures AI outputs remain grounded and reliable.</p>
+    <p>NeuroGuard is a comprehensive gamified health monitoring platform that turns routine neurological and physiological assessments into engaging mini-games and clinical scanning tools. Using your phone's built-in sensors &mdash; touchscreen, accelerometer, gyroscope, microphone, and camera &mdash; NeuroGuard captures clinically relevant biomarkers across motor function, cognitive performance, cardiovascular health, voice and speech patterns, gait and balance, oculomotor tracking, and metabolic indicators.</p>
+    <p>Beyond the games, NeuroGuard includes 12 dedicated clinical scanning tools for targeted assessments &mdash; from full-body anatomical scanning and ECG monitoring to non-invasive glucose measurement and fetal monitoring. An AI health chat companion provides context-aware wellness insights, while a four-way diagnostic consensus engine ensures every health finding is validated across independent AI models.</p>
+    <p>A three-tier emergency escalation system monitors for critical health events in real time, with automatic countdown timers, emergency contact notification, and 911 integration when needed. A digital twin model builds a personalized representation of your health profile for predictive diagnostics over time.</p>
+    <p>Built with Flutter 3.41 and Dart 3.11, NeuroGuard is currently available on iOS via TestFlight, with Android availability in progress.</p>
 
     <div class="tech-box">
-        <strong>Clinical-Grade AI Architecture:</strong> NeuroGuard's ICDL engine queries multiple AI models using Latin Square assignment with context rotation. Correlated failure detection identifies when models produce unreliable outputs, and automated architectural quarantine isolates compromised model pathways. This means every health insight you receive has been validated across independent AI systems.
+        <strong>ArbiterAI &mdash; 20-Step Clinical Intelligence Pipeline:</strong> NeuroGuard's diagnostic engine runs a 20-step pipeline including ICDL multi-model consensus, Immune Intelligence with clonal selection, Entropic Hallucination Detection, Traceboard auditing, Quorum Voting, Debate Engine with multi-model reasoning transparency, MACA (Multi-Agent Clinical Arbitration), Shadow Cabinet verification, Conformal Prediction with statistical guarantees, and Prediction Markets for probability-calibrated outputs. Each step adds a layer of validation before any health insight reaches the user.
     </div>
 
-    <h2>The Game Engines</h2>
-    <p>Each game is designed to feel fun while quietly extracting precise biomarker data. You play for a few minutes; the system captures hundreds of data points per session.</p>
+    <h2>The Game Engines (16 Games)</h2>
+    <p>Each game is designed to feel fun while quietly extracting precise biomarker data. Games feature adaptive difficulty levels 1 through 10, instruction screens, real-time scoring, personal baseline comparison, and streak tracking. You play for a few minutes; the system captures hundreds of data points per session.</p>
 
     <div class="game-grid">
         <div class="game-card">
             <div class="game-type">Motor Assessment</div>
             <h4>Quick Tap</h4>
-            <p>A whack-a-mole-style game with separate left and right hand rounds. Measures tap speed, accuracy, reaction time, and touch pressure. Bilateral comparison detects hemispheric asymmetries that may indicate early neurological changes.</p>
+            <p>Bilateral reaction time testing with separate left and right hand rounds. Measures tap speed, accuracy, reaction time, and hand dominance asymmetry. Hemispheric comparison detects early neurological changes.</p>
+            <div class="sensors">Sensors: Touch, Accelerometer</div>
         </div>
         <div class="game-card">
             <div class="game-type">Motor &amp; Tremor Analysis</div>
             <h4>Trace Perfect</h4>
-            <p>Draw Archimedes spirals, clock faces, and copy figures on screen. FFT tremor analysis at 3-12Hz detects rest tremor, action tremor, and intention tremor with clinical-grade precision. Measures drawing accuracy and pen pressure patterns.</p>
+            <p>Draw spirals, clock faces, and complex figures on screen. FFT tremor analysis at 3&ndash;12Hz detects rest, action, and intention tremor. Measures motor precision, velocity consistency, and drawing accuracy.</p>
+            <div class="sensors">Sensors: Touch, Accelerometer</div>
         </div>
         <div class="game-card">
             <div class="game-type">Cognitive Assessment</div>
             <h4>Memory Match Plus</h4>
-            <p>Classic card matching combined with N-back tasks, spatial memory challenges, and interference tasks. Tracks working memory capacity, processing speed, attention, and recall accuracy over time.</p>
+            <p>Card matching combined with N-back tasks, spatial memory challenges, and interference tasks. Tracks working memory capacity, attention span, processing speed, and recall accuracy over time.</p>
+            <div class="sensors">Sensors: Touch</div>
         </div>
         <div class="game-card">
-            <div class="game-type">Oculomotor Tracking</div>
-            <h4>Pupil Pilot</h4>
-            <p>Uses your phone's front camera to measure pupillary light reflex, saccadic eye movements, smooth pursuit tracking, convergence and divergence. Also tests color discrimination and contrast sensitivity.</p>
+            <div class="game-type">Balance &amp; Vestibular</div>
+            <h4>Balance Master</h4>
+            <p>Assesses postural stability, inner ear function, and body sway using accelerometer and gyroscope data. Detects subtle changes in standing balance that may precede clinical symptoms.</p>
+            <div class="sensors">Sensors: Accelerometer, Gyroscope</div>
         </div>
         <div class="game-card">
             <div class="game-type">Voice &amp; Speech Biomarkers</div>
             <h4>Voice Quest</h4>
-            <p>Guided vocal exercises that extract jitter, shimmer, harmonics-to-noise ratio (HNR), fundamental frequency (F0), formant frequencies, and spectral tilt. Changes in these biomarkers can indicate neurological or respiratory conditions.</p>
+            <p>Guided vocal exercises extracting jitter, shimmer, harmonics-to-noise ratio (HNR), fundamental frequency (F0), formant frequencies, and spectral tilt. Changes in these biomarkers can indicate neurological or respiratory conditions.</p>
+            <div class="sensors">Sensors: Microphone</div>
         </div>
         <div class="game-card">
-            <div class="game-type">Balance &amp; Gait</div>
-            <h4>Balance Master</h4>
-            <p>Uses accelerometer and gyroscope data to assess standing balance, step cadence, stride length, and gait symmetry. Detects subtle changes in postural stability that may precede clinical symptoms.</p>
+            <div class="game-type">Oculomotor Tracking</div>
+            <h4>Pupil Pilot</h4>
+            <p>Uses the front camera to measure pupillary light reflex, saccadic eye movements, smooth pursuit tracking, convergence, and divergence. Tests oculomotor function with clinical precision.</p>
+            <div class="sensors">Sensors: Camera</div>
         </div>
         <div class="game-card">
-            <div class="game-type">Cardiovascular</div>
+            <div class="game-type">Cardiovascular &amp; Rhythm</div>
             <h4>Rhythm Doctor</h4>
-            <p>A rhythm-tapping game that simultaneously measures heart rate, heart rate variability (HRV), RMSSD, and rhythm accuracy. Combines fun gameplay with passive cardiac monitoring through the phone's sensors.</p>
+            <p>A rhythm-tapping game that simultaneously measures psychomotor timing, rhythm synchronization, heart rate, heart rate variability (HRV), and RMSSD. Combines gameplay with passive cardiac monitoring.</p>
+            <div class="sensors">Sensors: Touch, Microphone</div>
         </div>
         <div class="game-card">
-            <div class="game-type">Visuospatial</div>
+            <div class="game-type">Gait Analysis</div>
+            <h4>Step Quest</h4>
+            <p>Walking-based assessment measuring gait cadence, stride length, stride symmetry, and step regularity. Detects asymmetries and changes in locomotor patterns over time.</p>
+            <div class="sensors">Sensors: Accelerometer, Gyroscope</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Mood &amp; Psychology</div>
+            <h4>MindScape</h4>
+            <p>Mood assessment and psychological state mapping through interactive challenges. Analyzes interaction patterns to build a picture of emotional well-being and cognitive engagement.</p>
+            <div class="sensors">Sensors: Touch, Interaction Patterns</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Physical Performance</div>
+            <h4>Physio Quest</h4>
+            <p>Physical performance and functional capacity assessment through guided exercises. Measures movement quality, endurance indicators, and physical capability trends.</p>
+            <div class="sensors">Sensors: Accelerometer</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Nutrition Tracking</div>
+            <h4>Nutri Track</h4>
+            <p>Nutrition tracking and dietary pattern analysis. Logs food intake and correlates nutritional data with biomarker trends to surface connections between diet and health metrics.</p>
+            <div class="sensors">Sensors: Touch</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Lifestyle Monitoring</div>
+            <h4>Lifestyle Capture</h4>
+            <p>Daily lifestyle factor logging including activity patterns, sleep quality indicators, and environmental factors. Provides context for interpreting biomarker data trends.</p>
+            <div class="sensors">Sensors: Touch, Accelerometer</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Spatial Reasoning</div>
             <h4>Tetris Rotation</h4>
-            <p>A spatial rotation game that tests visuospatial abilities, mental rotation speed, and spatial working memory. Difficulty adapts based on your performance to maintain engagement and clinical sensitivity.</p>
+            <p>Spatial reasoning and mental rotation game that tests visuospatial abilities, spatial working memory, and motor control. Difficulty adapts to maintain clinical sensitivity.</p>
+            <div class="sensors">Sensors: Touch, Accelerometer</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Visual Processing</div>
+            <h4>Visuospatial</h4>
+            <p>Spatial cognition and visual processing assessment. Tests visual attention, spatial awareness, and the ability to interpret and act on complex visual information.</p>
+            <div class="sensors">Sensors: Touch, Camera</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Bilateral Coordination</div>
+            <h4>Psychomotor Rhythm</h4>
+            <p>Bilateral motor coordination and rhythm perception testing. Measures synchronization between left and right hands, timing precision, and cross-hemispheric motor integration.</p>
+            <div class="sensors">Sensors: Touch, Accelerometer</div>
+        </div>
+        <div class="game-card">
+            <div class="game-type">Health History</div>
+            <h4>Family Tree</h4>
+            <p>Interactive family health history tracking. Maps hereditary conditions, genetic risk factors, and familial health patterns to inform personalized risk assessments and screening priorities.</p>
+            <div class="sensors">Sensors: Touch Input</div>
         </div>
     </div>
 
-    <p>Additional game engines include <strong>Step Quest</strong> (step counting and gait analysis), <strong>Psychomotor Rhythm</strong> (bilateral motor coordination), <strong>MindScape</strong> (advanced cognitive challenges), <strong>MedVault</strong> (medical records storage), <strong>Nutri Track</strong> (nutrition tracking), <strong>Physio Quest</strong> (physical rehabilitation), <strong>Family Tree</strong> (family health history), <strong>Lifestyle Capture</strong> (activity logging), and <strong>AR Modes</strong> (augmented reality assessments) &mdash; 19 game engines in total, with specialized modes for industrial safety, military/aerospace, and elite athletics.</p>
+    <h2>Clinical Scanning Tools (12 Tools)</h2>
+    <p>Beyond the games, NeuroGuard includes a suite of dedicated clinical scanning tools for targeted physiological assessments. These tools use your phone's sensors in focused, guided scanning sessions with calibration phases, real-time guidance interfaces, and confidence metrics for every measurement.</p>
+
+    <div class="tool-grid">
+        <div class="tool-card">
+            <h4>Body Scanner</h4>
+            <p>Multi-target 2&ndash;5 minute full-body scan covering 50+ anatomical targets across head, chest, abdomen, extremities, and organs. Includes calibration phase, homing beacon guidance, and confidence metrics.</p>
+        </div>
+        <div class="tool-card">
+            <h4>ECG Monitor</h4>
+            <p>Electrocardiogram waveform capture and analysis. Records cardiac electrical activity and identifies rhythm patterns for cardiovascular health tracking.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Blood Pressure</h4>
+            <p>Pulse transit time blood pressure estimation. Non-invasive systolic and diastolic measurement using sensor-derived pulse wave analysis.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Stroke Volume</h4>
+            <p>Cardiac output assessment estimating stroke volume and ejection fraction for comprehensive cardiovascular performance monitoring.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Venous Refill</h4>
+            <p>Venous insufficiency detection through refill time measurement. Assesses peripheral vascular health and circulatory function.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Stone Sweeper</h4>
+            <p>Kidney stone detection via acoustic imaging simulation. Uses ultrasound-inspired techniques to identify potential renal calculi.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Elastography</h4>
+            <p>Tissue elasticity assessment via vibration analysis. Measures tissue stiffness to screen for fibrosis and other structural changes.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Pulmonary</h4>
+            <p>Lung sound analysis and pulmonary diagnostics. Captures respiratory sounds and analyzes breathing patterns for pulmonary health assessment.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Carotid Scan</h4>
+            <p>Tri-modal carotid artery assessment. Evaluates carotid health through multiple measurement approaches for vascular risk screening.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Marangoni</h4>
+            <p>Non-invasive glucose measurement via surface tension dynamics. Uses Marangoni effect principles to estimate blood glucose without needles.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Fetal Monitor</h4>
+            <p>Pregnancy monitoring and fetal assessment. Tracks fetal movement, heart rate indicators, and maternal health parameters during pregnancy.</p>
+        </div>
+        <div class="tool-card">
+            <h4>Breath Analysis</h4>
+            <p>Respiratory biomarker analysis and breathalyzer functions. Identifies volatile organic compounds and respiratory patterns linked to health conditions.</p>
+        </div>
+    </div>
 
     <h2>Key Features</h2>
     <div class="feature-grid">
         <div class="feature-card">
-            <h4>ICDL Consensus Engine</h4>
-            <p>Multi-LLM clinical arbiter with Latin Square assignment, context rotation, and correlated failure detection. Every health insight is validated across independent AI models before reaching you.</p>
+            <h4>ArbiterAI Consensus Engine</h4>
+            <p>20-step clinical intelligence pipeline with ICDL multi-model consensus, Quorum Voting, Debate Engine, Shadow Cabinet verification, and Conformal Prediction. Every insight is validated across independent AI models.</p>
         </div>
         <div class="feature-card">
             <h4>Adaptive Immune Intelligence</h4>
@@ -145,19 +271,27 @@
         </div>
         <div class="feature-card">
             <h4>Bilateral Asymmetry Detection</h4>
-            <p>Games like Quick Tap test each hand separately. The system compares left vs. right performance to detect hemispheric deficits that may indicate early neurological changes.</p>
+            <p>Games like Quick Tap and Psychomotor Rhythm test each hand separately. The system compares left vs. right performance to detect hemispheric deficits indicating early neurological changes.</p>
         </div>
         <div class="feature-card">
-            <h4>Biomarker Dashboard</h4>
-            <p>Six-modality health dashboard tracking Motor, Cognitive, Cardiovascular, Voice/Speech, Gait/Balance, and Oculomotor biomarkers with trend visualization and composite risk scoring.</p>
+            <h4>Digital Twin</h4>
+            <p>Personalized digital model for predictive diagnostics. Builds neuro-twin and generative twin representations of your health profile that evolve with every data point collected.</p>
         </div>
         <div class="feature-card">
             <h4>Entropic Hallucination Detection</h4>
-            <p>A dedicated AI safety layer that monitors entropy in model outputs, injects grounding checks, and uses active inference to ensure all health insights remain factually grounded.</p>
+            <p>AI safety layer monitoring entropy in model outputs, injecting grounding checks, and using active inference to ensure all health insights remain factually grounded and reliable.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Emergency Escalation</h4>
+            <p>Three-tier system (Warning, Alert, Critical) with countdown timers, "I'M OK" acknowledgment buttons, emergency contact notification, 911 integration, and location sharing.</p>
+        </div>
+        <div class="feature-card">
+            <h4>FAST Stroke Protocol</h4>
+            <p>Quick Face-Arms-Speech-Time assessment with tiered alert escalation. Guides users through rapid stroke screening with automatic emergency notification when indicated.</p>
         </div>
         <div class="feature-card">
             <h4>Advanced ML Pipeline</h4>
-            <p>Bayesian uncertainty quantification, conformal prediction, Liquid Neural Networks, Spiking Neural Networks, causal AI, and explainable AI (XAI) ensure transparent, reliable analysis.</p>
+            <p>Bayesian uncertainty, conformal prediction, Liquid Neural Networks, Spiking Neural Networks, nonlinear dynamics, GNN fusion, causal AI, XAI, multi-omics, pharmacokinetic modeling, GARCH, isolation forest, EMD, and IMM-EKF.</p>
         </div>
     </div>
 
@@ -166,48 +300,80 @@
     <div class="screen-section">
         <span class="screen-tag">Games Hub</span>
         <h3>Your Assessment Playground</h3>
-        <p>The Games Hub presents all available game engines in a two-column grid. Each game shows its name, the biomarker modality it targets, estimated play time, and your last session score.</p>
+        <p>The Games Hub presents all 16 game engines in a grid layout. Each game shows its name, target biomarker modality, estimated play time, adaptive difficulty level, and your last session score with baseline comparison.</p>
         <ul>
-            <li><strong>Active Games:</strong> Games you have unlocked and calibrated appear at the top with full-color cards. Tap any game to jump straight into a session.</li>
-            <li><strong>Coming Soon:</strong> Upcoming game engines appear as grayed-out cards with a "Coming Soon" label and brief description of what they will measure.</li>
-            <li><strong>Daily Recommendation:</strong> The system suggests which games to play today based on which biomarkers haven't been tested recently, ensuring balanced coverage across all modalities.</li>
-            <li><strong>Session History:</strong> Tap the clock icon on any game to see your past sessions, scores, and biomarker trends specific to that game engine.</li>
+            <li><strong>Active Games:</strong> Games you have unlocked and calibrated appear at the top with full-color cards. Tap any game to jump into a session with instructions, calibration, gameplay, and results.</li>
+            <li><strong>Adaptive Difficulty:</strong> Each game dynamically adjusts difficulty across levels 1&ndash;10 based on your performance, maintaining the optimal challenge zone for both engagement and clinical sensitivity.</li>
+            <li><strong>Daily Recommendation:</strong> The system suggests which games to play today based on which biomarkers have not been tested recently, ensuring balanced coverage across all modalities.</li>
+            <li><strong>Streak Tracking:</strong> Track consecutive days of play, personal records, and modality coverage badges. Longer streaks and broader coverage unlock achievement badges.</li>
+            <li><strong>Session History:</strong> Tap the clock icon on any game to see past sessions, scores, and biomarker trends specific to that game engine.</li>
         </ul>
     </div>
 
     <div class="screen-section">
         <span class="screen-tag">Health Dashboard</span>
-        <h3>Biomarker Trends &amp; Risk Scoring</h3>
-        <p>The Dashboard is where game data becomes health intelligence. It synthesizes data from all your game sessions into a unified view of your neurological health.</p>
+        <h3>Real-Time Biomarker Intelligence</h3>
+        <p>The Dashboard synthesizes data from all game sessions and clinical scanning tools into a unified view of your health, with real-time metrics including heart rate, blood pressure estimates, and composite wellness scores.</p>
         <ul>
-            <li><strong>Six-Modality Overview:</strong> Color-coded cards for Motor, Cognitive, Cardiovascular, Voice/Speech, Gait/Balance, and Oculomotor health. Each shows a current status (Normal, Watch, Alert) and trend direction.</li>
-            <li><strong>Composite Risk Score:</strong> An overall score that combines data from all modalities, weighted by clinical significance. This is your at-a-glance neurological health indicator.</li>
-            <li><strong>Trend Charts:</strong> Tap any modality card to see detailed sparkline charts showing how each biomarker has changed over days, weeks, and months.</li>
-            <li><strong>Bilateral Comparison:</strong> A dedicated view showing left-hand vs. right-hand performance across motor games. Any growing asymmetry is highlighted with an explanation of its potential significance.</li>
-            <li><strong>AI Insights:</strong> The ICDL consensus engine generates plain-language summaries of what your data shows, with confidence indicators showing model agreement levels.</li>
+            <li><strong>Real-Time Metrics:</strong> Live health indicators including heart rate, blood pressure, and wellness scores updated with each session and scanning tool use.</li>
+            <li><strong>Biomarker Trend Visualization:</strong> Interactive charts showing how each biomarker has changed over days, weeks, and months. Tap any modality card for detailed sparkline charts.</li>
+            <li><strong>Anomaly Detection &amp; Alerts:</strong> Tiered severity system that flags meaningful deviations from your baseline. Alerts are categorized as Watch, Alert, or Critical based on clinical significance.</li>
+            <li><strong>Population Comparison:</strong> Percentile ranking vs. your peer group by age, sex, and activity level. See where you stand relative to similar users.</li>
+            <li><strong>Bilateral Comparison:</strong> Dedicated view showing left-hand vs. right-hand performance across motor games. Growing asymmetry is highlighted with clinical context.</li>
+            <li><strong>Weekly Digest:</strong> Automated summary of key insights, trend changes, and recommended actions delivered weekly with AI-generated plain-language explanations.</li>
+            <li><strong>AI Insights:</strong> The ArbiterAI consensus engine generates summaries with four-way confidence indicators showing model agreement levels for every finding.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">AI Health Chat</span>
+        <h3>Conversational Health Companion</h3>
+        <p>An AI-powered health chat interface provides context-aware conversation grounded in your personal biomarker data and health history.</p>
+        <ul>
+            <li><strong>Context-Aware Q&amp;A:</strong> Ask questions about your health data and receive answers informed by your specific biomarker trends, game results, and scanning tool outputs.</li>
+            <li><strong>Proactive Wellness Insights:</strong> The AI companion surfaces relevant observations and suggestions based on patterns it detects in your data, without waiting for you to ask.</li>
+            <li><strong>Suggestion-Based Interaction:</strong> Quick-tap suggestion chips guide the conversation toward clinically relevant topics based on your recent data.</li>
+            <li><strong>Message History:</strong> Full conversation history preserved for continuity across sessions. Reference past discussions and track how recommendations have evolved.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Diagnostic Intelligence</span>
+        <h3>Multi-Model Clinical Reasoning</h3>
+        <p>The Diagnostic Intelligence screen exposes the reasoning process behind every health finding, providing full transparency into how conclusions are reached.</p>
+        <ul>
+            <li><strong>Four-Way Consensus Indicators:</strong> Visual display of multi-model diagnostic agreement. See how many independent AI models agree on each finding and where they diverge.</li>
+            <li><strong>Context Sliders:</strong> Adjustable clinical context parameters that let you or your healthcare provider tune the diagnostic framing for more relevant interpretations.</li>
+            <li><strong>Biomarker Telemetry:</strong> Real-time sensor data visualization showing raw and processed signals from active games and scanning tools.</li>
+            <li><strong>ArbiterAI Confidence Panel:</strong> Evidence strength indicators with quantified confidence levels, uncertainty bounds, and calibration metrics for every diagnostic output.</li>
+            <li><strong>Debate Verdicts:</strong> Multi-model reasoning transparency showing how different AI models argued for and against each conclusion, with the final arbitrated verdict.</li>
+            <li><strong>Evidence Tab:</strong> Clinical citations and references supporting each finding, linking diagnostic outputs to established medical literature.</li>
+            <li><strong>Wellness Tab:</strong> Holistic recommendations spanning lifestyle, nutrition, exercise, and preventive care based on the full picture of your health data.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Emergency Escalation</span>
+        <h3>Three-Tier Safety System</h3>
+        <p>NeuroGuard continuously monitors for critical health events and provides an escalating response system designed to protect you when it matters most.</p>
+        <ul>
+            <li><strong>Tier 1 &mdash; Warning:</strong> Subtle notification when biomarkers show concerning deviations. Logged for trend analysis with a recommendation to re-test or consult a professional.</li>
+            <li><strong>Tier 2 &mdash; Alert:</strong> Prominent alert with countdown timer and "I'M OK" acknowledgment button. If not acknowledged, the system escalates and notifies your designated emergency contacts.</li>
+            <li><strong>Tier 3 &mdash; Critical:</strong> Full emergency protocol with emergency contact notification, Call 911 integration, and automatic location sharing. Activates when critical thresholds are breached or an alert goes unacknowledged.</li>
+            <li><strong>FAST Stroke Protocol:</strong> Dedicated rapid Face-Arms-Speech-Time assessment that can be triggered manually or automatically, with structured alert escalation.</li>
+            <li><strong>Escalation History Log:</strong> Complete record of all past alerts, responses, and outcomes for review by you or your healthcare provider.</li>
         </ul>
     </div>
 
     <div class="screen-section">
         <span class="screen-tag">Game Session</span>
         <h3>Playing a Game (Quick Tap Example)</h3>
-        <p>Each game follows a consistent pattern: brief instructions, calibration, gameplay, and results. Here is how Quick Tap works as an example.</p>
+        <p>Each game follows a consistent pattern: instructions, calibration, adaptive gameplay, and results with baseline comparison.</p>
         <ul>
-            <li><strong>Instructions:</strong> A brief animation shows what to do. For Quick Tap: tap the targets as fast as you can when they appear. You will play one round with your left hand, then one with your right.</li>
-            <li><strong>Calibration:</strong> A short practice round establishes your baseline for this session. The difficulty adapts to keep you in the optimal challenge zone.</li>
-            <li><strong>Gameplay:</strong> Targets appear at random positions. You tap them as quickly and accurately as possible. The game feels like fun; meanwhile sensors capture reaction time, tap accuracy, touch pressure, and inter-tap interval for every single touch.</li>
-            <li><strong>Results:</strong> After both rounds, you see your score, accuracy percentage, and how you compare to your personal average. Behind the scenes, the data is processed through the ICDL engine and added to your biomarker history.</li>
-        </ul>
-    </div>
-
-    <div class="screen-section">
-        <span class="screen-tag">Achievements</span>
-        <h3>Progress &amp; Motivation</h3>
-        <p>The Achievements screen gamifies the monitoring process itself, rewarding consistent engagement with badges and streaks.</p>
-        <ul>
-            <li><strong>Daily Streaks:</strong> Track consecutive days of playing at least one game. Longer streaks unlock achievement badges.</li>
-            <li><strong>Modality Coverage:</strong> Badges for testing all six modalities within a week, ensuring balanced biomarker data collection.</li>
-            <li><strong>Personal Records:</strong> Track your best scores across all games. See improvement trends that keep you motivated to play regularly.</li>
+            <li><strong>Instructions:</strong> A brief animation shows what to do. For Quick Tap: tap the targets as fast as you can. You play one round with your left hand, then one with your right.</li>
+            <li><strong>Calibration:</strong> A short practice round establishes your session baseline. Difficulty adapts across levels 1&ndash;10 to keep you in the optimal challenge zone.</li>
+            <li><strong>Gameplay:</strong> Targets appear at random positions. You tap as quickly and accurately as possible. Meanwhile, sensors capture reaction time, tap accuracy, touch pressure, and inter-tap interval for every touch.</li>
+            <li><strong>Results:</strong> After both rounds, you see your score, accuracy percentage, streak status, and how you compare to your personal baseline. The data is processed through ArbiterAI and added to your biomarker history.</li>
         </ul>
     </div>
 
@@ -224,22 +390,45 @@
             <div class="step-num">2</div>
             <div class="step-content">
                 <h4>Play Games Regularly</h4>
-                <p>Play 2-3 games per day for a few minutes each. The system recommends which games to play based on which biomarkers need fresh data. It feels like gaming; the health monitoring happens invisibly.</p>
+                <p>Play 2&ndash;3 games per day for a few minutes each. The system recommends which games to play based on which biomarkers need fresh data. It feels like gaming; the health monitoring happens invisibly.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-num">3</div>
             <div class="step-content">
-                <h4>Review Your Dashboard</h4>
-                <p>Check the Health Dashboard periodically to see trends across all six modalities. The ICDL consensus engine generates plain-language summaries with confidence levels so you understand what the data means.</p>
+                <h4>Use Clinical Scanning Tools</h4>
+                <p>For targeted assessments, use the 12 clinical scanning tools. Run a full Body Scan, check blood pressure, monitor ECG, or use any specialized tool with guided calibration and real-time feedback.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-num">4</div>
             <div class="step-content">
-                <h4>Share With Your Doctor</h4>
-                <p>Export your biomarker history and AI-generated reports to share with your healthcare provider. Longitudinal data from daily monitoring gives clinicians insights they cannot get from periodic office visits.</p>
+                <h4>Review Dashboard &amp; AI Insights</h4>
+                <p>Check the Health Dashboard to see trends across all modalities. Chat with the AI health companion for context-aware answers. Review diagnostic intelligence panels for multi-model consensus findings with confidence levels.</p>
             </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Share With Your Doctor</h4>
+                <p>Export your biomarker history, AI-generated reports, and clinical scanning results to share with your healthcare provider. Longitudinal data from daily monitoring gives clinicians insights they cannot get from periodic office visits.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Domain Applications</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>Industrial Safety</h4>
+            <p>Worker health monitoring in hazardous environments. Track neurological and physiological fitness, detect fatigue or impairment, and ensure personnel safety with continuous biomarker surveillance.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Military &amp; Aerospace</h4>
+            <p>Pilot and soldier fitness and readiness assessment. Monitor cognitive function, reaction time, balance, and physiological state for mission-critical decision making and return-to-duty protocols.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Elite Athletics</h4>
+            <p>Performance optimization and injury prevention. Track neuromotor function, recovery metrics, and concussion indicators with return-to-play protocol support and longitudinal performance baselines.</p>
         </div>
     </div>
 
@@ -250,6 +439,8 @@
         <li><strong>Older adults</strong> who want to proactively monitor cognitive and motor function as part of healthy aging</li>
         <li><strong>Athletes and military personnel</strong> who need to track neurological function for concussion monitoring, performance optimization, or return-to-play/duty protocols</li>
         <li><strong>Healthcare professionals</strong> who want patients to collect objective, longitudinal biomarker data between clinical visits</li>
+        <li><strong>Industrial workers</strong> in hazardous environments who require ongoing health monitoring and fitness-for-duty assessments</li>
+        <li><strong>Pregnant women</strong> who want to use fetal monitoring tools and track maternal health parameters throughout pregnancy</li>
     </ul>
 
     <div class="disclaimer">
@@ -257,7 +448,8 @@
     </div>
 
     <h2>Privacy &amp; Security</h2>
-    <p>Health biomarker data demands the highest level of protection. NeuroGuard uses post-quantum cryptography (Kyber/Dilithium) for data encryption, federated learning with Elastic Weight Consolidation so your raw data never leaves your device for model training, and fully homomorphic encryption (CKKS) for any cloud-based analysis. Your data is encrypted at rest and in transit, and you can export or delete it at any time.</p>
+    <p>Health biomarker data demands the highest level of protection. NeuroGuard uses post-quantum cryptography (Kyber for key encapsulation, Dilithium for digital signatures) for data encryption, federated learning with Elastic Weight Consolidation (EWC) so your raw data never leaves your device for model training, and fully homomorphic encryption (CKKS scheme) for any cloud-based analysis. Your data is encrypted at rest and in transit, and you can export or delete it at any time.</p>
+    <p>The privacy architecture ensures that even in the event of a future quantum computing breakthrough, your health data remains protected by cryptographic standards designed to withstand quantum attacks.</p>
     <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
 </div>
 

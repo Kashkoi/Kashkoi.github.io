@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternis — Living Memory Platform | Alpha Inception</title>
+    <style>
+        :root { --primary: #1a2b4a; --accent: #0ea5e9; --accent-dark: #0284c7; --light-bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --product-color: #0d9488; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); } a:hover { color: var(--accent-dark); }
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
+        .hero { background: linear-gradient(135deg, #1a2b4a 0%, #134e4a 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero .badge { display: inline-block; background: rgba(13,148,136,0.25); color: #5eead4; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
+        .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+        .content h2:first-child { margin-top: 0; }
+        .content p { margin-bottom: 16px; color: var(--text); }
+        .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
+        .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .pillar-card { background: var(--card-bg); border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 4px solid var(--product-color); }
+        .pillar-card .pillar-num { display: inline-block; background: var(--product-color); color: #fff; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; }
+        .pillar-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 1.05rem; }
+        .pillar-card p { font-size: 0.85rem; color: var(--text-light); margin: 0 0 8px; }
+        .pillar-card ul { margin: 8px 0 0 16px; font-size: 0.85rem; } .pillar-card li { margin-bottom: 4px; color: var(--text); }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #ccfbf1; color: #0d9488; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+        .tech-box { background: #f0fdfa; border-left: 4px solid var(--product-color); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .safety-box { background: #f0fdfa; border-left: 4px solid var(--product-color); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .cta { text-align: center; padding: 40px 24px; }
+        .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; } .cta-btn:hover { background: #0f766e; color: #fff; }
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer a { color: #cbd5e1; } .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .pillar-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">Alpha <span>Inception</span></div>
+        <nav class="header-nav">
+            <a href="services.html">All Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-inner">
+        <a class="back-link" href="services.html">&larr; All Services</a>
+        <div class="badge">Memory &amp; Legacy</div>
+        <h1>Eternis</h1>
+        <div class="tagline">Living Memory Platform &mdash; AI-guided personal and family memory management with time capsules, digital self, genealogy, and cognitive health integration</div>
+    </div>
+</section>
+
+<div class="content">
+    <h2>What Is Eternis?</h2>
+    <p>Eternis is a living memory platform that captures, preserves, organizes, and intelligently processes your lifetime memories. It goes far beyond a journal or photo album &mdash; Eternis uses AI to actively elicit your stories through adaptive questioning, connects memories across family generations through a collaborative genealogy vault, and creates a digital representation of yourself that your loved ones can interact with.</p>
+    <p>At its core, Eternis is built around the idea that memories are too important to leave to chance. Most of us lose the details of our lives simply because no one asked the right questions at the right time. Eternis asks those questions, preserves your answers in multiple media formats, and weaves them into a coherent narrative that grows richer over time.</p>
+
+    <div class="tech-box">
+        <strong>Cognitive Intelligence Integration:</strong> Eternis feeds journal entries and memory text into the NLCS (Neuro-Linguistic Cognitive Sentinel) ecosystem, which analyzes 28 linguistic features to track cognitive trajectory over time. This means your everyday journaling becomes a passive cognitive health monitoring tool &mdash; detecting subtle linguistic shifts that may indicate early cognitive changes, years before clinical symptoms appear.
+    </div>
+
+    <h2>The 6 Pillars</h2>
+    <p>Eternis is organized around six interconnected pillars, each addressing a different dimension of memory and legacy.</p>
+
+    <div class="pillar-grid">
+        <div class="pillar-card">
+            <div class="pillar-num">1</div>
+            <h4>Personal Memory Agent</h4>
+            <p>AI-guided journaling that goes beyond a blank page. The Memory Agent uses Thompson Sampling to learn which types of questions elicit your richest memories and adapts its prompts over time.</p>
+            <ul>
+                <li>Text, voice memo, photo, and video memory capture</li>
+                <li>Adaptive AI questioning that learns what resonates with you</li>
+                <li>Automatic mood tracking and life-stage tagging</li>
+                <li>Location-based memory triggers and annotations</li>
+                <li>Voice-to-text transcription via Whisper for spoken memories</li>
+                <li>Daily prompt scheduling to build a consistent journaling habit</li>
+            </ul>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-num">2</div>
+            <h4>Family Vault &amp; Genealogy</h4>
+            <p>A collaborative space where your entire family contributes memories, builds a living family tree, and preserves health history across generations.</p>
+            <ul>
+                <li>Interactive family tree with GEDCOM import/export</li>
+                <li>Invite family members to contribute their own memories</li>
+                <li>Collaborative memory collection tied to family events</li>
+                <li>Family health history tracking across generations</li>
+                <li>Shared photo and video albums with AI-powered organization</li>
+                <li>Permission controls for who can view or contribute</li>
+            </ul>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-num">3</div>
+            <h4>Cooperative Challenge Game</h4>
+            <p>A multiplayer memory game that turns memory sharing into an engaging group activity. Family members and friends collaborate on themed challenges to unlock shared memories.</p>
+            <ul>
+                <li>Themed memory challenges with multiple modalities</li>
+                <li>Encrypted contributions that only unlock when everyone participates</li>
+                <li>Unlock tokens for accessing shared memory collections</li>
+                <li>Leaderboards and streak tracking for engagement</li>
+                <li>Cross-family challenges for reunions and holidays</li>
+            </ul>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-num">4</div>
+            <h4>Time Capsule System</h4>
+            <p>Create sealed memory containers with sophisticated release mechanisms. Messages, photos, and videos are encrypted and locked until the conditions you set are met.</p>
+            <ul>
+                <li><strong>Temporal Release:</strong> Opens on a specific future date</li>
+                <li><strong>Event-Based:</strong> Triggered by a milestone (graduation, wedding, birthday)</li>
+                <li><strong>Mortality Trigger:</strong> Dead-man's-switch that releases if you stop checking in</li>
+                <li><strong>Consensus-Based:</strong> Requires multiple designated people to agree to open</li>
+                <li>AES-256-GCM encryption with Shamir secret sharing</li>
+                <li>Multiple recipients with individual access controls</li>
+            </ul>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-num">5</div>
+            <h4>Digital Self / Virtual You</h4>
+            <p>An AI personality model trained from your journal entries that captures your voice, perspectives, and personality. Your loved ones can have conversations with your digital self.</p>
+            <ul>
+                <li>AI personality model built from your journaling history</li>
+                <li>Voice synthesis that sounds like you</li>
+                <li>Chat interface for family to interact with your digital self</li>
+                <li>Personality weight tuning and activation controls</li>
+                <li>Opt-in only &mdash; you choose when and if to activate</li>
+                <li>Graceful handling of questions outside your memory scope</li>
+            </ul>
+        </div>
+        <div class="pillar-card">
+            <div class="pillar-num">6</div>
+            <h4>Health Integration</h4>
+            <p>Automatically extracts health observations from your memories using NLP, creating a longitudinal health record that bridges personal narrative with clinical data.</p>
+            <ul>
+                <li>NLP extraction of health conditions, symptoms, and observations from journal text</li>
+                <li>SNOMED/ICD-11 coded health observations</li>
+                <li>FHIR R4 export for sharing with healthcare providers</li>
+                <li>Family health history aggregation across generations</li>
+                <li>NLCS cognitive trajectory scoring from linguistic patterns</li>
+                <li>28 linguistic feature analysis for early cognitive monitoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>Adaptive AI Prompts</h4>
+            <p>Thompson Sampling algorithm learns which types of questions elicit your best memories. The system gets better at asking the right questions the more you use it, ensuring meaningful capture rather than generic journaling.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Multi-Media Capture</h4>
+            <p>Memories are not just text. Capture voice memos transcribed by Whisper AI, photos with location and context tags, videos, and documents. Every format is searchable and interconnected.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Military-Grade Encryption</h4>
+            <p>Time capsules use AES-256-GCM encryption with Shamir secret sharing for consensus-based releases. Your most private memories are protected with the same cryptographic standards used by intelligence agencies.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Cognitive Health Monitoring</h4>
+            <p>NLCS integration analyzes 28 linguistic features in your journal entries to track cognitive trajectory. Subtle changes in word diversity, sentence complexity, and semantic coherence are flagged before clinical symptoms appear.</p>
+        </div>
+        <div class="feature-card">
+            <h4>FHIR Health Export</h4>
+            <p>Health observations extracted from your memories are coded in SNOMED/ICD-11 and exportable as FHIR R4 Observations with LOINC coding. Share a longitudinal health narrative with your doctor, not just lab results.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Dead-Man's Switch</h4>
+            <p>The mortality trigger checks whether you are still active. If you stop responding to periodic check-ins, designated time capsules and digital self access are released to your chosen recipients according to your instructions.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Narrative Synthesis</h4>
+            <p>AI-powered post-event montage and book generation. After a trip, holiday, or life milestone, Eternis can compile your memories into a cohesive narrative with photos, quotes, and timeline visualizations.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Ecosystem Integration</h4>
+            <p>Eternis feeds into the broader Alpha Inception health ecosystem. Journal data flows to NLCS for cognitive monitoring, health observations connect with Synapta therapy records, and family health history enriches NeuroGuard baselines.</p>
+        </div>
+    </div>
+
+    <h2>App Screens &amp; How You Interact</h2>
+
+    <div class="screen-section">
+        <span class="screen-tag">Memory Journal</span>
+        <h3>Your Daily Memory Space</h3>
+        <p>The journal is where most of your interaction with Eternis happens. It is designed to make memory capture effortless, whether you have thirty seconds or thirty minutes.</p>
+        <ul>
+            <li><strong>AI Prompt Card:</strong> Each day opens with a personalized prompt from the Memory Agent. Questions like "Tell me about a meal that changed how you think about food" or "What did your childhood home smell like?" are chosen by Thompson Sampling based on what has worked best for you.</li>
+            <li><strong>Quick Capture:</strong> Tap the microphone to record a voice memo, the camera for a photo, or just start typing. Every entry is automatically tagged with date, location, mood, and life stage.</li>
+            <li><strong>Memory Timeline:</strong> Scroll through your memories chronologically or search by topic, person, location, or emotion. The AI surfaces connections between memories you may not have noticed.</li>
+            <li><strong>Mood Tracker:</strong> Each entry includes an optional mood indicator. Over time, this builds a longitudinal emotional map that correlates with life events and journal themes.</li>
+            <li><strong>Cognitive Pulse:</strong> A subtle indicator showing your recent NLCS cognitive trajectory score. This is derived entirely from your natural writing &mdash; no tests or assessments required.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Family Vault</span>
+        <h3>Collaborative Family Memory</h3>
+        <p>The Family Vault turns memory preservation into a shared family activity. Multiple generations contribute memories that are woven into a living family narrative.</p>
+        <ul>
+            <li><strong>Family Tree:</strong> An interactive visual tree where each person is a node. Tap any family member to see their contributed memories, health history, and relationship connections.</li>
+            <li><strong>Invite System:</strong> Send invitations to family members to join the vault. Each person controls what they share and with whom &mdash; no one can see your private memories unless you explicitly share them.</li>
+            <li><strong>Shared Albums:</strong> Create photo and video collections around family events &mdash; holidays, reunions, milestones. Multiple family members can contribute to the same album.</li>
+            <li><strong>Health History:</strong> A dedicated view that aggregates health conditions across the family tree. Useful for understanding genetic predispositions and sharing with healthcare providers.</li>
+            <li><strong>GEDCOM Import:</strong> Already have genealogy data? Import GEDCOM files to bootstrap your family tree with existing research from Ancestry, FamilySearch, or other platforms.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Time Capsules</span>
+        <h3>Sealed Messages for the Future</h3>
+        <p>Create encrypted memory containers that are locked until specific conditions are met. This is Eternis at its most powerful &mdash; preserving your voice for moments you may not be present for.</p>
+        <ul>
+            <li><strong>Create a Capsule:</strong> Record a video message, write a letter, or compile photos. Choose your release mechanism: a specific date, a life event, a mortality trigger, or a consensus vote among designated people.</li>
+            <li><strong>Recipient Management:</strong> Assign one or more recipients. Each recipient can have different access conditions &mdash; your daughter might receive a capsule on her wedding day while your best friend gets one on a specific anniversary.</li>
+            <li><strong>Encryption Status:</strong> See the lock status of each capsule. Sealed capsules show their release conditions without revealing contents. Once released, recipients receive a notification and can view the contents.</li>
+            <li><strong>Dead-Man's Switch:</strong> For mortality-triggered capsules, the system sends periodic check-in prompts. If you do not respond within your configured window, the release process begins with a grace period before final delivery.</li>
+            <li><strong>Shamir Sharing:</strong> For consensus-based capsules, multiple key holders must agree to release. The system uses Shamir secret sharing so that no single person (including Alpha Inception) can access the contents alone.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Digital Self</span>
+        <h3>Your AI Personality Model</h3>
+        <p>The Digital Self is an AI model trained on your journal entries that captures your voice, opinions, humor, and worldview. Opt-in only &mdash; you decide if and when to activate it.</p>
+        <ul>
+            <li><strong>Training Progress:</strong> See how much data has been used to train your digital self. The model becomes more accurate as your journal grows. A minimum threshold of entries is required before activation is offered.</li>
+            <li><strong>Chat Interface:</strong> Your family and designated contacts can have text and voice conversations with your digital self. The AI responds in your voice and perspective based on your journal history.</li>
+            <li><strong>Voice Synthesis:</strong> The digital self can speak in a synthesized version of your voice, trained from your voice memo recordings. This creates a more personal and authentic interaction experience.</li>
+            <li><strong>Activation Controls:</strong> Full control over when the digital self is active, who can access it, and what topics it can discuss. You can deactivate it at any time.</li>
+            <li><strong>Scope Handling:</strong> When asked about topics outside your memory scope, the digital self responds honestly &mdash; "I don't have memories about that" rather than fabricating an answer.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Challenge Arena</span>
+        <h3>Cooperative Memory Games</h3>
+        <p>Turn memory sharing into a group activity. Family members and friends participate in themed challenges that unlock shared memory collections.</p>
+        <ul>
+            <li><strong>Active Challenges:</strong> See current challenges you have been invited to or created. Each challenge has a theme (childhood summers, family recipes, travel adventures) and a participation target.</li>
+            <li><strong>Contribute:</strong> Submit your memory contribution to a challenge. Contributions are encrypted until all participants have submitted, preventing anyone from being influenced by others' responses.</li>
+            <li><strong>Unlock and Reveal:</strong> Once all participants contribute, the collection unlocks and everyone can see each other's memories on the same theme. This often surfaces surprising connections and forgotten stories.</li>
+            <li><strong>Leaderboard:</strong> Track participation streaks and challenge completions. Badges reward consistent engagement and multi-generational participation.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Health Dashboard</span>
+        <h3>Memory-Derived Health Intelligence</h3>
+        <p>Eternis quietly extracts health-relevant observations from your natural journaling, building a longitudinal health narrative without requiring you to fill out medical forms.</p>
+        <ul>
+            <li><strong>Extracted Observations:</strong> NLP identifies mentions of health conditions, symptoms, medications, and lifestyle factors from your journal entries. Each observation is coded in SNOMED/ICD-11 for clinical compatibility.</li>
+            <li><strong>Cognitive Trajectory:</strong> NLCS integration tracks 28 linguistic features over time. Charts show trends in word diversity, semantic coherence, syntactic complexity, and other markers that correlate with cognitive health.</li>
+            <li><strong>Family Health Map:</strong> Aggregated view of health conditions across your family tree. See patterns and predispositions that emerge when individual family members' health data is viewed together.</li>
+            <li><strong>FHIR Export:</strong> One-tap export of your health observations as FHIR R4 resources. Share with your doctor to add a personal health narrative layer to your clinical records.</li>
+            <li><strong>Alert Levels:</strong> The NLCS system flags Watch, Alert, and Critical levels if linguistic patterns suggest cognitive changes. These are informational and always paired with recommendations to consult a healthcare provider.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Sign Up &amp; Choose Your Pillars</h4>
+                <p>Create your account via email, Apple, or Google sign-in. Choose which of the 6 pillars to activate &mdash; you can start with just journaling and enable family vault, time capsules, or digital self later. Each module requires separate consent.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Start Capturing Memories</h4>
+                <p>Respond to your daily AI prompt, or capture memories spontaneously via text, voice, photo, or video. The Memory Agent adapts its questions based on what elicits your best responses. Within a few weeks, you will have a rich and growing memory collection.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Invite Your Family</h4>
+                <p>Add family members to your Family Vault. Build your family tree, start collaborative memory challenges, and begin aggregating family health history. The more family members participate, the richer the shared narrative becomes.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Create Time Capsules</h4>
+                <p>Record messages for future moments &mdash; your child's 18th birthday, your anniversary, or as a legacy for after you are gone. Choose your encryption and release conditions, assign recipients, and seal the capsule.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Watch Your Legacy Grow</h4>
+                <p>Over months and years, Eternis weaves your memories into a comprehensive life narrative. Your cognitive health is passively monitored, your family tree fills with stories from multiple generations, and your digital self becomes an increasingly accurate reflection of who you are.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is Eternis For?</h2>
+    <ul>
+        <li><strong>Anyone who wants to preserve their life story</strong> beyond scattered photos and fading memories &mdash; Eternis gives your memories structure, context, and permanence</li>
+        <li><strong>Parents and grandparents</strong> who want to pass down stories, wisdom, and family history to future generations in a format that lasts</li>
+        <li><strong>Families who value shared history</strong> and want a collaborative space where multiple generations contribute to a living family narrative</li>
+        <li><strong>People concerned about cognitive health</strong> who want passive, non-invasive monitoring through natural journaling without clinical tests or assessments</li>
+        <li><strong>Anyone planning their digital legacy</strong> who wants control over how their memories, messages, and digital self are shared after they are gone</li>
+        <li><strong>Genealogy enthusiasts</strong> who want to combine traditional family tree research with living memories and health history tracking</li>
+        <li><strong>Journalers and writers</strong> who want AI-powered prompts that draw out deeper, more meaningful entries than a blank page ever could</li>
+    </ul>
+
+    <div class="disclaimer">
+        <strong>Important Notice:</strong> Eternis is a memory management and wellness tool. Cognitive trajectory scoring from NLCS integration is informational only and does not constitute a medical diagnosis. If cognitive health monitoring flags a concern, please consult a qualified healthcare professional. The Digital Self feature is an AI approximation and does not replicate consciousness or sentience.
+    </div>
+
+    <h2>Privacy &amp; Security</h2>
+    <p>Your memories are among the most personal data imaginable, and Eternis treats them accordingly. All data is encrypted at rest and in transit. Time capsules use AES-256-GCM encryption with Shamir secret sharing &mdash; meaning that even Alpha Inception cannot access sealed capsules without the designated key holders' consent.</p>
+    <p>Authentication is handled through Supabase with support for email, Apple, and Google sign-in. Media files (photos, videos, voice memos) are stored in encrypted cloud storage with access controls tied to your account. Voice memos are transcribed by Whisper AI and the original audio is retained only if you choose to keep it.</p>
+    <p>Module activation is consent-based &mdash; each of the 6 pillars requires separate opt-in before any data collection begins. You can deactivate any module and request deletion of associated data at any time. NLCS cognitive analysis processes your text through secure Redis Streams with no data retention beyond the computed scores.</p>
+    <p>Read our full <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+</div>
+
+<div class="cta">
+    <a class="cta-btn" href="services.html">View All Services</a>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
+    </div>
+</footer>
+
+</body>
+</html>

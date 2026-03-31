@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriber Preferences | Meridian by Alpha Inception</title>
+    <meta name="description" content="Manage your Meridian market intelligence subscription preferences, delivery frequency, and notification settings.">
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+            --green: #059669;
+            --green-bg: #ecfdf5;
+            --red: #dc2626;
+            --red-bg: #fef2f2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        /* Header */
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px; }
+        .hero .subtitle { font-size: 1.05rem; color: #cbd5e1; }
+
+        /* Main */
+        .main { max-width: 800px; margin: 0 auto; padding: 32px 24px 64px; }
+
+        /* Subscriber Info */
+        .subscriber-info { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+        .subscriber-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--meridian-navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; flex-shrink: 0; }
+        .subscriber-details { flex: 1; }
+        .subscriber-name { font-size: 1.1rem; font-weight: 600; color: var(--primary); }
+        .subscriber-email { font-size: 0.88rem; color: var(--text-light); }
+
+        /* Section */
+        .pref-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+        .pref-section-header { background: var(--meridian-navy); color: #fff; padding: 14px 24px; font-size: 1rem; font-weight: 600; letter-spacing: -0.3px; }
+        .pref-section-body { padding: 24px; }
+
+        /* Market Group */
+        .market-group { margin-bottom: 20px; }
+        .market-group:last-child { margin-bottom: 0; }
+        .market-group-label { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--meridian-steel); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+        .checkbox-item:hover { background: var(--light-bg); }
+        .checkbox-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--meridian-navy); cursor: pointer; flex-shrink: 0; }
+        .checkbox-item label { font-size: 0.88rem; color: var(--text); cursor: pointer; user-select: none; }
+
+        /* Radio Groups */
+        .radio-group { margin-bottom: 20px; }
+        .radio-group:last-child { margin-bottom: 0; }
+        .radio-group-label { font-size: 0.88rem; font-weight: 600; color: var(--primary); margin-bottom: 10px; }
+        .radio-options { display: flex; flex-direction: column; gap: 6px; }
+        .radio-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: background 0.15s; border: 1px solid transparent; }
+        .radio-item:hover { background: var(--light-bg); }
+        .radio-item.selected { background: #eff6ff; border-color: var(--meridian-steel); }
+        .radio-item input[type="radio"] { width: 16px; height: 16px; accent-color: var(--meridian-navy); cursor: pointer; margin-top: 2px; flex-shrink: 0; }
+        .radio-item label { cursor: pointer; user-select: none; }
+        .radio-item .radio-label { font-size: 0.9rem; font-weight: 500; color: var(--text); display: block; }
+        .radio-item .radio-desc { font-size: 0.78rem; color: var(--text-light); display: block; }
+
+        /* Notification checkboxes */
+        .notif-list { display: flex; flex-direction: column; gap: 6px; }
+        .notif-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+        .notif-item:hover { background: var(--light-bg); }
+        .notif-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--meridian-navy); cursor: pointer; flex-shrink: 0; }
+        .notif-item label { font-size: 0.9rem; color: var(--text); cursor: pointer; user-select: none; }
+
+        /* Buttons */
+        .actions { display: flex; gap: 12px; margin-top: 8px; }
+        .btn-save { background: var(--meridian-navy); color: #fff; border: none; padding: 14px 36px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-save:hover { background: var(--meridian-steel); }
+        .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Status Messages */
+        .status-msg { padding: 14px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; margin-bottom: 20px; display: none; }
+        .status-msg.success { display: block; background: var(--green-bg); color: var(--green); border: 1px solid #a7f3d0; }
+        .status-msg.error { display: block; background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+
+        /* Loading */
+        .loading-overlay { text-align: center; padding: 64px 24px; }
+        .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--meridian-navy); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 16px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--text-light); font-size: 0.92rem; }
+
+        .error-state { text-align: center; padding: 64px 24px; }
+        .error-state h2 { color: var(--red); margin-bottom: 8px; }
+        .error-state p { color: var(--text-light); }
+
+        /* Footer */
+        .footer { text-align: center; padding: 32px 24px; color: var(--text-light); font-size: 0.82rem; border-top: 1px solid var(--border); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; gap: 12px; text-align: center; }
+            .header-nav a { margin-left: 12px; margin-right: 12px; font-size: 0.82rem; }
+            .hero h1 { font-size: 1.7rem; }
+            .checkbox-grid { grid-template-columns: 1fr 1fr; }
+            .subscriber-info { flex-direction: column; text-align: center; }
+            .actions { flex-direction: column; }
+            .btn-save { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="meridian.html" class="logo">Meridian <span>Live Wire</span></a>
+            <nav class="header-nav">
+                <a href="meridian.html#services">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="meridian.html">Live Wire</a>
+                <a href="forums.html">Forums</a>
+                <a href="discuss.html">Discuss</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Subscription Preferences</h1>
+            <p class="subtitle">Customize your market intelligence delivery</p>
+        </div>
+    </section>
+
+    <main class="main" id="app">
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-overlay">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading your preferences...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-state" style="display:none;">
+            <h2>Unable to Load Preferences</h2>
+            <p id="error-msg">A valid token is required. Please use the link from your subscription email.</p>
+        </div>
+
+        <!-- Preferences Form -->
+        <form id="pref-form" style="display:none;" onsubmit="return false;">
+            <div id="status-banner" class="status-msg"></div>
+
+            <!-- Subscriber Info -->
+            <div class="subscriber-info">
+                <div class="subscriber-avatar" id="avatar">?</div>
+                <div class="subscriber-details">
+                    <div class="subscriber-name" id="sub-name">--</div>
+                    <div class="subscriber-email" id="sub-email">--</div>
+                </div>
+            </div>
+
+            <!-- Market Interests -->
+            <div class="pref-section">
+                <div class="pref-section-header">Market Interests</div>
+                <div class="pref-section-body" id="market-interests">
+                    <!-- Carbon Markets -->
+                    <div class="market-group">
+                        <div class="market-group-label">Carbon Markets</div>
+                        <div class="checkbox-grid" id="grp-carbon"></div>
+                    </div>
+                    <!-- Clean Fuels -->
+                    <div class="market-group">
+                        <div class="market-group-label">Clean Fuels</div>
+                        <div class="checkbox-grid" id="grp-fuels"></div>
+                    </div>
+                    <!-- RECs -->
+                    <div class="market-group">
+                        <div class="market-group-label">RECs</div>
+                        <div class="checkbox-grid" id="grp-recs"></div>
+                    </div>
+                    <!-- Power -->
+                    <div class="market-group">
+                        <div class="market-group-label">Power</div>
+                        <div class="checkbox-grid" id="grp-power"></div>
+                    </div>
+                    <!-- Natural Gas -->
+                    <div class="market-group">
+                        <div class="market-group-label">Natural Gas</div>
+                        <div class="checkbox-grid" id="grp-gas"></div>
+                    </div>
+                    <!-- Legislation -->
+                    <div class="market-group">
+                        <div class="market-group-label">Legislation</div>
+                        <div class="checkbox-grid" id="grp-legislation"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Preferences -->
+            <div class="pref-section">
+                <div class="pref-section-header">Delivery Preferences</div>
+                <div class="pref-section-body">
+                    <div class="radio-group">
+                        <div class="radio-group-label">Frequency</div>
+                        <div class="radio-options" id="freq-options"></div>
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-group-label">Depth</div>
+                        <div class="radio-options" id="depth-options"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussion Notifications -->
+            <div class="pref-section">
+                <div class="pref-section-header">Discussion Notifications</div>
+                <div class="pref-section-body">
+                    <div class="notif-list" id="notif-options"></div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button type="button" class="btn-save" id="btn-save" onclick="savePreferences()">Save Preferences</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Alpha Inception. All rights reserved.
+    </footer>
+
+    <script>
+        const API_BASE = 'https://meridian-api.alphainception.com';
+
+        // Market interest definitions
+        const MARKET_GROUPS = {
+            carbon: [
+                { id: 'ca_cap_trade', label: 'CA Cap-and-Trade' },
+                { id: 'rggi', label: 'RGGI' },
+                { id: 'wci', label: 'WCI' },
+                { id: 'eu_ets', label: 'EU ETS' },
+                { id: 'uk_ets', label: 'UK ETS' },
+                { id: 'voluntary_carbon', label: 'Voluntary Carbon' },
+                { id: 'offsets', label: 'Offsets' },
+                { id: 'international_carbon', label: 'International' }
+            ],
+            fuels: [
+                { id: 'ca_lcfs', label: 'CA LCFS' },
+                { id: 'or_cfp', label: 'OR CFP' },
+                { id: 'wa_cfs', label: 'WA CFS' },
+                { id: 'rins_d3', label: 'RINs D3' },
+                { id: 'rins_d4', label: 'RINs D4' },
+                { id: 'rins_d5', label: 'RINs D5' },
+                { id: 'rins_d6', label: 'RINs D6' },
+                { id: 'rins_d7', label: 'RINs D7' },
+                { id: 'rfs_rvo', label: 'RFS/RVO' }
+            ],
+            recs: [
+                { id: 'national_wind_solar', label: 'National Wind/Solar' },
+                { id: 'state_srecs', label: 'State SRECs' },
+                { id: 'voluntary_recs', label: 'Voluntary RECs' }
+            ],
+            power: [
+                { id: 'caiso', label: 'CAISO' },
+                { id: 'pjm', label: 'PJM' },
+                { id: 'ercot', label: 'ERCOT' },
+                { id: 'miso', label: 'MISO' },
+                { id: 'spp', label: 'SPP' },
+                { id: 'nyiso', label: 'NYISO' },
+                { id: 'iso_ne', label: 'ISO-NE' }
+            ],
+            gas: [
+                { id: 'henry_hub', label: 'Henry Hub' },
+                { id: 'western_hubs', label: 'Western Hubs' },
+                { id: 'eastern_hubs', label: 'Eastern Hubs' },
+                { id: 'lng', label: 'LNG' }
+            ],
+            legislation: [
+                { id: 'federal_leg', label: 'Federal' },
+                { id: 'california_leg', label: 'California' },
+                { id: 'western_states_leg', label: 'Western States' },
+                { id: 'eastern_states_leg', label: 'Eastern States' },
+                { id: 'international_leg', label: 'International' }
+            ]
+        };
+
+        const FREQUENCY_OPTIONS = [
+            { value: 'breaking_only', label: 'Breaking Only', desc: 'Only receive breaking market alerts' },
+            { value: 'daily_breaking', label: 'Daily + Breaking', desc: 'Daily digest plus breaking alerts' },
+            { value: 'weekly_breaking', label: 'Weekly + Breaking', desc: 'Weekly roundup plus breaking alerts' },
+            { value: 'monthly_breaking', label: 'Monthly + Breaking', desc: 'Monthly summary plus breaking alerts' },
+            { value: 'all', label: 'All Updates', desc: 'Every update as it happens' }
+        ];
+
+        const DEPTH_OPTIONS = [
+            { value: 'executive', label: 'Executive Summary', desc: 'Short, high-level bullet points' },
+            { value: 'standard', label: 'Standard', desc: 'Balanced coverage with key details' },
+            { value: 'deep_dive', label: 'Deep Dive', desc: 'Detailed analysis with full context' }
+        ];
+
+        const NOTIF_OPTIONS = [
+            { id: 'notif_new_posts', label: 'New posts in followed channels' },
+            { id: 'notif_replies', label: 'Replies to my posts' },
+            { id: 'notif_mentions', label: '@mentions' },
+            { id: 'notif_daily_digest', label: 'Daily discussion digest' }
+        ];
+
+        let token = null;
+        let currentPrefs = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            token = params.get('token');
+
+            if (!token) {
+                showError('No token provided. Please use the link from your subscription email.');
+                return;
+            }
+
+            buildForm();
+            loadPreferences();
+        });
+
+        function buildForm() {
+            // Market interest checkboxes
+            Object.entries(MARKET_GROUPS).forEach(([groupKey, items]) => {
+                const container = document.getElementById('grp-' + groupKey);
+                if (!container) return;
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'checkbox-item';
+                    div.innerHTML = `<input type="checkbox" id="mkt_${item.id}" name="markets" value="${item.id}"><label for="mkt_${item.id}">${item.label}</label>`;
+                    div.onclick = (e) => { if (e.target.tagName !== 'INPUT') div.querySelector('input').click(); };
+                    container.appendChild(div);
+                });
+            });
+
+            // Frequency radios
+            const freqContainer = document.getElementById('freq-options');
+            FREQUENCY_OPTIONS.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'radio-item';
+                div.innerHTML = `<input type="radio" id="freq_${opt.value}" name="frequency" value="${opt.value}"><label for="freq_${opt.value}"><span class="radio-label">${opt.label}</span><span class="radio-desc">${opt.desc}</span></label>`;
+                div.onclick = (e) => {
+                    if (e.target.tagName !== 'INPUT') div.querySelector('input').click();
+                    document.querySelectorAll('#freq-options .radio-item').forEach(r => r.classList.remove('selected'));
+                    div.classList.add('selected');
+                };
+                div.querySelector('input').addEventListener('change', () => {
+                    document.querySelectorAll('#freq-options .radio-item').forEach(r => r.classList.remove('selected'));
+                    div.classList.add('selected');
+                });
+                freqContainer.appendChild(div);
+            });
+
+            // Depth radios
+            const depthContainer = document.getElementById('depth-options');
+            DEPTH_OPTIONS.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'radio-item';
+                div.innerHTML = `<input type="radio" id="depth_${opt.value}" name="depth" value="${opt.value}"><label for="depth_${opt.value}"><span class="radio-label">${opt.label}</span><span class="radio-desc">${opt.desc}</span></label>`;
+                div.onclick = (e) => {
+                    if (e.target.tagName !== 'INPUT') div.querySelector('input').click();
+                    document.querySelectorAll('#depth-options .radio-item').forEach(r => r.classList.remove('selected'));
+                    div.classList.add('selected');
+                };
+                div.querySelector('input').addEventListener('change', () => {
+                    document.querySelectorAll('#depth-options .radio-item').forEach(r => r.classList.remove('selected'));
+                    div.classList.add('selected');
+                });
+                depthContainer.appendChild(div);
+            });
+
+            // Notification checkboxes
+            const notifContainer = document.getElementById('notif-options');
+            NOTIF_OPTIONS.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'notif-item';
+                div.innerHTML = `<input type="checkbox" id="${opt.id}" name="notifications" value="${opt.id}"><label for="${opt.id}">${opt.label}</label>`;
+                div.onclick = (e) => { if (e.target.tagName !== 'INPUT') div.querySelector('input').click(); };
+                notifContainer.appendChild(div);
+            });
+        }
+
+        async function loadPreferences() {
+            try {
+                const res = await fetch(`${API_BASE}/api/preferences/${token}`);
+                if (!res.ok) throw new Error(`Server returned ${res.status}`);
+                const data = await res.json();
+                currentPrefs = data;
+                populateForm(data);
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('pref-form').style.display = 'block';
+            } catch (err) {
+                console.error('Failed to load preferences:', err);
+                showError('Unable to load your preferences. Please try again or contact support.');
+            }
+        }
+
+        function populateForm(data) {
+            // Subscriber info
+            if (data.name) {
+                document.getElementById('sub-name').textContent = data.name;
+                document.getElementById('avatar').textContent = data.name.charAt(0).toUpperCase();
+            }
+            if (data.email) {
+                document.getElementById('sub-email').textContent = data.email;
+            }
+
+            // Market interests
+            if (data.markets && Array.isArray(data.markets)) {
+                data.markets.forEach(m => {
+                    const cb = document.getElementById('mkt_' + m);
+                    if (cb) cb.checked = true;
+                });
+            }
+
+            // Frequency
+            if (data.frequency) {
+                const radio = document.getElementById('freq_' + data.frequency);
+                if (radio) {
+                    radio.checked = true;
+                    radio.closest('.radio-item').classList.add('selected');
+                }
+            }
+
+            // Depth
+            if (data.depth) {
+                const radio = document.getElementById('depth_' + data.depth);
+                if (radio) {
+                    radio.checked = true;
+                    radio.closest('.radio-item').classList.add('selected');
+                }
+            }
+
+            // Notifications
+            if (data.notifications && Array.isArray(data.notifications)) {
+                data.notifications.forEach(n => {
+                    const cb = document.getElementById(n);
+                    if (cb) cb.checked = true;
+                });
+            }
+        }
+
+        async function savePreferences() {
+            const btn = document.getElementById('btn-save');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+            hideStatus();
+
+            const markets = Array.from(document.querySelectorAll('input[name="markets"]:checked')).map(c => c.value);
+            const frequency = document.querySelector('input[name="frequency"]:checked')?.value || '';
+            const depth = document.querySelector('input[name="depth"]:checked')?.value || '';
+            const notifications = Array.from(document.querySelectorAll('input[name="notifications"]:checked')).map(c => c.value);
+
+            const payload = { markets, frequency, depth, notifications };
+
+            try {
+                const res = await fetch(`${API_BASE}/api/preferences/${token}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error(`Server returned ${res.status}`);
+                showStatus('Preferences saved successfully.', 'success');
+            } catch (err) {
+                console.error('Save failed:', err);
+                showStatus('Failed to save preferences. Please try again.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Preferences';
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('error-msg').textContent = msg;
+            document.getElementById('error-state').style.display = 'block';
+        }
+
+        function showStatus(msg, type) {
+            const banner = document.getElementById('status-banner');
+            banner.textContent = msg;
+            banner.className = 'status-msg ' + type;
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideStatus() {
+            const banner = document.getElementById('status-banner');
+            banner.className = 'status-msg';
+            banner.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

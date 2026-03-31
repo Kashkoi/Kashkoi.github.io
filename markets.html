@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Coverage | Meridian by Alpha Inception</title>
+    <meta name="description" content="Comprehensive energy and environmental market intelligence coverage. Real-time, daily, and weekly coverage across carbon, clean fuels, RECs, power, and natural gas markets.">
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+            --tier1: #059669;
+            --tier1-bg: #ecfdf5;
+            --tier1-border: #a7f3d0;
+            --tier2: #4A7FB5;
+            --tier2-bg: #eff6ff;
+            --tier2-border: #93c5fd;
+            --tier3: #64748b;
+            --tier3-bg: #f8fafc;
+            --tier3-border: #cbd5e1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        /* Header */
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 2.6rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -1px; }
+        .hero .subtitle { font-size: 1.15rem; color: #cbd5e1; max-width: 640px; margin: 0 auto; }
+
+        /* Main */
+        .main { max-width: 1200px; margin: 0 auto; padding: 0 24px 64px; }
+
+        /* Summary Stats */
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: -32px 0 40px; position: relative; z-index: 2; }
+        .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .stat-number { font-size: 2rem; font-weight: 700; letter-spacing: -1px; }
+        .stat-label { font-size: 0.82rem; color: var(--text-light); font-weight: 500; margin-top: 2px; }
+        .stat-card.total .stat-number { color: var(--meridian-navy); }
+        .stat-card.tier1 .stat-number { color: var(--tier1); }
+        .stat-card.tier2 .stat-number { color: var(--tier2); }
+        .stat-card.tier3 .stat-number { color: var(--tier3); }
+
+        /* Tier Sections */
+        .tier-section { margin-bottom: 40px; }
+        .tier-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .tier-badge { padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; }
+        .tier-badge.t1 { background: var(--tier1); }
+        .tier-badge.t2 { background: var(--tier2); }
+        .tier-badge.t3 { background: var(--tier3); }
+        .tier-title { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        .tier-desc { font-size: 0.88rem; color: var(--text-light); margin-left: auto; }
+
+        /* Market Cards */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+        .market-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 0; overflow: hidden; transition: box-shadow 0.2s, transform 0.15s; }
+        .market-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+        .market-card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .market-card-name { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+        .market-card-tier { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 10px; border-radius: 12px; }
+        .market-card-tier.t1 { background: var(--tier1-bg); color: var(--tier1); }
+        .market-card-tier.t2 { background: var(--tier2-bg); color: var(--tier2); }
+        .market-card-tier.t3 { background: var(--tier3-bg); color: var(--tier3); }
+        .market-card-body { padding: 16px 20px; }
+        .market-row { display: flex; gap: 8px; margin-bottom: 8px; font-size: 0.85rem; }
+        .market-row:last-child { margin-bottom: 0; }
+        .market-row-label { font-weight: 600; color: var(--text-light); min-width: 90px; flex-shrink: 0; }
+        .market-row-value { color: var(--text); }
+        .market-programs { display: flex; flex-wrap: wrap; gap: 4px; }
+        .market-programs .prog-tag { background: var(--light-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 8px; font-size: 0.78rem; color: var(--text-light); }
+        .market-card.t1-border { border-left: 3px solid var(--tier1); }
+        .market-card.t2-border { border-left: 3px solid var(--tier2); }
+        .market-card.t3-border { border-left: 3px solid var(--tier3); }
+
+        /* Loading */
+        .loading-overlay { text-align: center; padding: 48px 24px; }
+        .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--meridian-navy); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 16px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Footer */
+        .footer { text-align: center; padding: 32px 24px; color: var(--text-light); font-size: 0.82rem; border-top: 1px solid var(--border); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; gap: 12px; text-align: center; }
+            .header-nav a { margin-left: 12px; margin-right: 12px; font-size: 0.82rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); margin-top: -24px; }
+            .market-grid { grid-template-columns: 1fr; }
+            .tier-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .tier-desc { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="meridian.html" class="logo">Meridian <span>Live Wire</span></a>
+            <nav class="header-nav">
+                <a href="meridian.html#services">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="meridian.html">Live Wire</a>
+                <a href="forums.html">Forums</a>
+                <a href="discuss.html">Discuss</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Market Coverage</h1>
+            <p class="subtitle">Comprehensive energy and environmental market intelligence</p>
+        </div>
+    </section>
+
+    <main class="main">
+        <!-- Summary Stats -->
+        <div class="stats-bar" id="stats-bar">
+            <div class="stat-card total">
+                <div class="stat-number" id="stat-total">--</div>
+                <div class="stat-label">Total Markets</div>
+            </div>
+            <div class="stat-card tier1">
+                <div class="stat-number" id="stat-t1">--</div>
+                <div class="stat-label">Tier 1 Real-Time</div>
+            </div>
+            <div class="stat-card tier2">
+                <div class="stat-number" id="stat-t2">--</div>
+                <div class="stat-label">Tier 2 Daily</div>
+            </div>
+            <div class="stat-card tier3">
+                <div class="stat-number" id="stat-t3">--</div>
+                <div class="stat-label">Tier 3 Weekly</div>
+            </div>
+        </div>
+
+        <!-- Tier 1 -->
+        <section class="tier-section" id="tier1-section">
+            <div class="tier-header">
+                <span class="tier-badge t1">Tier 1</span>
+                <span class="tier-title">Real-Time Coverage</span>
+                <span class="tier-desc">Continuous monitoring with instant alerts</span>
+            </div>
+            <div class="market-grid" id="tier1-grid"></div>
+        </section>
+
+        <!-- Tier 2 -->
+        <section class="tier-section" id="tier2-section">
+            <div class="tier-header">
+                <span class="tier-badge t2">Tier 2</span>
+                <span class="tier-title">Daily Coverage</span>
+                <span class="tier-desc">End-of-day analysis and next-day outlook</span>
+            </div>
+            <div class="market-grid" id="tier2-grid"></div>
+        </section>
+
+        <!-- Tier 3 -->
+        <section class="tier-section" id="tier3-section">
+            <div class="tier-header">
+                <span class="tier-badge t3">Tier 3</span>
+                <span class="tier-title">Weekly / Event Coverage</span>
+                <span class="tier-desc">Periodic reports and event-driven analysis</span>
+            </div>
+            <div class="market-grid" id="tier3-grid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Alpha Inception. All rights reserved.
+    </footer>
+
+    <script>
+        const API_BASE = 'https://meridian-api.alphainception.com';
+
+        // Static fallback data
+        const STATIC_DATA = {
+            tier1: [
+                { name: 'CA Cap-and-Trade', programs: ['CCA Vintage Allowances', 'APCR Reserve'], price_points: ['Current Vintage', 'Future Vintage', 'Auction Floor', 'APCR Tiers'], sources: ['CARB', 'ICE', 'Nodal Exchange'], units: '$/mtCO2e' },
+                { name: 'RGGI', programs: ['CO2 Allowances', 'CCR Trigger'], price_points: ['Spot', 'Futures', 'Auction Clearing'], sources: ['RGGI Inc', 'ICE'], units: '$/short ton CO2' },
+                { name: 'LCFS', programs: ['CA LCFS Credits'], price_points: ['Credit Price', 'Credit Bank', 'Deficit Balance'], sources: ['CARB', 'Argus', 'OPIS'], units: '$/mtCO2e' },
+                { name: 'RINs', programs: ['D3 Cellulosic', 'D4 BBD', 'D5 Advanced', 'D6 Conventional', 'D7 Cellulosic Diesel'], price_points: ['Spot', 'Prompt-Month', 'Cal-Year Strips'], sources: ['EPA EMTS', 'OPIS', 'Argus'], units: '$/RIN (gallon)' },
+                { name: 'RECs', programs: ['National Wind', 'National Solar', 'State SRECs'], price_points: ['Spot', 'Forward', 'Compliance Year'], sources: ['Intercontinental Exchange', 'Tradition', 'Platts'], units: '$/MWh' },
+                { name: 'CAISO Power', programs: ['Day-Ahead', 'Real-Time', 'Congestion Revenue Rights'], price_points: ['SP15', 'NP15', 'ZP26', 'Hub Prices'], sources: ['CAISO OASIS', 'ICE'], units: '$/MWh' },
+                { name: 'Western Gas', programs: ['SoCal Citygate', 'PG&E Citygate', 'Stanfield', 'Sumas'], price_points: ['Day-Ahead', 'Prompt-Month', 'Seasonal Strips'], sources: ['ICE', 'Platts', 'NGI'], units: '$/MMBtu' }
+            ],
+            tier2: [
+                { name: 'EU ETS', programs: ['EUA Phase IV', 'Aviation Allowances'], price_points: ['Front-December', 'Spot', 'Auction'], sources: ['ICE Endex', 'EEX'], units: 'EUR/tCO2' },
+                { name: 'UK ETS', programs: ['UKA Allowances'], price_points: ['Spot', 'Front-Year', 'Auction Clearing'], sources: ['ICE', 'UK Gov'], units: 'GBP/tCO2' },
+                { name: 'Henry Hub', programs: ['Physical', 'Financial'], price_points: ['Spot', 'Prompt-Month', 'Cal Strips', 'Basis Swaps'], sources: ['CME/NYMEX', 'ICE', 'Platts'], units: '$/MMBtu' },
+                { name: 'PJM', programs: ['Day-Ahead LMP', 'Real-Time LMP', 'Capacity'], price_points: ['Western Hub', 'AEP Dayton', 'AD Hub'], sources: ['PJM Interconnection'], units: '$/MWh' },
+                { name: 'ERCOT', programs: ['Day-Ahead SPP', 'Real-Time SPP'], price_points: ['North Hub', 'Houston Hub', 'South Hub', 'West Hub'], sources: ['ERCOT'], units: '$/MWh' },
+                { name: 'MISO', programs: ['Day-Ahead LMP', 'Real-Time LMP'], price_points: ['Indiana Hub', 'Michigan Hub', 'Illinois Hub'], sources: ['MISO'], units: '$/MWh' },
+                { name: 'SPP', programs: ['Day-Ahead LMP', 'Real-Time LMP'], price_points: ['North Hub', 'South Hub'], sources: ['SPP'], units: '$/MWh' },
+                { name: 'NYISO', programs: ['Day-Ahead LBMP', 'Real-Time LBMP'], price_points: ['Zone A-K', 'NYC', 'Long Island'], sources: ['NYISO'], units: '$/MWh' },
+                { name: 'ISO-NE', programs: ['Day-Ahead LMP', 'Real-Time LMP', 'Capacity'], price_points: ['Internal Hub', 'Maine', 'Connecticut'], sources: ['ISO New England'], units: '$/MWh' },
+                { name: 'WCI Auction', programs: ['Joint CA-QC Auctions'], price_points: ['Current Vintage Settlement', 'Advance Vintage Settlement'], sources: ['CARB', 'MELCC'], units: '$/mtCO2e' },
+                { name: 'Federal Legislation', programs: ['Congressional Bills', 'Executive Orders', 'EPA Rulemaking'], price_points: [], sources: ['Congress.gov', 'Federal Register', 'EPA'], units: 'N/A' }
+            ],
+            tier3: [
+                { name: 'Australia', programs: ['Safeguard Mechanism Credits', 'ACCUs'], price_points: ['ACCU Spot', 'Safeguard Credits'], sources: ['Clean Energy Regulator'], units: 'AUD/tCO2e' },
+                { name: 'New Zealand', programs: ['NZ ETS NZUs'], price_points: ['NZU Spot', 'NZU Auction'], sources: ['NZ EPA', 'CommTrade'], units: 'NZD/tCO2e' },
+                { name: 'Korea', programs: ['K-ETS KAUs', 'KOCs'], price_points: ['KAU Spot', 'KOC Spot'], sources: ['KRX'], units: 'KRW/tCO2e' },
+                { name: 'VCM', programs: ['Verra VCUs', 'Gold Standard CERs', 'CORSIA'], price_points: ['Nature-Based', 'Tech Removals', 'REDD+', 'Renewables'], sources: ['CBL', 'S&P Platts', 'ACX'], units: '$/tCO2e' },
+                { name: 'Article 6', programs: ['ITMOs', 'Art 6.4 Mechanism'], price_points: ['Bilateral Deals', 'Authorized Credits'], sources: ['UNFCCC', 'National Registries'], units: '$/tCO2e' },
+                { name: 'Canada Federal', programs: ['OBPS Credits', 'Federal Carbon Price'], price_points: ['OBPS Surplus Credit', 'Carbon Charge Rate'], sources: ['ECCC', 'Government of Canada'], units: 'CAD/tCO2e' },
+                { name: 'State Legislation', programs: ['CA Bills', 'Western State Legislation', 'Eastern State Legislation'], price_points: [], sources: ['State Legislatures', 'LegiScan'], units: 'N/A' },
+                { name: 'Canada Provincial', programs: ['Alberta TIER', 'BC Carbon Tax', 'Quebec C&T'], price_points: ['TIER Credit', 'BC Rate', 'QC Auction'], sources: ['Alberta TER', 'BC Gov', 'MELCC'], units: 'CAD/tCO2e' }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarketData();
+        });
+
+        async function loadMarketData() {
+            let data = null;
+            try {
+                const res = await fetch(`${API_BASE}/api/markets/tiers`);
+                if (res.ok) data = await res.json();
+            } catch (e) {
+                console.log('API unavailable, using static data');
+            }
+
+            if (!data) data = STATIC_DATA;
+            renderMarkets(data);
+        }
+
+        function renderMarkets(data) {
+            const t1 = data.tier1 || [];
+            const t2 = data.tier2 || [];
+            const t3 = data.tier3 || [];
+            const total = t1.length + t2.length + t3.length;
+
+            // Stats
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-t1').textContent = t1.length;
+            document.getElementById('stat-t2').textContent = t2.length;
+            document.getElementById('stat-t3').textContent = t3.length;
+
+            // Render grids
+            renderGrid('tier1-grid', t1, 't1');
+            renderGrid('tier2-grid', t2, 't2');
+            renderGrid('tier3-grid', t3, 't3');
+        }
+
+        function renderGrid(containerId, markets, tierClass) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            markets.forEach(m => {
+                const card = document.createElement('div');
+                card.className = `market-card ${tierClass}-border`;
+
+                const tierLabels = { t1: 'Real-Time', t2: 'Daily', t3: 'Weekly' };
+
+                let programsHtml = '';
+                if (m.programs && m.programs.length) {
+                    programsHtml = `<div class="market-row">
+                        <span class="market-row-label">Programs</span>
+                        <span class="market-row-value"><div class="market-programs">${m.programs.map(p => `<span class="prog-tag">${p}</span>`).join('')}</div></span>
+                    </div>`;
+                }
+
+                let pricePointsHtml = '';
+                if (m.price_points && m.price_points.length) {
+                    pricePointsHtml = `<div class="market-row">
+                        <span class="market-row-label">Price Points</span>
+                        <span class="market-row-value">${m.price_points.join(', ')}</span>
+                    </div>`;
+                }
+
+                let sourcesHtml = '';
+                if (m.sources && m.sources.length) {
+                    sourcesHtml = `<div class="market-row">
+                        <span class="market-row-label">Sources</span>
+                        <span class="market-row-value">${m.sources.join(', ')}</span>
+                    </div>`;
+                }
+
+                let unitsHtml = '';
+                if (m.units) {
+                    unitsHtml = `<div class="market-row">
+                        <span class="market-row-label">Units</span>
+                        <span class="market-row-value">${m.units}</span>
+                    </div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="market-card-header">
+                        <span class="market-card-name">${m.name}</span>
+                        <span class="market-card-tier ${tierClass}">${tierLabels[tierClass]}</span>
+                    </div>
+                    <div class="market-card-body">
+                        ${programsHtml}
+                        ${pricePointsHtml}
+                        ${sourcesHtml}
+                        ${unitsHtml}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

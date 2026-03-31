@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Category | Meridian Forums</title>
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        .category-hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 60px 24px 40px; }
+        .category-hero-inner { max-width: 900px; margin: 0 auto; }
+        .back-link { color: #94a3b8; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+        .back-link:hover { color: #fff; }
+        .category-hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
+        .category-hero p { font-size: 1.05rem; color: #cbd5e1; }
+
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+
+        .new-thread-toggle { display: inline-block; padding: 10px 24px; background: var(--meridian-navy); color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 24px; }
+        .new-thread-toggle:hover { background: var(--meridian-steel); }
+
+        .new-thread-form { background: var(--card-bg); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 28px; display: none; }
+        .new-thread-form.open { display: block; }
+        .new-thread-form h3 { font-size: 1.1rem; color: var(--meridian-navy); margin-bottom: 16px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); background: var(--light-bg); font-family: inherit; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--meridian-steel); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-row { display: flex; gap: 12px; }
+        .form-row .form-group { flex: 1; }
+        .submit-btn { padding: 10px 28px; background: var(--meridian-navy); color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: var(--meridian-steel); }
+        .form-msg { margin-top: 10px; font-size: 0.9rem; }
+        .form-msg.success { color: #166534; }
+        .form-msg.error { color: #dc2626; }
+        .moderation-notice { font-size: 0.8rem; color: var(--text-light); margin-top: 10px; font-style: italic; }
+
+        .threads-list { display: flex; flex-direction: column; gap: 2px; }
+        .thread-item { background: var(--card-bg); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: background 0.15s; border-left: 3px solid transparent; }
+        .thread-item:first-child { border-radius: 12px 12px 0 0; }
+        .thread-item:last-child { border-radius: 0 0 12px 12px; }
+        .thread-item:only-child { border-radius: 12px; }
+        .thread-item:hover { background: #f1f5f9; border-left-color: var(--meridian-steel); }
+        .thread-info { flex: 1; min-width: 0; }
+        .thread-title { font-size: 1.05rem; font-weight: 600; color: var(--meridian-navy); display: block; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .thread-title:hover { color: var(--meridian-steel); }
+        .thread-meta { font-size: 0.8rem; color: var(--text-light); }
+        .thread-stats { text-align: right; flex-shrink: 0; }
+        .thread-replies { font-size: 0.9rem; font-weight: 600; color: var(--meridian-navy); }
+        .thread-replies-label { font-size: 0.75rem; color: var(--text-light); }
+
+        .loading { text-align: center; padding: 60px 0; color: var(--text-light); font-size: 1.1rem; }
+        .empty-state { text-align: center; padding: 40px 0; color: var(--text-light); font-size: 1rem; }
+
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; }
+        .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+
+        @media (max-width: 768px) {
+            .category-hero h1 { font-size: 1.6rem; }
+            .header-inner { flex-direction: column; gap: 12px; }
+            .form-row { flex-direction: column; }
+            .thread-item { flex-direction: column; align-items: flex-start; }
+            .thread-stats { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <a href="services.html" class="logo">Alpha <span>Inception</span></a>
+        <nav class="header-nav">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<div class="category-hero" id="category-hero" style="display:none;">
+    <div class="category-hero-inner">
+        <a href="forums.html" class="back-link">&larr; All Forums</a>
+        <h1 id="category-name"></h1>
+        <p id="category-desc"></p>
+    </div>
+</div>
+
+<div id="loading" class="loading">Loading category...</div>
+
+<section class="content" id="main-content" style="display:none;">
+    <button class="new-thread-toggle" id="toggle-form">New Thread</button>
+
+    <div class="new-thread-form" id="thread-form">
+        <h3>Start a New Thread</h3>
+        <div class="form-group">
+            <label for="thread-title">Title</label>
+            <input type="text" id="thread-title" placeholder="Thread title">
+        </div>
+        <div class="form-group">
+            <label for="thread-content">Content</label>
+            <textarea id="thread-content" placeholder="Share your thoughts, questions, or analysis..."></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="thread-name">Your Name</label>
+                <input type="text" id="thread-name" placeholder="Display name">
+            </div>
+            <div class="form-group">
+                <label for="thread-email">Email</label>
+                <input type="email" id="thread-email" placeholder="your@email.com">
+            </div>
+        </div>
+        <button class="submit-btn" id="submit-thread">Post Thread</button>
+        <div class="moderation-notice">All posts are moderated before appearing publicly.</div>
+        <div class="form-msg" id="form-msg"></div>
+    </div>
+
+    <div id="threads-loading" class="loading" style="display:none;">Loading threads...</div>
+    <div id="threads-empty" class="empty-state" style="display:none;">No threads yet. Be the first to start a discussion!</div>
+    <div class="threads-list" id="threads-list"></div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.3rem; margin-bottom: 8px;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception LLC. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+const API_BASE = 'https://meridian-api.alphainception.com';
+const slug = new URLSearchParams(window.location.search).get('slug');
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// Toggle new thread form
+document.getElementById('toggle-form').addEventListener('click', () => {
+    document.getElementById('thread-form').classList.toggle('open');
+});
+
+async function loadCategory() {
+    const loading = document.getElementById('loading');
+    const hero = document.getElementById('category-hero');
+    const content = document.getElementById('main-content');
+
+    if (!slug) {
+        loading.textContent = 'No category specified.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/forums/categories/${encodeURIComponent(slug)}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const category = data.category || data;
+
+        document.title = `${category.name || 'Forum'} | Meridian Forums`;
+        document.getElementById('category-name').textContent = category.name || 'Forum';
+        document.getElementById('category-desc').textContent = category.description || '';
+
+        loading.style.display = 'none';
+        hero.style.display = 'block';
+        content.style.display = 'block';
+
+        loadThreads(category.threads || []);
+    } catch (err) {
+        loading.textContent = 'Category not found.';
+    }
+}
+
+function loadThreads(threads) {
+    const list = document.getElementById('threads-list');
+    const empty = document.getElementById('threads-empty');
+
+    if (!threads || threads.length === 0) {
+        empty.style.display = 'block';
+        return;
+    }
+
+    list.innerHTML = threads.map(t => `
+        <div class="thread-item">
+            <div class="thread-info">
+                <a class="thread-title" href="forum-thread.html?slug=${encodeURIComponent(t.slug)}">${t.title || 'Untitled'}</a>
+                <div class="thread-meta">by ${t.author || 'Anonymous'} &middot; ${formatDate(t.created_at)}</div>
+            </div>
+            <div class="thread-stats">
+                <div class="thread-replies">${t.reply_count || 0}</div>
+                <div class="thread-replies-label">replies</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Submit thread
+document.getElementById('submit-thread').addEventListener('click', async () => {
+    const title = document.getElementById('thread-title').value.trim();
+    const content = document.getElementById('thread-content').value.trim();
+    const name = document.getElementById('thread-name').value.trim();
+    const email = document.getElementById('thread-email').value.trim();
+    const msg = document.getElementById('form-msg');
+
+    if (!title || !content) {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Title and content are required.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/forums/threads`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                category_slug: slug,
+                title,
+                content,
+                author_name: name,
+                author_email: email
+            })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        msg.className = 'form-msg success';
+        msg.textContent = 'Thread submitted! It will appear after moderation review.';
+        document.getElementById('thread-title').value = '';
+        document.getElementById('thread-content').value = '';
+    } catch (err) {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Failed to submit thread. Please try again.';
+    }
+});
+
+loadCategory();
+</script>
+
+</body>
+</html>

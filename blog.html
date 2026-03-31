@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Blog | Alpha Inception</title>
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        .hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 80px 24px 60px; text-align: center; }
+        .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
+        .hero p { font-size: 1.15rem; color: #cbd5e1; max-width: 700px; margin: 0 auto; }
+
+        .content { max-width: 1200px; margin: 0 auto; padding: 40px 24px 60px; }
+
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; justify-content: center; }
+        .filter-btn { padding: 8px 20px; border-radius: 24px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .filter-btn:hover { border-color: var(--meridian-steel); color: var(--meridian-navy); }
+        .filter-btn.active { background: var(--meridian-navy); color: #fff; border-color: var(--meridian-navy); }
+
+        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+        .post-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+        .post-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        .post-card-color { height: 5px; background: linear-gradient(90deg, var(--meridian-navy), var(--meridian-steel)); }
+        .post-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+        .post-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: #e0f2fe; color: #0369a1; margin-bottom: 12px; align-self: flex-start; }
+        .post-badge.carbon { background: #dcfce7; color: #166534; }
+        .post-badge.power { background: #fef3c7; color: #92400e; }
+        .post-badge.natural-gas { background: #fce7f3; color: #9d174d; }
+        .post-badge.renewables { background: #d1fae5; color: #065f46; }
+        .post-badge.regulatory { background: #e0e7ff; color: #3730a3; }
+        .post-badge.legislative { background: #f3e8ff; color: #6b21a8; }
+        .post-badge.market-outlook { background: #fee2e2; color: #991b1b; }
+        .post-card-body h3 { font-size: 1.25rem; color: var(--primary); margin-bottom: 10px; line-height: 1.4; }
+        .post-card-body .excerpt { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; flex: 1; }
+        .post-meta { font-size: 0.8rem; color: var(--text-light); margin-bottom: 14px; }
+        .post-card-bottom { margin-top: auto; }
+        .read-more { display: inline-block; color: var(--meridian-steel); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .read-more:hover { color: var(--meridian-navy); }
+
+        .loading { text-align: center; padding: 60px 0; color: var(--text-light); font-size: 1.1rem; }
+        .empty-state { text-align: center; padding: 60px 0; color: var(--text-light); font-size: 1.1rem; }
+
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 40px; }
+        .page-btn { padding: 10px 24px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .page-btn:hover:not(:disabled) { border-color: var(--meridian-steel); color: var(--meridian-navy); }
+        .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .page-info { font-size: 0.9rem; color: var(--text-light); }
+
+        .newsletter { background: var(--card-bg); border-radius: 12px; padding: 48px; margin-top: 60px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); text-align: center; }
+        .newsletter h2 { font-size: 1.6rem; color: var(--meridian-navy); margin-bottom: 8px; }
+        .newsletter p { color: var(--text-light); margin-bottom: 24px; font-size: 0.95rem; }
+        .newsletter-form { max-width: 500px; margin: 0 auto; }
+        .newsletter-form .form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+        .newsletter-form input[type="text"],
+        .newsletter-form input[type="email"] { flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); background: var(--light-bg); transition: border-color 0.2s; }
+        .newsletter-form input:focus { outline: none; border-color: var(--meridian-steel); }
+        .category-checks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px; }
+        .category-checks label { font-size: 0.85rem; color: var(--text); display: flex; align-items: center; gap: 4px; cursor: pointer; }
+        .category-checks input[type="checkbox"] { accent-color: var(--meridian-steel); }
+        .subscribe-btn { padding: 12px 32px; border: none; border-radius: 8px; background: var(--meridian-navy); color: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .subscribe-btn:hover { background: var(--meridian-steel); }
+        .subscribe-msg { margin-top: 12px; font-size: 0.9rem; }
+        .subscribe-msg.success { color: #166534; }
+        .subscribe-msg.error { color: #dc2626; }
+
+        .disclaimer { max-width: 800px; margin: 40px auto 0; padding: 24px; background: var(--card-bg); border-radius: 8px; border-left: 4px solid var(--meridian-steel); font-size: 0.8rem; color: var(--text-light); line-height: 1.7; }
+
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; }
+        .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .header-inner { flex-direction: column; gap: 12px; }
+            .newsletter { padding: 28px 20px; }
+            .newsletter-form .form-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <a href="services.html" class="logo">Alpha <span>Inception</span></a>
+        <nav class="header-nav">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Meridian</h1>
+    <p>Energy &amp; Environmental Markets Intelligence | Alpha Inception LLC</p>
+</section>
+
+<section class="content">
+    <div class="filters" id="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="carbon">Carbon</button>
+        <button class="filter-btn" data-category="power">Power</button>
+        <button class="filter-btn" data-category="natural-gas">Natural Gas</button>
+        <button class="filter-btn" data-category="renewables">Renewables</button>
+        <button class="filter-btn" data-category="regulatory">Regulatory</button>
+        <button class="filter-btn" data-category="legislative">Legislative</button>
+        <button class="filter-btn" data-category="market-outlook">Market Outlook</button>
+    </div>
+
+    <div id="posts-container">
+        <div class="loading" id="loading">Loading posts...</div>
+        <div class="posts-grid" id="posts-grid"></div>
+        <div class="empty-state" id="empty-state" style="display:none;">No posts yet. Check back soon for energy market insights.</div>
+    </div>
+
+    <div class="pagination" id="pagination" style="display:none;">
+        <button class="page-btn" id="prev-btn" disabled>Previous</button>
+        <span class="page-info" id="page-info">Page 1</span>
+        <button class="page-btn" id="next-btn">Next</button>
+    </div>
+
+    <div class="newsletter">
+        <h2>Stay Informed</h2>
+        <p>Subscribe to Meridian for weekly energy market analysis and regulatory updates.</p>
+        <div class="newsletter-form">
+            <div class="form-row">
+                <input type="text" id="sub-name" placeholder="Your name">
+                <input type="email" id="sub-email" placeholder="Your email">
+            </div>
+            <div class="category-checks">
+                <label><input type="checkbox" name="sub-cat" value="carbon"> Carbon</label>
+                <label><input type="checkbox" name="sub-cat" value="power"> Power</label>
+                <label><input type="checkbox" name="sub-cat" value="natural-gas"> Natural Gas</label>
+                <label><input type="checkbox" name="sub-cat" value="renewables"> Renewables</label>
+                <label><input type="checkbox" name="sub-cat" value="regulatory"> Regulatory</label>
+                <label><input type="checkbox" name="sub-cat" value="legislative"> Legislative</label>
+                <label><input type="checkbox" name="sub-cat" value="market-outlook"> Market Outlook</label>
+            </div>
+            <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+            <div class="subscribe-msg" id="subscribe-msg"></div>
+        </div>
+    </div>
+
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> The content published on Meridian is for informational purposes only and does not constitute financial, investment, legal, or regulatory advice. Alpha Inception LLC makes no representations or warranties regarding the accuracy, completeness, or timeliness of any information provided. Energy markets involve significant risk; readers should consult qualified professionals before making any decisions based on the information presented here.
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.3rem; margin-bottom: 8px;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception LLC. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+const API_BASE = 'https://meridian-api.alphainception.com';
+
+let currentPage = 1;
+let currentCategory = 'all';
+const perPage = 12;
+
+const categoryClasses = {
+    'carbon': 'carbon',
+    'power': 'power',
+    'natural-gas': 'natural-gas',
+    'natural gas': 'natural-gas',
+    'renewables': 'renewables',
+    'regulatory': 'regulatory',
+    'legislative': 'legislative',
+    'market-outlook': 'market-outlook',
+    'market outlook': 'market-outlook'
+};
+
+function getCategoryClass(cat) {
+    if (!cat) return '';
+    return categoryClasses[cat.toLowerCase()] || '';
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function renderPosts(posts) {
+    const grid = document.getElementById('posts-grid');
+    const empty = document.getElementById('empty-state');
+    const loading = document.getElementById('loading');
+    loading.style.display = 'none';
+
+    if (!posts || posts.length === 0) {
+        grid.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+
+    empty.style.display = 'none';
+    grid.innerHTML = posts.map(post => `
+        <div class="post-card">
+            <div class="post-card-color"></div>
+            <div class="post-card-body">
+                <span class="post-badge ${getCategoryClass(post.category)}">${post.category || 'General'}</span>
+                <h3>${post.title || 'Untitled'}</h3>
+                <p class="excerpt">${post.excerpt || ''}</p>
+                <div class="post-meta">${formatDate(post.published_at || post.created_at)}</div>
+                <div class="post-card-bottom">
+                    <a class="read-more" href="blog-post.html?slug=${encodeURIComponent(post.slug)}">Read More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function updatePagination(total) {
+    const pagination = document.getElementById('pagination');
+    const totalPages = Math.ceil(total / perPage);
+    if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+    }
+    pagination.style.display = 'flex';
+    document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
+    document.getElementById('prev-btn').disabled = currentPage <= 1;
+    document.getElementById('next-btn').disabled = currentPage >= totalPages;
+}
+
+async function fetchPosts() {
+    const loading = document.getElementById('loading');
+    const grid = document.getElementById('posts-grid');
+    const empty = document.getElementById('empty-state');
+    loading.style.display = 'block';
+    grid.innerHTML = '';
+    empty.style.display = 'none';
+
+    try {
+        let url = `${API_BASE}/api/posts?page=${currentPage}&per_page=${perPage}`;
+        if (currentCategory !== 'all') {
+            url += `&category=${encodeURIComponent(currentCategory)}`;
+        }
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const posts = data.posts || data.data || data || [];
+        const total = data.total || posts.length;
+        renderPosts(Array.isArray(posts) ? posts : []);
+        updatePagination(total);
+    } catch (err) {
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+        empty.textContent = 'No posts yet. Check back soon for energy market insights.';
+        document.getElementById('pagination').style.display = 'none';
+    }
+}
+
+// Filter buttons
+document.getElementById('filters').addEventListener('click', (e) => {
+    if (!e.target.classList.contains('filter-btn')) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentCategory = e.target.dataset.category;
+    currentPage = 1;
+    fetchPosts();
+});
+
+// Pagination
+document.getElementById('prev-btn').addEventListener('click', () => {
+    if (currentPage > 1) { currentPage--; fetchPosts(); }
+});
+document.getElementById('next-btn').addEventListener('click', () => {
+    currentPage++;
+    fetchPosts();
+});
+
+// Newsletter subscribe
+document.getElementById('subscribe-btn').addEventListener('click', async () => {
+    const name = document.getElementById('sub-name').value.trim();
+    const email = document.getElementById('sub-email').value.trim();
+    const msg = document.getElementById('subscribe-msg');
+    const cats = Array.from(document.querySelectorAll('input[name="sub-cat"]:checked')).map(c => c.value);
+
+    if (!email) {
+        msg.className = 'subscribe-msg error';
+        msg.textContent = 'Please enter your email address.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/subscribers`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, categories: cats })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        msg.className = 'subscribe-msg success';
+        msg.textContent = 'Subscribed successfully! Check your inbox for confirmation.';
+        document.getElementById('sub-name').value = '';
+        document.getElementById('sub-email').value = '';
+        document.querySelectorAll('input[name="sub-cat"]:checked').forEach(c => c.checked = false);
+    } catch (err) {
+        msg.className = 'subscribe-msg error';
+        msg.textContent = 'Subscription failed. Please try again later.';
+    }
+});
+
+// Init
+fetchPosts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thread | Meridian Forums</title>
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        .thread-hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 50px 24px 36px; }
+        .thread-hero-inner { max-width: 900px; margin: 0 auto; }
+        .back-link { color: #94a3b8; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+        .back-link:hover { color: #fff; }
+        .thread-hero h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+        .thread-hero-meta { font-size: 0.9rem; color: #94a3b8; }
+
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+
+        .thread-post { background: var(--card-bg); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 28px; border-left: 4px solid var(--meridian-navy); }
+        .thread-post .post-author { font-weight: 600; color: var(--meridian-navy); font-size: 0.95rem; }
+        .thread-post .post-date { font-size: 0.8rem; color: var(--text-light); margin-left: 12px; }
+        .thread-post .post-content { margin-top: 14px; font-size: 1rem; line-height: 1.8; }
+        .thread-post .post-content p { margin-bottom: 12px; }
+
+        .replies-header { font-size: 1.1rem; font-weight: 600; color: var(--meridian-navy); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+
+        .replies-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+        .reply { background: var(--card-bg); border-radius: 10px; padding: 20px 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .reply.nested { margin-left: 32px; border-left: 3px solid var(--meridian-steel); }
+        .reply .reply-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .reply .reply-author { font-weight: 600; font-size: 0.9rem; color: var(--meridian-navy); }
+        .reply .reply-date { font-size: 0.78rem; color: var(--text-light); }
+        .reply .reply-content { font-size: 0.95rem; line-height: 1.7; }
+        .reply .reply-content p { margin-bottom: 8px; }
+
+        .reply-form-section { background: var(--card-bg); border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
+        .reply-form-section h3 { font-size: 1.1rem; color: var(--meridian-navy); margin-bottom: 16px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); background: var(--light-bg); font-family: inherit; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--meridian-steel); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-row { display: flex; gap: 12px; }
+        .form-row .form-group { flex: 1; }
+        .submit-btn { padding: 10px 28px; background: var(--meridian-navy); color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background: var(--meridian-steel); }
+        .form-msg { margin-top: 10px; font-size: 0.9rem; }
+        .form-msg.success { color: #166534; }
+        .form-msg.error { color: #dc2626; }
+        .moderation-notice { font-size: 0.8rem; color: var(--text-light); margin-top: 10px; font-style: italic; }
+
+        .loading { text-align: center; padding: 60px 0; color: var(--text-light); font-size: 1.1rem; }
+        .error-state { text-align: center; padding: 60px 24px; }
+        .error-state h2 { color: var(--meridian-navy); margin-bottom: 12px; }
+        .error-state p { color: var(--text-light); margin-bottom: 20px; }
+
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; }
+        .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+
+        @media (max-width: 768px) {
+            .thread-hero h1 { font-size: 1.4rem; }
+            .header-inner { flex-direction: column; gap: 12px; }
+            .form-row { flex-direction: column; }
+            .reply.nested { margin-left: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <a href="services.html" class="logo">Alpha <span>Inception</span></a>
+        <nav class="header-nav">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<div class="thread-hero" id="thread-hero" style="display:none;">
+    <div class="thread-hero-inner">
+        <a href="forums.html" class="back-link" id="back-link">&larr; Back to Forums</a>
+        <h1 id="thread-title"></h1>
+        <div class="thread-hero-meta">
+            <span id="thread-author"></span> &middot; <span id="thread-date"></span>
+        </div>
+    </div>
+</div>
+
+<div id="loading" class="loading">Loading thread...</div>
+
+<div id="error" class="error-state" style="display:none;">
+    <h2>Thread Not Found</h2>
+    <p>This thread could not be found or may have been removed.</p>
+    <a href="forums.html" style="display:inline-block; padding:10px 24px; background:var(--meridian-navy); color:#fff; border-radius:8px; font-weight:600;">Back to Forums</a>
+</div>
+
+<section class="content" id="main-content" style="display:none;">
+    <div class="thread-post" id="thread-post">
+        <span class="post-author" id="post-author"></span>
+        <span class="post-date" id="post-date"></span>
+        <div class="post-content" id="post-content"></div>
+    </div>
+
+    <div class="replies-header" id="replies-header" style="display:none;">Replies</div>
+    <div class="replies-list" id="replies-list"></div>
+
+    <div class="reply-form-section">
+        <h3>Post a Reply</h3>
+        <div class="form-group">
+            <label for="reply-content">Your Reply</label>
+            <textarea id="reply-content" placeholder="Share your thoughts..."></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="reply-name">Your Name</label>
+                <input type="text" id="reply-name" placeholder="Display name">
+            </div>
+            <div class="form-group">
+                <label for="reply-email">Email</label>
+                <input type="email" id="reply-email" placeholder="your@email.com">
+            </div>
+        </div>
+        <button class="submit-btn" id="submit-reply">Post Reply</button>
+        <div class="moderation-notice">All posts are moderated before appearing publicly.</div>
+        <div class="form-msg" id="form-msg"></div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.3rem; margin-bottom: 8px;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="forums.html">Forums</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception LLC. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+const API_BASE = 'https://meridian-api.alphainception.com';
+const threadSlug = new URLSearchParams(window.location.search).get('slug');
+let threadId = null;
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function buildRepliesTree(replies) {
+    if (!replies || !replies.length) return '';
+
+    const topLevel = replies.filter(r => !r.parent_reply_id);
+    const children = {};
+    replies.forEach(r => {
+        if (r.parent_reply_id) {
+            if (!children[r.parent_reply_id]) children[r.parent_reply_id] = [];
+            children[r.parent_reply_id].push(r);
+        }
+    });
+
+    function renderReply(reply, nested) {
+        const kids = children[reply.id] || [];
+        return `
+            <div class="reply ${nested ? 'nested' : ''}">
+                <div class="reply-header">
+                    <span class="reply-author">${reply.author || 'Anonymous'}</span>
+                    <span class="reply-date">${formatDate(reply.created_at)}</span>
+                </div>
+                <div class="reply-content">${reply.content_html || reply.content || ''}</div>
+            </div>
+            ${kids.map(k => renderReply(k, true)).join('')}
+        `;
+    }
+
+    return topLevel.map(r => renderReply(r, false)).join('');
+}
+
+async function loadThread() {
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('error');
+    const hero = document.getElementById('thread-hero');
+    const content = document.getElementById('main-content');
+
+    if (!threadSlug) {
+        loading.style.display = 'none';
+        error.style.display = 'block';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/forums/threads/${encodeURIComponent(threadSlug)}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const thread = data.thread || data;
+
+        threadId = thread.id;
+        document.title = `${thread.title || 'Thread'} | Meridian Forums`;
+
+        document.getElementById('thread-title').textContent = thread.title || 'Untitled';
+        document.getElementById('thread-author').textContent = thread.author || 'Anonymous';
+        document.getElementById('thread-date').textContent = formatDate(thread.created_at);
+        document.getElementById('post-author').textContent = thread.author || 'Anonymous';
+        document.getElementById('post-date').textContent = formatDate(thread.created_at);
+        document.getElementById('post-content').innerHTML = thread.content_html || thread.content || '';
+
+        if (thread.category_slug) {
+            document.getElementById('back-link').href = `forum-category.html?slug=${encodeURIComponent(thread.category_slug)}`;
+        }
+
+        const replies = thread.replies || [];
+        if (replies.length > 0) {
+            document.getElementById('replies-header').style.display = 'block';
+            document.getElementById('replies-header').textContent = `Replies (${replies.length})`;
+            document.getElementById('replies-list').innerHTML = buildRepliesTree(replies);
+        }
+
+        loading.style.display = 'none';
+        hero.style.display = 'block';
+        content.style.display = 'block';
+    } catch (err) {
+        loading.style.display = 'none';
+        error.style.display = 'block';
+    }
+}
+
+// Submit reply
+document.getElementById('submit-reply').addEventListener('click', async () => {
+    const replyContent = document.getElementById('reply-content').value.trim();
+    const name = document.getElementById('reply-name').value.trim();
+    const email = document.getElementById('reply-email').value.trim();
+    const msg = document.getElementById('form-msg');
+
+    if (!replyContent) {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Reply content is required.';
+        return;
+    }
+
+    if (!threadId) {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Thread not loaded. Please refresh and try again.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/api/forums/threads/${threadId}/replies`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content: replyContent,
+                author_name: name,
+                author_email: email
+            })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        msg.className = 'form-msg success';
+        msg.textContent = 'Reply submitted! It will appear after moderation review.';
+        document.getElementById('reply-content').value = '';
+    } catch (err) {
+        msg.className = 'form-msg error';
+        msg.textContent = 'Failed to submit reply. Please try again.';
+    }
+});
+
+loadThread();
+</script>
+
+</body>
+</html>

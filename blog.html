@@ -150,23 +150,37 @@
 
     <div class="newsletter">
         <h2>Stay Informed</h2>
-        <p>Subscribe to Meridian for weekly energy market analysis and regulatory updates.</p>
+        <p>Subscribe to Meridian for energy market intelligence delivered to your inbox.</p>
         <div class="newsletter-form">
             <div class="form-row">
-                <input type="text" id="sub-name" placeholder="Your name">
-                <input type="email" id="sub-email" placeholder="Your email">
+                <input type="text" id="sub-first" placeholder="First name">
+                <input type="text" id="sub-last" placeholder="Last name">
             </div>
+            <div class="form-row">
+                <input type="email" id="sub-email" placeholder="Email address *" required>
+                <input type="text" id="sub-company" placeholder="Company (optional)">
+            </div>
+            <div style="margin:12px 0 4px;font-weight:600;color:var(--primary);font-size:0.9rem;">Market Interests:</div>
             <div class="category-checks">
-                <label><input type="checkbox" name="sub-cat" value="carbon"> Carbon</label>
-                <label><input type="checkbox" name="sub-cat" value="power"> Power</label>
-                <label><input type="checkbox" name="sub-cat" value="natural-gas"> Natural Gas</label>
-                <label><input type="checkbox" name="sub-cat" value="renewables"> Renewables</label>
-                <label><input type="checkbox" name="sub-cat" value="regulatory"> Regulatory</label>
-                <label><input type="checkbox" name="sub-cat" value="legislative"> Legislative</label>
-                <label><input type="checkbox" name="sub-cat" value="market-outlook"> Market Outlook</label>
+                <label><input type="checkbox" name="sub-cat" value="carbon"> Carbon (CCA, RGGI, EUA)</label>
+                <label><input type="checkbox" name="sub-cat" value="power"> Power Markets</label>
+                <label><input type="checkbox" name="sub-cat" value="natural_gas"> Natural Gas</label>
+                <label><input type="checkbox" name="sub-cat" value="renewables"> Renewables & RECs</label>
+                <label><input type="checkbox" name="sub-cat" value="rins"> RINs</label>
+                <label><input type="checkbox" name="sub-cat" value="lcfs"> LCFS Credits</label>
+                <label><input type="checkbox" name="sub-cat" value="regulatory"> Regulatory / Legislative</label>
             </div>
-            <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+            <div style="margin:12px 0 4px;font-weight:600;color:var(--primary);font-size:0.9rem;">Delivery Preference:</div>
+            <div class="category-checks">
+                <label><input type="checkbox" name="sub-freq" value="daily" checked> Daily Recap</label>
+                <label><input type="checkbox" name="sub-freq" value="weekly" checked> Weekly Roundup</label>
+                <label><input type="checkbox" name="sub-freq" value="monthly"> Monthly Deep Dive</label>
+                <label><input type="checkbox" name="sub-freq" value="breaking"> Breaking News</label>
+                <label><input type="checkbox" name="sub-freq" value="legislation"> Legislative Alerts</label>
+            </div>
+            <button class="subscribe-btn" id="subscribe-btn">Subscribe to Meridian</button>
             <div class="subscribe-msg" id="subscribe-msg"></div>
+            <p style="font-size:0.75rem;color:var(--text-light);margin-top:8px;">By subscribing you consent to receiving market intelligence emails from Alpha Inception LLC. You can unsubscribe at any time.</p>
         </div>
     </div>
 
@@ -309,10 +323,13 @@ document.getElementById('next-btn').addEventListener('click', () => {
 
 // Newsletter subscribe
 document.getElementById('subscribe-btn').addEventListener('click', async () => {
-    const name = document.getElementById('sub-name').value.trim();
+    const firstName = document.getElementById('sub-first').value.trim();
+    const lastName = document.getElementById('sub-last').value.trim();
     const email = document.getElementById('sub-email').value.trim();
+    const company = document.getElementById('sub-company').value.trim();
     const msg = document.getElementById('subscribe-msg');
-    const cats = Array.from(document.querySelectorAll('input[name="sub-cat"]:checked')).map(c => c.value);
+    const markets = Array.from(document.querySelectorAll('input[name="sub-cat"]:checked')).map(c => c.value);
+    const frequency = Array.from(document.querySelectorAll('input[name="sub-freq"]:checked')).map(c => c.value);
 
     if (!email) {
         msg.className = 'subscribe-msg error';
@@ -324,13 +341,20 @@ document.getElementById('subscribe-btn').addEventListener('click', async () => {
         const res = await fetch(`${API_BASE}/api/subscribers`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, categories: cats })
+            body: JSON.stringify({
+                email,
+                name: [firstName, lastName].filter(Boolean).join(' ') || null,
+                categories: markets.length ? markets.join(',') : 'all',
+                topics: frequency.length ? frequency.join(',') : 'all'
+            })
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         msg.className = 'subscribe-msg success';
-        msg.textContent = 'Subscribed successfully! Check your inbox for confirmation.';
-        document.getElementById('sub-name').value = '';
+        msg.textContent = 'Check your inbox for a confirmation email to complete your subscription.';
+        document.getElementById('sub-first').value = '';
+        document.getElementById('sub-last').value = '';
         document.getElementById('sub-email').value = '';
+        document.getElementById('sub-company').value = '';
         document.querySelectorAll('input[name="sub-cat"]:checked').forEach(c => c.checked = false);
     } catch (err) {
         msg.className = 'subscribe-msg error';

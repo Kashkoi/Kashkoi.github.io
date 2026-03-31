@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Discussion Board | Alpha Inception</title>
+    <meta name="description" content="Energy market discussion board for verified practitioners. Carbon, LCFS, RINs, power, gas, RECs — real-time market intelligence and peer insights.">
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+            --red: #dc2626;
+            --amber: #d97706;
+            --green: #16a34a;
+            --purple: #7c3aed;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        /* Header */
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+        .header-nav a.active { color: #fff; font-weight: 600; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 48px 24px 36px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px; }
+        .hero .subtitle { font-size: 1rem; color: #cbd5e1; }
+
+        /* Auth Bar */
+        .auth-bar { background: var(--primary); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 24px; }
+        .auth-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+        .auth-bar input { padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.82rem; width: 180px; }
+        .auth-bar input::placeholder { color: rgba(255,255,255,0.4); }
+        .auth-bar .btn-sm { padding: 6px 16px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-login { background: var(--accent); color: #fff; }
+        .btn-login:hover { background: var(--accent-dark); }
+        .btn-register { background: transparent; color: var(--accent); border: 1px solid var(--accent) !important; }
+        .btn-register:hover { background: var(--accent); color: #fff; }
+        .auth-user { color: #cbd5e1; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
+        .btn-logout { padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; background: rgba(255,255,255,0.1); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; }
+        .btn-logout:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+        /* Flair badges */
+        .flair { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+        .flair-carbon-trader { background: #fef2f2; color: var(--red); }
+        .flair-power-trader { background: #eff6ff; color: #2563eb; }
+        .flair-gas-trader { background: #fefce8; color: #a16207; }
+        .flair-regulatory-analyst { background: #f5f3ff; color: var(--purple); }
+        .flair-utility-compliance { background: #ecfdf5; color: #047857; }
+        .flair-portfolio-manager { background: #f0f9ff; color: var(--meridian-navy); }
+        .flair-broker { background: #fdf4ff; color: #9333ea; }
+        .flair-consultant { background: #f8fafc; color: var(--text-light); }
+        .flair-other { background: #f1f5f9; color: var(--text-light); }
+        .flair-verified { background: rgba(14,165,233,0.1); color: var(--accent); }
+
+        /* Main Layout */
+        .main-layout { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 200px 1fr 260px; gap: 24px; }
+
+        /* Channel Sidebar */
+        .channel-sidebar { position: sticky; top: 24px; align-self: start; }
+        .channel-sidebar h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; font-weight: 700; }
+        .channel-list { display: flex; flex-direction: column; gap: 6px; }
+        .channel-btn { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; border: none; background: var(--card-bg); color: var(--text); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: left; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        .channel-btn:hover { transform: translateX(2px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+        .channel-btn.active { font-weight: 700; }
+        .channel-btn .ch-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-right: 8px; }
+        .channel-btn .ch-name { flex: 1; }
+        .channel-btn .ch-count { font-size: 0.7rem; color: var(--text-light); background: var(--light-bg); padding: 1px 7px; border-radius: 10px; font-weight: 600; }
+
+        /* Feed */
+        .feed { min-width: 0; }
+        .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+        .feed-sort { display: flex; gap: 4px; }
+        .sort-btn { padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-light); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+        .sort-btn:hover { border-color: var(--meridian-steel); }
+        .sort-btn.active { background: var(--meridian-navy); color: #fff; border-color: var(--meridian-navy); }
+        .btn-new-post { padding: 8px 20px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 0.85rem; font-weight: 700; border: none; cursor: pointer; transition: all 0.2s; }
+        .btn-new-post:hover { background: var(--accent-dark); transform: translateY(-1px); }
+        .btn-new-post:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* New Post Form */
+        .new-post-form { background: var(--card-bg); border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: none; border: 2px solid var(--accent); }
+        .new-post-form.visible { display: block; }
+        .new-post-form h3 { font-size: 0.95rem; color: var(--meridian-navy); margin-bottom: 12px; }
+        .form-row { margin-bottom: 10px; }
+        .form-row label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .form-row input, .form-row textarea, .form-row select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.88rem; font-family: inherit; color: var(--text); background: var(--light-bg); }
+        .form-row input:focus, .form-row textarea:focus, .form-row select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
+        .form-row textarea { min-height: 100px; resize: vertical; }
+        .form-hint { font-size: 0.72rem; color: var(--text-light); margin-top: 4px; }
+        .form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+        .btn-cancel { padding: 8px 16px; border-radius: 6px; background: var(--light-bg); color: var(--text-light); border: 1px solid var(--border); font-size: 0.82rem; cursor: pointer; }
+        .btn-submit { padding: 8px 20px; border-radius: 6px; background: var(--accent); color: #fff; border: none; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+        .btn-submit:hover { background: var(--accent-dark); }
+
+        /* Post Cards */
+        .post-card { background: var(--card-bg); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 3px solid transparent; transition: box-shadow 0.15s; }
+        .post-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.07); }
+        .post-card.pinned { border-left-color: var(--accent); background: linear-gradient(90deg, #f0f9ff 0%, var(--card-bg) 30%); }
+        .post-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+        .post-author { font-size: 0.82rem; font-weight: 700; color: var(--meridian-navy); }
+        .post-time { font-size: 0.72rem; color: var(--text-light); font-variant-numeric: tabular-nums; }
+        .channel-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: #fff; }
+        .tag-carbon-pricing { background: var(--red); }
+        .tag-lcfs-rins { background: var(--amber); }
+        .tag-power-gas { background: var(--meridian-steel); }
+        .tag-recs-renewables { background: var(--green); }
+        .tag-legislation { background: var(--purple); }
+        .tag-general { background: #64748b; }
+        .pin-indicator { font-size: 0.68rem; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 3px; }
+        .post-title { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.35; }
+        .post-content { font-size: 0.88rem; color: var(--text); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap; }
+        .post-content .price-ref { color: var(--accent); font-weight: 600; cursor: pointer; }
+        .post-content .price-ref:hover { text-decoration: underline; }
+        .post-actions { display: flex; align-items: center; gap: 16px; }
+        .upvote-btn { display: flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--text-light); font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+        .upvote-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(14,165,233,0.05); }
+        .upvote-btn.voted { border-color: var(--accent); color: var(--accent); background: rgba(14,165,233,0.08); }
+        .upvote-btn svg { width: 14px; height: 14px; }
+        .reply-toggle { display: flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 6px; border: none; background: transparent; color: var(--text-light); font-size: 0.78rem; cursor: pointer; }
+        .reply-toggle:hover { color: var(--meridian-navy); background: var(--light-bg); }
+        .attachment-icon { color: var(--text-light); font-size: 0.78rem; display: flex; align-items: center; gap: 3px; }
+
+        /* Replies */
+        .replies-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); display: none; }
+        .replies-section.visible { display: block; }
+        .reply-card { padding: 10px 14px; margin-bottom: 8px; margin-left: 16px; border-left: 2px solid var(--border); background: var(--light-bg); border-radius: 0 8px 8px 0; }
+        .reply-card .post-author { font-size: 0.78rem; }
+        .reply-card .post-content { font-size: 0.82rem; margin-bottom: 4px; }
+        .reply-card .post-time { font-size: 0.68rem; }
+        .reply-form { display: flex; gap: 8px; margin-top: 10px; margin-left: 16px; }
+        .reply-form textarea { flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.82rem; font-family: inherit; min-height: 60px; resize: vertical; }
+        .reply-form textarea:focus { outline: none; border-color: var(--accent); }
+        .reply-form .btn-submit { align-self: flex-end; padding: 8px 14px; font-size: 0.78rem; }
+
+        /* Right Sidebar */
+        .right-sidebar { position: sticky; top: 24px; align-self: start; }
+        .sidebar-widget { background: var(--card-bg); border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .sidebar-widget h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .contributor-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+        .contributor-rank { width: 20px; height: 20px; border-radius: 50%; background: var(--meridian-navy); color: #fff; font-size: 0.65rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .contributor-name { font-size: 0.82rem; font-weight: 600; color: var(--text); flex: 1; }
+        .contributor-posts { font-size: 0.7rem; color: var(--text-light); }
+        .highlight-item { padding: 8px 0; border-bottom: 1px solid var(--border); }
+        .highlight-item:last-child { border-bottom: none; }
+        .highlight-title { font-size: 0.82rem; font-weight: 600; color: var(--meridian-navy); line-height: 1.3; margin-bottom: 3px; cursor: pointer; }
+        .highlight-title:hover { color: var(--accent); }
+        .highlight-meta { font-size: 0.68rem; color: var(--text-light); display: flex; gap: 8px; }
+        .channel-info-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; margin-bottom: 10px; }
+        .channel-info-examples { font-size: 0.75rem; color: var(--text-light); }
+        .channel-info-examples li { margin-bottom: 4px; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.visible { display: flex; }
+        .modal { background: var(--card-bg); border-radius: 14px; padding: 32px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .modal h2 { font-size: 1.3rem; color: var(--meridian-navy); margin-bottom: 4px; }
+        .modal .modal-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 20px; }
+        .modal .form-row input, .modal .form-row select { background: #fff; }
+        .modal .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+        .modal .checkbox-group label { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; color: var(--text); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; transition: all 0.15s; }
+        .modal .checkbox-group label:hover { border-color: var(--accent); }
+        .modal .checkbox-group label.checked { background: rgba(14,165,233,0.08); border-color: var(--accent); color: var(--accent); }
+        .modal .checkbox-group input { display: none; }
+        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 1.5rem; color: var(--text-light); cursor: pointer; background: none; border: none; }
+        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+        .anon-check { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-light); margin-top: 4px; }
+        .anon-check input { width: auto; }
+        .form-error { color: var(--red); font-size: 0.78rem; margin-top: 4px; display: none; }
+
+        /* Loading & Empty */
+        .loading { text-align: center; padding: 40px 0; color: var(--text-light); font-size: 0.95rem; }
+        .empty-feed { text-align: center; padding: 40px; color: var(--text-light); background: var(--card-bg); border-radius: 10px; }
+
+        /* Footer */
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; }
+        .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout { grid-template-columns: 1fr 240px; }
+            .channel-sidebar { display: none; }
+            .mobile-channels { display: flex !important; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.6rem; }
+            .main-layout { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
+            .right-sidebar { display: none; }
+            .header-inner { flex-direction: column; gap: 12px; }
+            .auth-bar-inner { flex-wrap: wrap; justify-content: center; }
+            .auth-bar input { width: 140px; }
+            .mobile-channels { display: flex !important; }
+            .post-card { padding: 14px 16px; }
+        }
+        .mobile-channels { display: none; overflow-x: auto; gap: 6px; padding: 12px 24px; background: var(--card-bg); border-bottom: 1px solid var(--border); scrollbar-width: thin; }
+        .mobile-channels .channel-pill { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; }
+        .mobile-channels .channel-pill.active { color: #fff; border-color: transparent; }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <a href="services.html" class="logo">Alpha <span>Inception</span></a>
+        <nav class="header-nav">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="meridian.html">Live Wire</a>
+            <a href="forums.html">Forums</a>
+            <a href="discuss.html" class="active">Discuss</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Auth Bar -->
+<div class="auth-bar">
+    <div class="auth-bar-inner">
+        <div id="auth-login" style="display:flex; align-items:center; gap:10px;">
+            <input type="email" id="login-email" placeholder="Email">
+            <input type="password" id="login-password" placeholder="Password">
+            <button class="btn-sm btn-login" onclick="handleLogin()">Log In</button>
+            <button class="btn-sm btn-register" onclick="openRegisterModal()">Register</button>
+        </div>
+        <div id="auth-user" style="display:none;" class="auth-user">
+            <span>Welcome, <strong id="user-display-name"></strong></span>
+            <span id="user-flair-badge"></span>
+            <button class="btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Meridian Discussion Board</h1>
+        <p class="subtitle">Energy Market Intelligence &mdash; Verified Practitioners Only</p>
+    </div>
+</section>
+
+<!-- Mobile Channels -->
+<div class="mobile-channels" id="mobile-channels"></div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+
+    <!-- Channel Sidebar (Desktop) -->
+    <aside class="channel-sidebar">
+        <h3>Channels</h3>
+        <div class="channel-list" id="channel-list"></div>
+    </aside>
+
+    <!-- Discussion Feed -->
+    <main class="feed">
+        <div class="feed-header">
+            <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn-new-post" id="btn-new-post" onclick="toggleNewPostForm()" disabled>+ New Post</button>
+                <span id="active-channel-label" style="font-size:0.82rem;color:var(--text-light);"></span>
+            </div>
+            <div class="feed-sort">
+                <button class="sort-btn active" data-sort="latest" onclick="setSort('latest')">Latest</button>
+                <button class="sort-btn" data-sort="top" onclick="setSort('top')">Top</button>
+            </div>
+        </div>
+
+        <!-- New Post Form -->
+        <div class="new-post-form" id="new-post-form">
+            <h3>Start a Discussion</h3>
+            <div class="form-row">
+                <label>Title (optional)</label>
+                <input type="text" id="post-title" placeholder="Summarize your discussion topic">
+            </div>
+            <div class="form-row">
+                <label>Channel</label>
+                <select id="post-channel">
+                    <option value="carbon-pricing">#carbon-pricing</option>
+                    <option value="lcfs-rins">#lcfs-rins</option>
+                    <option value="power-gas">#power-gas</option>
+                    <option value="recs-renewables">#recs-renewables</option>
+                    <option value="legislation">#legislation</option>
+                    <option value="general">#general</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Content</label>
+                <textarea id="post-content" placeholder="Share your analysis, question, or observation..."></textarea>
+                <div class="form-hint">Type $CCA, $D4, $ERCOT etc. to auto-link market prices</div>
+            </div>
+            <div class="form-actions">
+                <button class="btn-cancel" onclick="toggleNewPostForm()">Cancel</button>
+                <button class="btn-submit" onclick="submitPost()">Post</button>
+            </div>
+        </div>
+
+        <!-- Feed container -->
+        <div id="feed-loading" class="loading">Loading discussions...</div>
+        <div id="feed-empty" class="empty-feed" style="display:none;">No discussions yet. Be the first to post.</div>
+        <div id="feed-container"></div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar">
+        <div class="sidebar-widget" id="widget-contributors">
+            <h3>Top Contributors</h3>
+            <div id="contributors-list"></div>
+        </div>
+        <div class="sidebar-widget" id="widget-highlights">
+            <h3>Community Highlights</h3>
+            <div id="highlights-list"></div>
+        </div>
+        <div class="sidebar-widget" id="widget-channel-info">
+            <h3>Channel Info</h3>
+            <div id="channel-info-content">
+                <p class="channel-info-desc">Select a channel to see details and example discussions.</p>
+            </div>
+        </div>
+    </aside>
+
+</div>
+
+<!-- Registration Modal -->
+<div class="modal-overlay" id="register-modal">
+    <div class="modal" style="position:relative;">
+        <button class="modal-close" onclick="closeRegisterModal()">&times;</button>
+        <h2>Join the Discussion</h2>
+        <p class="modal-sub">Verification required. Provide your professional details.</p>
+        <div class="form-row">
+            <label>Full Name *</label>
+            <input type="text" id="reg-name" placeholder="Jane Smith">
+        </div>
+        <div class="form-row">
+            <label>Email *</label>
+            <input type="email" id="reg-email" placeholder="jane@tradingfirm.com">
+        </div>
+        <div class="form-row">
+            <label>Password *</label>
+            <input type="password" id="reg-password" placeholder="Min 8 characters">
+        </div>
+        <div class="form-row">
+            <label>Company / Affiliation *</label>
+            <input type="text" id="reg-company" placeholder="Trading Firm Inc.">
+        </div>
+        <div class="form-row">
+            <label>LinkedIn Profile (optional)</label>
+            <input type="url" id="reg-linkedin" placeholder="https://linkedin.com/in/...">
+        </div>
+        <div class="form-row">
+            <label>Display Name *</label>
+            <input type="text" id="reg-display" placeholder="How you appear in discussions">
+        </div>
+        <div class="anon-check">
+            <input type="checkbox" id="reg-anonymous">
+            <label for="reg-anonymous">Post anonymously by default</label>
+        </div>
+        <div class="form-row" style="margin-top:12px;">
+            <label>Role *</label>
+            <select id="reg-role">
+                <option value="">Select your role...</option>
+                <option value="Carbon Trader">Carbon Trader</option>
+                <option value="Power Trader">Power Trader</option>
+                <option value="Gas Trader">Gas Trader</option>
+                <option value="Regulatory Analyst">Regulatory Analyst</option>
+                <option value="Utility Compliance">Utility Compliance</option>
+                <option value="Portfolio Manager">Portfolio Manager</option>
+                <option value="Broker">Broker</option>
+                <option value="Consultant">Consultant</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label>Market Expertise</label>
+            <div class="checkbox-group" id="reg-expertise">
+                <label><input type="checkbox" value="Carbon"> Carbon</label>
+                <label><input type="checkbox" value="LCFS"> LCFS</label>
+                <label><input type="checkbox" value="RINs"> RINs</label>
+                <label><input type="checkbox" value="Power"> Power</label>
+                <label><input type="checkbox" value="Gas"> Gas</label>
+                <label><input type="checkbox" value="RECs"> RECs</label>
+                <label><input type="checkbox" value="Regulatory"> Regulatory</label>
+            </div>
+        </div>
+        <div class="form-error" id="reg-error"></div>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeRegisterModal()">Cancel</button>
+            <button class="btn-submit" onclick="submitRegistration()">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.3rem; margin-bottom: 8px;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="meridian.html">Live Wire</a>
+            <a href="forums.html">Forums</a>
+            <a href="discuss.html">Discuss</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception LLC. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+const API_BASE = 'https://meridian-api.alphainception.com';
+
+// ── Channel Definitions ──
+const CHANNELS = [
+    { id: 'all', name: 'All Channels', color: '#1B3A5C', dot: '#4A7FB5' },
+    { id: 'carbon-pricing', name: '#carbon-pricing', color: '#dc2626', dot: '#dc2626', desc: 'CCA, EUA, RGGI, WCI compliance and voluntary carbon markets. Price action, auction results, policy shifts.', examples: ['CCA auction results analysis', 'EU ETS reform impact on spreads', 'Voluntary carbon credit quality debate'] },
+    { id: 'lcfs-rins', name: '#lcfs-rins', color: '#d97706', dot: '#d97706', desc: 'Low Carbon Fuel Standard credits, RIN markets, D4/D6 valuations, RVO updates.', examples: ['D4 RIN pricing outlook Q2', 'LCFS credit generation trends', 'EPA RVO proposal discussion'] },
+    { id: 'power-gas', name: '#power-gas', color: '#4A7FB5', dot: '#4A7FB5', desc: 'Power and natural gas markets. ERCOT, PJM, CAISO, Henry Hub, basis differentials.', examples: ['ERCOT summer capacity outlook', 'PJM capacity auction results', 'Henry Hub storage report analysis'] },
+    { id: 'recs-renewables', name: '#recs-renewables', color: '#16a34a', dot: '#16a34a', desc: 'Renewable Energy Certificates, PPA pricing, clean energy procurement, IRA impacts.', examples: ['REC pricing by vintage and region', 'Corporate PPA structures', 'IRA tax credit transferability'] },
+    { id: 'legislation', name: '#legislation', color: '#7c3aed', dot: '#7c3aed', desc: 'Federal and state energy legislation, FERC rulings, EPA regulations, state-level mandates.', examples: ['FERC transmission reform', 'State RPS updates', 'Methane fee implementation'] },
+    { id: 'general', name: '#general', color: '#64748b', dot: '#64748b', desc: 'Off-topic market discussion, career, industry events, introductions.', examples: ['Conference recommendations', 'Career path discussion', 'Book and resource recommendations'] }
+];
+
+// ── State ──
+let currentUser = null;
+let currentChannel = 'all';
+let currentSort = 'latest';
+let posts = [];
+let channelCounts = {};
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+    restoreSession();
+    renderChannels();
+    loadPosts();
+    loadSidebarData();
+    initExpertiseCheckboxes();
+});
+
+// ── Auth ──
+function restoreSession() {
+    const token = localStorage.getItem('meridian_forum_token');
+    const userJson = localStorage.getItem('meridian_forum_user');
+    if (token && userJson) {
+        try {
+            currentUser = JSON.parse(userJson);
+            currentUser.token = token;
+            showAuthUser();
+        } catch(e) {
+            localStorage.removeItem('meridian_forum_token');
+            localStorage.removeItem('meridian_forum_user');
+        }
+    }
+}
+
+function showAuthUser() {
+    document.getElementById('auth-login').style.display = 'none';
+    document.getElementById('auth-user').style.display = 'flex';
+    document.getElementById('user-display-name').textContent = currentUser.display_name || currentUser.name;
+    const flairEl = document.getElementById('user-flair-badge');
+    if (currentUser.role) {
+        const cls = 'flair flair-' + currentUser.role.toLowerCase().replace(/\s+/g, '-');
+        flairEl.innerHTML = '<span class="' + cls + '">' + escHtml(currentUser.role) + '</span>';
+    } else {
+        flairEl.innerHTML = '';
+    }
+    document.getElementById('btn-new-post').disabled = false;
+}
+
+function showAuthLogin() {
+    document.getElementById('auth-login').style.display = 'flex';
+    document.getElementById('auth-user').style.display = 'none';
+    document.getElementById('btn-new-post').disabled = true;
+}
+
+async function handleLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) return;
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Login failed');
+        localStorage.setItem('meridian_forum_token', data.token);
+        localStorage.setItem('meridian_forum_user', JSON.stringify(data.user));
+        currentUser = { ...data.user, token: data.token };
+        showAuthUser();
+        document.getElementById('login-email').value = '';
+        document.getElementById('login-password').value = '';
+    } catch(e) {
+        alert(e.message);
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('meridian_forum_token');
+    localStorage.removeItem('meridian_forum_user');
+    currentUser = null;
+    showAuthLogin();
+}
+
+// ── Registration ──
+function openRegisterModal() {
+    document.getElementById('register-modal').classList.add('visible');
+}
+
+function closeRegisterModal() {
+    document.getElementById('register-modal').classList.remove('visible');
+    document.getElementById('reg-error').style.display = 'none';
+}
+
+function initExpertiseCheckboxes() {
+    document.querySelectorAll('#reg-expertise label').forEach(label => {
+        const cb = label.querySelector('input');
+        cb.addEventListener('change', () => {
+            label.classList.toggle('checked', cb.checked);
+        });
+    });
+}
+
+async function submitRegistration() {
+    const errEl = document.getElementById('reg-error');
+    errEl.style.display = 'none';
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const company = document.getElementById('reg-company').value.trim();
+    const linkedin = document.getElementById('reg-linkedin').value.trim();
+    const display_name = document.getElementById('reg-display').value.trim();
+    const anonymous = document.getElementById('reg-anonymous').checked;
+    const role = document.getElementById('reg-role').value;
+    const expertise = [];
+    document.querySelectorAll('#reg-expertise input:checked').forEach(cb => expertise.push(cb.value));
+
+    if (!name || !email || !password || !company || !display_name || !role) {
+        errEl.textContent = 'Please fill in all required fields.';
+        errEl.style.display = 'block';
+        return;
+    }
+    if (password.length < 8) {
+        errEl.textContent = 'Password must be at least 8 characters.';
+        errEl.style.display = 'block';
+        return;
+    }
+
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, company, linkedin, display_name, anonymous, role, expertise })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Registration failed');
+        localStorage.setItem('meridian_forum_token', data.token);
+        localStorage.setItem('meridian_forum_user', JSON.stringify(data.user));
+        currentUser = { ...data.user, token: data.token };
+        showAuthUser();
+        closeRegisterModal();
+    } catch(e) {
+        errEl.textContent = e.message;
+        errEl.style.display = 'block';
+    }
+}
+
+// ── Channels ──
+function renderChannels() {
+    const list = document.getElementById('channel-list');
+    const mobile = document.getElementById('mobile-channels');
+    list.innerHTML = '';
+    mobile.innerHTML = '';
+
+    CHANNELS.forEach(ch => {
+        // Desktop
+        const btn = document.createElement('button');
+        btn.className = 'channel-btn' + (currentChannel === ch.id ? ' active' : '');
+        if (currentChannel === ch.id) btn.style.background = ch.color + '12';
+        if (currentChannel === ch.id) btn.style.borderLeft = '3px solid ' + ch.color;
+        btn.innerHTML = (ch.id !== 'all' ? '<span class="ch-dot" style="background:' + ch.dot + '"></span>' : '') +
+            '<span class="ch-name">' + (ch.id === 'all' ? 'All' : ch.name) + '</span>' +
+            '<span class="ch-count" id="count-' + ch.id + '">' + (channelCounts[ch.id] || 0) + '</span>';
+        btn.onclick = () => selectChannel(ch.id);
+        list.appendChild(btn);
+
+        // Mobile
+        const pill = document.createElement('button');
+        pill.className = 'channel-pill' + (currentChannel === ch.id ? ' active' : '');
+        if (currentChannel === ch.id) pill.style.background = ch.color;
+        if (currentChannel === ch.id) pill.style.color = '#fff';
+        pill.textContent = ch.id === 'all' ? 'All' : ch.name;
+        pill.onclick = () => selectChannel(ch.id);
+        mobile.appendChild(pill);
+    });
+}
+
+function selectChannel(channelId) {
+    currentChannel = channelId;
+    renderChannels();
+    renderPosts();
+    updateChannelInfo();
+    const ch = CHANNELS.find(c => c.id === channelId);
+    document.getElementById('active-channel-label').textContent = ch && ch.id !== 'all' ? ch.name : '';
+    if (channelId !== 'all') {
+        document.getElementById('post-channel').value = channelId;
+    }
+}
+
+function updateChannelInfo() {
+    const ch = CHANNELS.find(c => c.id === currentChannel);
+    const el = document.getElementById('channel-info-content');
+    if (!ch || ch.id === 'all') {
+        el.innerHTML = '<p class="channel-info-desc">Select a channel to see details and example discussions.</p>';
+        return;
+    }
+    el.innerHTML = '<p class="channel-info-desc">' + escHtml(ch.desc) + '</p>' +
+        '<div class="channel-info-examples"><strong style="font-size:0.72rem;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;">Example Topics</strong><ul style="margin-top:6px;padding-left:16px;">' +
+        ch.examples.map(e => '<li>' + escHtml(e) + '</li>').join('') + '</ul></div>';
+}
+
+// ── Posts ──
+async function loadPosts() {
+    const loading = document.getElementById('feed-loading');
+    loading.style.display = 'block';
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/posts');
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to load');
+        posts = data.posts || [];
+        // Count per channel
+        channelCounts = { all: posts.length };
+        posts.forEach(p => {
+            channelCounts[p.channel] = (channelCounts[p.channel] || 0) + 1;
+        });
+        renderChannels();
+        renderPosts();
+    } catch(e) {
+        console.error('Load posts error:', e);
+        posts = [];
+        renderPosts();
+    }
+    loading.style.display = 'none';
+}
+
+function renderPosts() {
+    const container = document.getElementById('feed-container');
+    const empty = document.getElementById('feed-empty');
+
+    let filtered = currentChannel === 'all' ? [...posts] : posts.filter(p => p.channel === currentChannel);
+
+    if (currentSort === 'top') {
+        filtered.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+    } else {
+        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    }
+
+    // Pinned posts first
+    const pinned = filtered.filter(p => p.pinned);
+    const unpinned = filtered.filter(p => !p.pinned);
+    filtered = [...pinned, ...unpinned];
+
+    if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+
+    container.innerHTML = filtered.map(p => renderPostCard(p)).join('');
+}
+
+function renderPostCard(p) {
+    const ch = CHANNELS.find(c => c.id === p.channel) || CHANNELS[CHANNELS.length - 1];
+    const tagClass = 'tag-' + (p.channel || 'general');
+    const authorDisplay = p.anonymous ? 'Verified Market Participant' : escHtml(p.display_name || p.author || 'Anonymous');
+    const flairHtml = p.anonymous
+        ? '<span class="flair flair-verified">Verified</span>'
+        : (p.role ? '<span class="flair flair-' + p.role.toLowerCase().replace(/\s+/g, '-') + '">' + escHtml(p.role) + '</span>' : '');
+    const content = formatContent(p.content || '');
+    const replyCount = (p.replies || []).length;
+    const voted = currentUser && p.user_voted;
+
+    return '<div class="post-card' + (p.pinned ? ' pinned' : '') + '" data-id="' + p.id + '">' +
+        '<div class="post-meta">' +
+            '<span class="post-author">' + authorDisplay + '</span>' +
+            flairHtml +
+            '<span class="channel-tag ' + tagClass + '">' + escHtml(ch.name) + '</span>' +
+            (p.pinned ? '<span class="pin-indicator"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg> Pinned</span>' : '') +
+            '<span class="post-time">' + formatTime(p.created_at) + '</span>' +
+            (p.attachments && p.attachments.length ? '<span class="attachment-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg> ' + p.attachments.length + '</span>' : '') +
+        '</div>' +
+        (p.title ? '<div class="post-title">' + escHtml(p.title) + '</div>' : '') +
+        '<div class="post-content">' + content + '</div>' +
+        '<div class="post-actions">' +
+            '<button class="upvote-btn' + (voted ? ' voted' : '') + '" onclick="upvotePost(\'' + p.id + '\')">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>' +
+                '<span>' + (p.upvotes || 0) + '</span>' +
+            '</button>' +
+            '<button class="reply-toggle" onclick="toggleReplies(\'' + p.id + '\')">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>' +
+                '<span>' + replyCount + ' repl' + (replyCount === 1 ? 'y' : 'ies') + '</span>' +
+            '</button>' +
+        '</div>' +
+        '<div class="replies-section" id="replies-' + p.id + '">' +
+            (p.replies || []).map(r => renderReply(r)).join('') +
+            (currentUser ? '<div class="reply-form"><textarea id="reply-text-' + p.id + '" placeholder="Write a reply..."></textarea><button class="btn-submit" onclick="submitReply(\'' + p.id + '\')">Reply</button></div>' : '') +
+        '</div>' +
+    '</div>';
+}
+
+function renderReply(r) {
+    const authorDisplay = r.anonymous ? 'Verified Market Participant' : escHtml(r.display_name || r.author || 'Anonymous');
+    const flairHtml = r.anonymous
+        ? '<span class="flair flair-verified">Verified</span>'
+        : (r.role ? '<span class="flair flair-' + r.role.toLowerCase().replace(/\s+/g, '-') + '">' + escHtml(r.role) + '</span>' : '');
+    return '<div class="reply-card">' +
+        '<div class="post-meta"><span class="post-author">' + authorDisplay + '</span>' + flairHtml + '<span class="post-time">' + formatTime(r.created_at) + '</span></div>' +
+        '<div class="post-content">' + formatContent(r.content || '') + '</div>' +
+    '</div>';
+}
+
+function formatContent(text) {
+    return escHtml(text).replace(/\$([A-Z][A-Z0-9_]{1,12})/g, '<span class="price-ref">$$$1</span>');
+}
+
+function formatTime(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    const now = new Date();
+    const diff = (now - d) / 1000;
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// ── Post Actions ──
+function toggleNewPostForm() {
+    const form = document.getElementById('new-post-form');
+    form.classList.toggle('visible');
+}
+
+async function submitPost() {
+    if (!currentUser) return;
+    const title = document.getElementById('post-title').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+    const channel = document.getElementById('post-channel').value;
+    if (!content) return alert('Post content is required.');
+
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + currentUser.token },
+            body: JSON.stringify({ title, content, channel })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to create post');
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+        document.getElementById('new-post-form').classList.remove('visible');
+        await loadPosts();
+    } catch(e) {
+        alert(e.message);
+    }
+}
+
+async function upvotePost(postId) {
+    if (!currentUser) return alert('Log in to upvote.');
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/upvote/' + postId, {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + currentUser.token }
+        });
+        if (!res.ok) { const d = await res.json(); throw new Error(d.detail || 'Upvote failed'); }
+        await loadPosts();
+    } catch(e) {
+        alert(e.message);
+    }
+}
+
+function toggleReplies(postId) {
+    const el = document.getElementById('replies-' + postId);
+    if (el) el.classList.toggle('visible');
+}
+
+async function submitReply(postId) {
+    if (!currentUser) return;
+    const textarea = document.getElementById('reply-text-' + postId);
+    const content = textarea.value.trim();
+    if (!content) return;
+
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/posts/' + postId + '/reply', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + currentUser.token },
+            body: JSON.stringify({ content })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to reply');
+        textarea.value = '';
+        await loadPosts();
+        // Re-open the replies section
+        setTimeout(() => {
+            const el = document.getElementById('replies-' + postId);
+            if (el) el.classList.add('visible');
+        }, 100);
+    } catch(e) {
+        alert(e.message);
+    }
+}
+
+// ── Sorting ──
+function setSort(sort) {
+    currentSort = sort;
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sort === sort);
+    });
+    renderPosts();
+}
+
+// ── Sidebar ──
+async function loadSidebarData() {
+    // Top Contributors
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/contributors');
+        const data = await res.json();
+        const list = document.getElementById('contributors-list');
+        if (data.contributors && data.contributors.length) {
+            list.innerHTML = data.contributors.slice(0, 5).map((c, i) =>
+                '<div class="contributor-item">' +
+                    '<span class="contributor-rank">' + (i + 1) + '</span>' +
+                    '<span class="contributor-name">' + escHtml(c.display_name) + '</span>' +
+                    (c.role ? '<span class="flair flair-' + c.role.toLowerCase().replace(/\s+/g, '-') + '" style="font-size:0.6rem;padding:1px 6px;">' + escHtml(c.role) + '</span>' : '') +
+                    '<span class="contributor-posts">' + c.post_count + ' posts</span>' +
+                '</div>'
+            ).join('');
+        } else {
+            list.innerHTML = '<p style="font-size:0.82rem;color:var(--text-light);">No contributors yet.</p>';
+        }
+    } catch(e) {
+        document.getElementById('contributors-list').innerHTML = '<p style="font-size:0.82rem;color:var(--text-light);">Loading...</p>';
+    }
+
+    // Highlights
+    try {
+        const res = await fetch(API_BASE + '/api/discuss/highlights');
+        const data = await res.json();
+        const list = document.getElementById('highlights-list');
+        if (data.highlights && data.highlights.length) {
+            list.innerHTML = data.highlights.slice(0, 3).map(h =>
+                '<div class="highlight-item">' +
+                    '<div class="highlight-title" onclick="selectChannel(\'' + escHtml(h.channel) + '\')">' + escHtml(h.title || h.content.substring(0, 60) + '...') + '</div>' +
+                    '<div class="highlight-meta">' +
+                        '<span>' + (h.upvotes || 0) + ' upvotes</span>' +
+                        '<span>' + escHtml(h.display_name || 'Anonymous') + '</span>' +
+                    '</div>' +
+                '</div>'
+            ).join('');
+        } else {
+            list.innerHTML = '<p style="font-size:0.82rem;color:var(--text-light);">No highlights yet this week.</p>';
+        }
+    } catch(e) {
+        document.getElementById('highlights-list').innerHTML = '<p style="font-size:0.82rem;color:var(--text-light);">Loading...</p>';
+    }
+}
+
+// ── Utilities ──
+function escHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+}
+</script>
+
+</body>
+</html>

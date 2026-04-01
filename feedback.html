@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Feedback | Meridian</title>
+    <meta name="description" content="Owner feedback portal for Meridian content quality control.">
+    <style>
+        :root {
+            --primary: #1a2b4a;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --meridian-navy: #1B3A5C;
+            --meridian-steel: #4A7FB5;
+            --amber: #d97706;
+            --amber-dark: #b45309;
+            --amber-bg: #fffbeb;
+            --red: #dc2626;
+            --red-bg: #fef2f2;
+            --green: #16a34a;
+            --green-bg: #f0fdf4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+
+        /* Header */
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 800px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; }
+        .header-nav a:hover { color: #fff; }
+
+        /* Page Hero */
+        .page-hero { background: linear-gradient(135deg, var(--meridian-navy) 0%, var(--meridian-steel) 100%); color: #fff; padding: 48px 24px 36px; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .page-hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; position: relative; z-index: 1; }
+        .page-hero p { color: #cbd5e1; font-size: 1rem; position: relative; z-index: 1; }
+
+        /* Main Container */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+        /* Weight Badge */
+        .weight-badge-container { text-align: center; margin: -20px auto 0; position: relative; z-index: 10; }
+        .weight-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--card-bg); border: 2px solid var(--amber); border-radius: 12px; padding: 12px 24px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15); }
+        .weight-badge .shield { font-size: 1.3rem; }
+        .weight-badge .label { font-size: 0.85rem; color: var(--text-light); }
+        .weight-badge .value { font-size: 1.1rem; font-weight: 700; color: var(--amber); }
+
+        /* Article Preview */
+        .article-preview { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px auto; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); border-left: 4px solid var(--meridian-steel); }
+        .article-preview .label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 8px; }
+        .article-preview h2 { font-size: 1.3rem; color: var(--meridian-navy); margin-bottom: 8px; line-height: 1.4; }
+        .article-preview .excerpt { font-size: 0.92rem; color: var(--text-light); line-height: 1.6; }
+        .article-preview .meta { font-size: 0.8rem; color: var(--text-light); margin-top: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .article-preview.loading-state { text-align: center; padding: 40px 28px; color: var(--text-light); }
+        .article-preview.error-state { border-left-color: var(--red); }
+
+        /* Feedback Form Card */
+        .feedback-card { background: var(--card-bg); border-radius: 12px; padding: 36px; margin: 24px auto; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
+        .feedback-card h3 { font-size: 1.2rem; color: var(--meridian-navy); margin-bottom: 24px; }
+
+        /* Form Elements */
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--meridian-navy); margin-bottom: 8px; }
+        .form-group .hint { font-size: 0.8rem; color: var(--text-light); margin-bottom: 8px; font-weight: 400; }
+
+        .form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); background: var(--card-bg); appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; cursor: pointer; transition: border-color 0.2s; }
+        .form-select:focus { outline: none; border-color: var(--meridian-steel); box-shadow: 0 0 0 3px rgba(74, 127, 181, 0.12); }
+
+        .category-desc { font-size: 0.8rem; color: var(--text-light); margin-top: 6px; padding: 8px 12px; background: var(--light-bg); border-radius: 6px; display: none; }
+        .category-desc.visible { display: block; }
+
+        /* Severity Radio Group */
+        .severity-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        .severity-option { flex: 1; min-width: 140px; }
+        .severity-option input { display: none; }
+        .severity-option label { display: block; padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .severity-option label:hover { border-color: #94a3b8; }
+        .severity-option .sev-name { font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 2px; }
+        .severity-option .sev-mult { font-size: 0.8rem; font-weight: 500; }
+
+        .severity-option.minor label { }
+        .severity-option.minor input:checked + label { border-color: var(--amber); background: var(--amber-bg); }
+        .severity-option.minor .sev-name { color: var(--amber); }
+        .severity-option.minor .sev-mult { color: var(--amber); }
+
+        .severity-option.moderate label { }
+        .severity-option.moderate input:checked + label { border-color: #ea580c; background: #fff7ed; }
+        .severity-option.moderate .sev-name { color: #ea580c; }
+        .severity-option.moderate .sev-mult { color: #ea580c; }
+
+        .severity-option.critical label { }
+        .severity-option.critical input:checked + label { border-color: var(--red); background: var(--red-bg); }
+        .severity-option.critical .sev-name { color: var(--red); }
+        .severity-option.critical .sev-mult { color: var(--red); }
+
+        .form-textarea { width: 100%; min-height: 200px; padding: 16px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); font-family: inherit; line-height: 1.6; resize: vertical; transition: border-color 0.2s; }
+        .form-textarea:focus { outline: none; border-color: var(--meridian-steel); box-shadow: 0 0 0 3px rgba(74, 127, 181, 0.12); }
+        .form-textarea::placeholder { color: #94a3b8; }
+
+        .form-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.95rem; color: var(--text); font-family: inherit; transition: border-color 0.2s; }
+        .form-input:focus { outline: none; border-color: var(--meridian-steel); box-shadow: 0 0 0 3px rgba(74, 127, 181, 0.12); }
+
+        .submit-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px 32px; background: linear-gradient(135deg, var(--amber), var(--amber-dark)); color: #fff; font-size: 1.05rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25); }
+        .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35); }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* Success / Error Messages */
+        .form-message { padding: 16px 20px; border-radius: 10px; margin-top: 16px; font-size: 0.92rem; display: none; }
+        .form-message.success { display: block; background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
+        .form-message.error { display: block; background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+        .form-message .msg-title { font-weight: 700; margin-bottom: 4px; }
+
+        /* History Section */
+        .history-section { margin: 32px auto 24px; }
+        .history-section h3 { font-size: 1.1rem; color: var(--meridian-navy); margin-bottom: 16px; }
+        .history-card { background: var(--card-bg); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--border); transition: border-color 0.2s; }
+        .history-card:hover { border-left-color: var(--meridian-steel); }
+        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+        .history-category { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--meridian-steel); }
+        .history-date { font-size: 0.78rem; color: var(--text-light); }
+        .history-text { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+        .history-meta { display: flex; gap: 16px; margin-top: 8px; font-size: 0.78rem; color: var(--text-light); }
+        .history-severity { font-weight: 600; }
+        .history-severity.minor { color: var(--amber); }
+        .history-severity.moderate { color: #ea580c; }
+        .history-severity.critical { color: var(--red); }
+        .history-empty { text-align: center; padding: 32px; color: var(--text-light); font-size: 0.92rem; }
+
+        /* Note */
+        .owner-note { background: var(--card-bg); border-radius: 10px; padding: 20px 24px; margin: 24px auto 40px; border-left: 4px solid var(--meridian-steel); font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+        .owner-note strong { color: var(--meridian-navy); }
+
+        /* Footer */
+        .footer { background: var(--primary); color: #94a3b8; padding: 32px 24px; text-align: center; margin-top: 40px; }
+        .footer-inner { max-width: 800px; margin: 0 auto; }
+        .footer a { color: #cbd5e1; }
+        .footer a:hover { color: #fff; }
+        .footer-copy { font-size: 0.8rem; }
+
+        /* Spinner */
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner-dark { border-color: rgba(0,0,0,0.1); border-top-color: var(--text-light); }
+
+        @media (max-width: 640px) {
+            .page-hero h1 { font-size: 1.5rem; }
+            .feedback-card { padding: 24px 20px; }
+            .article-preview { padding: 20px; }
+            .severity-group { flex-direction: column; }
+            .severity-option { min-width: 100%; }
+            .form-textarea { min-height: 160px; }
+            .weight-badge { padding: 10px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="meridian.html" class="logo">Meridian <span>Live Wire</span></a>
+            <nav class="header-nav">
+                <a href="meridian.html">Feed</a>
+                <a href="blog.html">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <h1>Article Feedback</h1>
+        <p>Owner-weighted corrections that shape future content</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Weight Badge -->
+        <div class="weight-badge-container">
+            <div class="weight-badge">
+                <span class="shield">&#9733;</span>
+                <div>
+                    <div class="label">Your feedback carries</div>
+                    <div class="value" id="weightDisplay">10x weight</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Preview -->
+        <div class="article-preview loading-state" id="articlePreview">
+            <div class="spinner spinner-dark"></div>
+            <p style="margin-top:12px;">Loading article...</p>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback-card">
+            <h3>Submit Feedback</h3>
+            <form id="feedbackForm" autocomplete="off">
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-select" id="category" required>
+                        <option value="" disabled selected>Select a feedback category</option>
+                        <option value="tone">Tone</option>
+                        <option value="factual_error">Factual Error</option>
+                        <option value="structure">Structure</option>
+                        <option value="data_presentation">Data Presentation</option>
+                        <option value="source_attribution">Source Attribution</option>
+                        <option value="topic_coverage">Topic Coverage</option>
+                        <option value="timing">Timing</option>
+                        <option value="compliance">Compliance</option>
+                        <option value="general">General</option>
+                    </select>
+                    <div class="category-desc" id="categoryDesc"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Severity</label>
+                    <div class="hint">Higher severity applies a stronger correction weight</div>
+                    <div class="severity-group">
+                        <div class="severity-option minor">
+                            <input type="radio" name="severity" id="sevMinor" value="minor" checked>
+                            <label for="sevMinor">
+                                <span class="sev-name">Minor</span>
+                                <span class="sev-mult">0.5x multiplier</span>
+                            </label>
+                        </div>
+                        <div class="severity-option moderate">
+                            <input type="radio" name="severity" id="sevModerate" value="moderate">
+                            <label for="sevModerate">
+                                <span class="sev-name">Moderate</span>
+                                <span class="sev-mult">1x multiplier</span>
+                            </label>
+                        </div>
+                        <div class="severity-option critical">
+                            <input type="radio" name="severity" id="sevCritical" value="critical">
+                            <label for="sevCritical">
+                                <span class="sev-name">Critical</span>
+                                <span class="sev-mult">2x multiplier</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedbackText">Feedback</label>
+                    <textarea class="form-textarea" id="feedbackText" placeholder="Describe what's wrong and how it should be different..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailInput">Your Email</label>
+                    <input class="form-input" type="email" id="emailInput" placeholder="owner@example.com" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Feedback
+                </button>
+
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+
+        <!-- Previous Feedback -->
+        <div class="history-section">
+            <h3>Your Previous Feedback</h3>
+            <div id="historyList">
+                <div class="history-empty">
+                    <div class="spinner spinner-dark" style="margin:0 auto 12px;"></div>
+                    Loading history...
+                </div>
+            </div>
+        </div>
+
+        <!-- Note -->
+        <div class="owner-note">
+            <strong>Owner-only access.</strong> Only designated owner emails can submit feedback. This ensures feedback quality and prevents gaming. Each submission is weighted by your role and severity level, and corrections are applied to all future content generation.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-copy">&copy; 2026 Alpha Inception. Meridian Live Wire. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+(function() {
+    const API_BASE = 'https://meridian-api.alphainception.com';
+
+    const CATEGORY_DESCRIPTIONS = {
+        tone: 'The article\'s voice, formality, or emotional framing is inappropriate for the audience or topic.',
+        factual_error: 'Contains incorrect data, wrong numbers, misquoted sources, or verifiably false claims.',
+        structure: 'Poor organization, missing sections, awkward flow, or unclear hierarchy of information.',
+        data_presentation: 'Charts, tables, or statistics are misleading, poorly formatted, or missing context.',
+        source_attribution: 'Missing citations, unattributed quotes, or incorrect source references.',
+        topic_coverage: 'Important aspects of the topic are missing, or irrelevant tangents are included.',
+        timing: 'Article is outdated, published too late to be useful, or references stale data.',
+        compliance: 'Content may violate regulatory guidelines, disclosure requirements, or legal standards.',
+        general: 'General feedback that doesn\'t fit other categories.'
+    };
+
+    const SEVERITY_MULTIPLIERS = { minor: 0.5, moderate: 1, critical: 2 };
+    const BASE_WEIGHT = 10;
+
+    // Parse URL params
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post_id') || params.get('postId') || '';
+    const emailParam = params.get('email') || '';
+
+    // Pre-fill email
+    const emailInput = document.getElementById('emailInput');
+    const savedEmail = localStorage.getItem('meridian_owner_email');
+    emailInput.value = emailParam || savedEmail || '';
+
+    // Category description tooltip
+    const categorySelect = document.getElementById('category');
+    const categoryDesc = document.getElementById('categoryDesc');
+    categorySelect.addEventListener('change', function() {
+        const desc = CATEGORY_DESCRIPTIONS[this.value];
+        if (desc) {
+            categoryDesc.textContent = desc;
+            categoryDesc.classList.add('visible');
+        } else {
+            categoryDesc.classList.remove('visible');
+        }
+    });
+
+    // Update weight display on severity change
+    const severityRadios = document.querySelectorAll('input[name="severity"]');
+    const weightDisplay = document.getElementById('weightDisplay');
+    function updateWeight() {
+        const severity = document.querySelector('input[name="severity"]:checked').value;
+        const mult = SEVERITY_MULTIPLIERS[severity];
+        const total = BASE_WEIGHT * mult;
+        weightDisplay.textContent = total + 'x weight';
+    }
+    severityRadios.forEach(r => r.addEventListener('change', updateWeight));
+
+    // Load article preview
+    const previewEl = document.getElementById('articlePreview');
+    if (postId) {
+        fetch(API_BASE + '/api/posts/' + encodeURIComponent(postId))
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(data => {
+                const post = data.post || data;
+                previewEl.classList.remove('loading-state');
+                previewEl.innerHTML = '<div class="label">Article under review</div>'
+                    + '<h2>' + escapeHtml(post.title || 'Untitled') + '</h2>'
+                    + '<p class="excerpt">' + escapeHtml(truncate(post.excerpt || post.summary || post.content || '', 200)) + '</p>'
+                    + '<div class="meta">'
+                    + (post.category ? '<span>' + escapeHtml(post.category) + '</span>' : '')
+                    + (post.published_at ? '<span>' + formatDate(post.published_at) + '</span>' : '')
+                    + '</div>';
+            })
+            .catch(function() {
+                previewEl.classList.remove('loading-state');
+                previewEl.classList.add('error-state');
+                previewEl.innerHTML = '<div class="label">Article</div>'
+                    + '<h2 style="color:var(--red)">Could not load article</h2>'
+                    + '<p class="excerpt">Post ID: ' + escapeHtml(postId || 'none') + '. The article may have been removed or the link is invalid.</p>';
+            });
+    } else {
+        previewEl.classList.remove('loading-state');
+        previewEl.innerHTML = '<div class="label">No article selected</div>'
+            + '<p class="excerpt">This page works best when opened from a feedback link in your email. You can still submit general feedback below.</p>';
+    }
+
+    // Load feedback history
+    function loadHistory() {
+        const email = emailInput.value.trim();
+        const historyList = document.getElementById('historyList');
+        if (!email) {
+            historyList.innerHTML = '<div class="history-empty">Enter your email above to see previous feedback.</div>';
+            return;
+        }
+        fetch(API_BASE + '/api/feedback/history?email=' + encodeURIComponent(email) + '&limit=5')
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(data => {
+                const items = data.feedback || data.items || data;
+                if (!Array.isArray(items) || items.length === 0) {
+                    historyList.innerHTML = '<div class="history-empty">No previous feedback found.</div>';
+                    return;
+                }
+                historyList.innerHTML = items.map(function(item) {
+                    const sevClass = (item.severity || 'moderate').toLowerCase();
+                    return '<div class="history-card">'
+                        + '<div class="history-header">'
+                        + '<span class="history-category">' + escapeHtml(formatCategory(item.category)) + '</span>'
+                        + '<span class="history-date">' + formatDate(item.created_at) + '</span>'
+                        + '</div>'
+                        + '<div class="history-text">' + escapeHtml(truncate(item.feedback || item.text || '', 150)) + '</div>'
+                        + '<div class="history-meta">'
+                        + '<span class="history-severity ' + sevClass + '">' + capitalize(sevClass) + '</span>'
+                        + (item.post_title ? '<span>' + escapeHtml(truncate(item.post_title, 40)) + '</span>' : '')
+                        + '</div>'
+                        + '</div>';
+                }).join('');
+            })
+            .catch(function() {
+                historyList.innerHTML = '<div class="history-empty">Could not load feedback history.</div>';
+            });
+    }
+
+    // Load history on page load and when email changes
+    if (emailInput.value) loadHistory();
+    emailInput.addEventListener('blur', loadHistory);
+
+    // Submit feedback
+    const form = document.getElementById('feedbackForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        formMessage.className = 'form-message';
+        formMessage.style.display = 'none';
+
+        const email = emailInput.value.trim();
+        const category = categorySelect.value;
+        const severity = document.querySelector('input[name="severity"]:checked').value;
+        const text = document.getElementById('feedbackText').value.trim();
+
+        if (!email || !category || !text) return;
+
+        // Save email
+        localStorage.setItem('meridian_owner_email', email);
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
+
+        const mult = SEVERITY_MULTIPLIERS[severity];
+        const totalWeight = BASE_WEIGHT * mult;
+
+        fetch(API_BASE + '/api/feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                post_id: postId || null,
+                email: email,
+                category: category,
+                severity: severity,
+                feedback: text,
+                weight: totalWeight
+            })
+        })
+        .then(function(r) {
+            if (!r.ok) return r.json().then(function(d) { throw new Error(d.detail || d.error || 'Submission failed'); });
+            return r.json();
+        })
+        .then(function() {
+            formMessage.className = 'form-message success';
+            formMessage.innerHTML = '<div class="msg-title">Feedback recorded with ' + totalWeight + 'x weight.</div>'
+                + 'This correction will be applied to all future content.';
+            document.getElementById('feedbackText').value = '';
+            categorySelect.selectedIndex = 0;
+            categoryDesc.classList.remove('visible');
+            document.getElementById('sevMinor').checked = true;
+            updateWeight();
+            loadHistory();
+        })
+        .catch(function(err) {
+            formMessage.className = 'form-message error';
+            formMessage.innerHTML = '<div class="msg-title">Submission failed</div>'
+                + escapeHtml(err.message || 'Please check your email is an authorized owner address and try again.');
+        })
+        .finally(function() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Submit Feedback';
+        });
+    });
+
+    // Helpers
+    function escapeHtml(str) {
+        var d = document.createElement('div');
+        d.textContent = str || '';
+        return d.innerHTML;
+    }
+    function truncate(str, len) {
+        str = str || '';
+        return str.length > len ? str.substring(0, len) + '...' : str;
+    }
+    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+    function formatCategory(cat) { return (cat || 'general').replace(/_/g, ' '); }
+    function formatDate(d) {
+        if (!d) return '';
+        try { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+        catch(e) { return d; }
+    }
+})();
+</script>
+
+</body>
+</html>

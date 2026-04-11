@@ -293,7 +293,7 @@ async function loadContent() {
         const data = await res.json();
 
         document.getElementById('edit-title').value = data.title || '';
-        document.getElementById('edit-content').value = data.markdown || data.content || '';
+        document.getElementById('edit-content').value = data.content_markdown || data.markdown || data.content || '';
 
         if (data.category) {
             const select = document.getElementById('edit-category');

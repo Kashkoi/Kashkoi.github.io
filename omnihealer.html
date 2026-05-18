@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniHealer — Research Guides for Patients & Families | Alpha Inception</title>
+    <style>
+        :root { --primary: #1a2b4a; --accent: #0ea5e9; --accent-dark: #0284c7; --light-bg: #f8fafc; --card-bg: #ffffff; --text: #334155; --text-light: #64748b; --border: #e2e8f0; --product-color: #2d6a4f; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: var(--text); line-height: 1.6; background: var(--light-bg); }
+        a { text-decoration: none; color: var(--accent); } a:hover { color: var(--accent-dark); }
+        .header { background: var(--primary); color: #fff; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--accent); }
+        .header-nav a { color: #cbd5e1; margin-left: 24px; font-size: 0.9rem; } .header-nav a:hover { color: #fff; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, #1a3d2e 50%, #1e3a5f 100%); color: #fff; padding: 60px 24px 50px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero .badge { display: inline-block; background: rgba(45,106,79,0.3); color: #95d5b2; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+        .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
+        .hero .tagline { font-size: 1.15rem; color: #94a3b8; margin-bottom: 8px; }
+        .content { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .content h2 { font-size: 1.5rem; color: var(--primary); margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+        .content h2:first-child { margin-top: 0; }
+        .content p { margin-bottom: 16px; color: var(--text); }
+        .content ul { margin: 0 0 16px 20px; } .content li { margin-bottom: 8px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin: 20px 0; }
+        .feature-card { background: var(--card-bg); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 3px solid var(--product-color); }
+        .feature-card h4 { color: var(--product-color); margin-bottom: 8px; font-size: 1rem; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .screen-section { background: var(--card-bg); border-radius: 12px; padding: 28px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .screen-section h3 { color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; }
+        .screen-section .screen-tag { display: inline-block; background: #d1fae5; color: #065f46; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .screen-section p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; }
+        .screen-section ul { margin: 8px 0 0 18px; font-size: 0.88rem; }
+        .screen-section li { color: var(--text); margin-bottom: 6px; }
+        .how-it-works { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--product-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .step-content h4 { color: var(--primary); margin-bottom: 4px; }
+        .step-content p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+        .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 0.9rem; }
+        .guide-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .guide-item { background: var(--card-bg); border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 4px solid var(--product-color); }
+        .guide-item.coming-soon { border-left-color: #d1d5db; opacity: 0.7; }
+        .guide-item h4 { color: var(--primary); margin-bottom: 4px; font-size: 1.05rem; }
+        .guide-item .status { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px; }
+        .guide-item .status.live { background: #dcfce7; color: #166534; }
+        .guide-item .status.soon { background: #f3f4f6; color: #6b7280; }
+        .guide-item p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+        .cta { text-align: center; padding: 40px 24px; }
+        .cta-btn { display: inline-block; background: var(--product-color); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; margin: 0 8px; } .cta-btn:hover { background: #1b4332; color: #fff; }
+        .cta-btn.outline { background: transparent; border: 2px solid var(--product-color); color: var(--product-color); } .cta-btn.outline:hover { background: var(--product-color); color: #fff; }
+        .footer { background: var(--primary); color: #94a3b8; padding: 40px 24px; text-align: center; }
+        .footer a { color: #cbd5e1; } .footer a:hover { color: #fff; }
+        .footer-links { margin: 16px 0; } .footer-links a { margin: 0 16px; font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; margin-top: 16px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.9rem; color: #94a3b8; } .back-link:hover { color: #fff; }
+        @media (max-width: 768px) { .hero h1 { font-size: 1.7rem; } .header-inner { flex-direction: column; gap: 12px; } .feature-grid { grid-template-columns: 1fr; } .guide-list { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">Alpha <span>Inception</span></div>
+        <nav class="header-nav">
+            <a href="services.html">All Services</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-inner">
+        <a class="back-link" href="services.html">&larr; All Services</a>
+        <div class="badge">Research Guides</div>
+        <h1>OmniHealer</h1>
+        <div class="tagline">Community-curated research guides that help patients and families walk into medical conversations better prepared</div>
+    </div>
+</section>
+
+<div class="content">
+    <h2>What Is OmniHealer?</h2>
+    <p>OmniHealer turns published medical research into plain-language, actionable guides for patients and families facing serious diagnoses. Each guide covers what the disease is, what treatment options exist, which questions to ask your medical team, and where to find the best care &mdash; organized by where you are in the treatment journey.</p>
+    <p>We believe that better-informed patients have better conversations with their doctors, ask better questions, and make more empowered decisions about their care. Our guides are written by researchers and informed advocates who synthesize published medical literature, clinical trial databases, and the expertise of major treatment centers.</p>
+
+    <div class="disclaimer">
+        <strong>Important:</strong> OmniHealer provides research summaries written in plain language. These guides are <strong>not medical advice</strong> and do not replace conversations with your medical team. Every treatment decision must be made together with qualified healthcare professionals. Information is drawn from published medical literature and is provided to help you prepare for those conversations.
+    </div>
+
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>Stage-Based Navigation</h4>
+            <p>Select where you are in the journey &mdash; newly diagnosed, active treatment, or recurrence &mdash; and see only the content most relevant to your current situation.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Regional Medical Centers</h4>
+            <p>Browse top treatment centers organized by US region (West Coast, Mountain, Southwest, Midwest, South, Northeast) with specialties, contact information, and clinical trial availability.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Clinical Trial Guidance</h4>
+            <p>Understand what clinical trials are, how to find them, what questions to ask, and why tissue banking early can open doors to future trials.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Action Checklists</h4>
+            <p>Interactive checklists for each stage of treatment so you can track what you have done and what still needs attention &mdash; from getting second opinions to requesting molecular testing.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Questions to Ask</h4>
+            <p>Curated lists of specific questions to bring to appointments with your surgeon, oncologist, and care team &mdash; organized by topic and treatment stage.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Moderated Community</h4>
+            <p>A safe space for patients, caregivers, and family members to share experiences, ask questions, and support one another. All posts are reviewed before publishing.</p>
+        </div>
+    </div>
+
+    <h2>Available Guides</h2>
+    <div class="guide-list">
+        <div class="guide-item">
+            <span class="status live">Available Now</span>
+            <h4>Glioblastoma (GBM)</h4>
+            <p>Comprehensive guide covering standard treatment, clinical trials, repurposed therapies, molecular markers, regional medical centers, and practical guidance from diagnosis through recurrence.</p>
+        </div>
+        <div class="guide-item coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <h4>Pancreatic Cancer</h4>
+            <p>Treatment pathways, emerging therapies, clinical trial navigation, and practical guidance for patients and families.</p>
+        </div>
+        <div class="guide-item coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <h4>Triple-Negative Breast Cancer</h4>
+            <p>Immunotherapy options, genomic profiling, clinical trial matching, and stage-specific guidance.</p>
+        </div>
+        <div class="guide-item coming-soon">
+            <span class="status soon">Coming Soon</span>
+            <h4>ALS (Lou Gehrig's Disease)</h4>
+            <p>Current therapies, experimental approaches, assistive technology, caregiver resources, and research-based guidance.</p>
+        </div>
+    </div>
+
+    <h2>How Each Guide Is Organized</h2>
+
+    <div class="screen-section">
+        <span class="screen-tag">Stage Selector</span>
+        <h3>Find Where You Are in the Journey</h3>
+        <p>Every guide opens with a stage selector that lets you jump directly to the content most relevant to your situation.</p>
+        <ul>
+            <li><strong>Overview:</strong> Foundational information about the disease, why it is difficult, and key molecular markers that affect treatment decisions.</li>
+            <li><strong>Newly Diagnosed:</strong> What to do in the critical first weeks &mdash; standard treatment protocols, surgery questions, tissue banking, and finding the right medical center.</li>
+            <li><strong>Active Treatment:</strong> Chemoradiation details, supportive therapies, diet considerations, repurposed drug research, and managing side effects.</li>
+            <li><strong>Recurrence:</strong> What changes at recurrence, second-line treatment options, clinical trial strategies, and when to consider experimental approaches.</li>
+            <li><strong>Support &amp; Centers:</strong> Regional medical center directory, international options, family and caregiver support resources, and community forum.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Medical Centers</span>
+        <h3>Find Specialists by Region</h3>
+        <p>Each guide includes a directory of top medical centers organized by US region, with the information you need to reach out.</p>
+        <ul>
+            <li><strong>Six Regions:</strong> West Coast, Mountain/Rockies, Southwest, Midwest, South, and Northeast &mdash; filter to find centers near you.</li>
+            <li><strong>Contact Details:</strong> Department phone numbers and specialties for each center, so you know exactly who to call.</li>
+            <li><strong>Notable Strengths:</strong> What each center is known for &mdash; specific clinical trials, surgical techniques, or research programs.</li>
+            <li><strong>International Options:</strong> Select centers outside the US that offer innovative approaches or compassionate-use programs.</li>
+        </ul>
+    </div>
+
+    <div class="screen-section">
+        <span class="screen-tag">Community</span>
+        <h3>Moderated Forum</h3>
+        <p>A safe, moderated space where patients, caregivers, and family members can connect.</p>
+        <ul>
+            <li><strong>Share Experiences:</strong> Post your story, ask questions, or suggest resources that helped you navigate the journey.</li>
+            <li><strong>Reviewed Before Publishing:</strong> Every post is reviewed by our team within 48 hours to ensure accuracy and safety. Identifying details are removed.</li>
+            <li><strong>Guide Feedback:</strong> Suggest corrections, additions, or resources that should be included in the guides.</li>
+            <li><strong>No Medical Advice:</strong> The forum is for sharing experiences and support, not prescribing treatments. Posts containing medical advice will not be published.</li>
+        </ul>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Find Your Guide</h4>
+                <p>Select the guide for your diagnosis. Each guide is a comprehensive, standalone resource covering everything from basic understanding through advanced treatment options.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Select Your Stage</h4>
+                <p>Choose where you are in the journey. The guide filters to show only the sections most relevant to your current situation, so you are not overwhelmed with information you do not need yet.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Prepare for Your Appointments</h4>
+                <p>Use the questions lists, action checklists, and treatment summaries to walk into your next medical conversation with confidence. Print or save sections to bring with you.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Find the Right Center</h4>
+                <p>Browse the regional medical center directory to identify specialists and centers with expertise in your specific condition. Contact information is provided for each.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Who Is OmniHealer For?</h2>
+    <ul>
+        <li><strong>Patients</strong> who want to understand their diagnosis and treatment options in plain language before their next appointment</li>
+        <li><strong>Family members and caregivers</strong> who are researching on behalf of a loved one and need a structured starting point</li>
+        <li><strong>Anyone newly diagnosed</strong> who is overwhelmed and needs to know what to do first, what questions to ask, and where to go</li>
+        <li><strong>Patients facing recurrence</strong> who need to understand how treatment options change and what clinical trials may be available</li>
+    </ul>
+
+    <h2>Our Approach to Information</h2>
+    <p>Every factual claim in our guides is sourced from peer-reviewed research or official clinical trial records. We synthesize information from published medical literature, major treatment center protocols, and clinical trial databases into plain-language summaries that are accessible to non-medical readers.</p>
+    <p>We do not recommend specific treatments. We present the options that exist, explain the evidence behind them, and help you formulate the right questions for your medical team. The goal is not to replace your doctor &mdash; it is to help you make the most of your time with them.</p>
+</div>
+
+<div class="cta">
+    <a class="cta-btn" href="https://omni.alphainception.com" target="_blank">Visit OmniHealer</a>
+    <a class="cta-btn outline" href="services.html">View All Services</a>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="logo" style="font-size:1.2rem;">Alpha <span style="color:var(--accent);">Inception</span></div>
+        <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="blog.html">Blog</a>
+            <a href="meridian.html">Live Wire</a>
+            <a href="forums.html">Forums</a>
+            <a href="discuss.html">Discuss</a>
+            <a href="markets.html">Markets</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:privacy@alphainception.com">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Alpha Inception. All rights reserved. | <a href="https://www.alphainception.com">www.alphainception.com</a></div>
+    </div>
+</footer>
+
+</body>
+</html>
